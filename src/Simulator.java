@@ -11,6 +11,7 @@ import java.awt.Color;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
+
 public class Simulator
 {
     // Constants representing configuration information for the simulation.
@@ -64,6 +65,11 @@ public class Simulator
         
         // Setup a valid starting point.
         reset();
+    }
+    
+    public static void main(String[] args)
+    {
+    	new Simulator();
     }
     
     /**
