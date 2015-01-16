@@ -11,11 +11,14 @@ import java.util.Map;
  * Colors for each type of species can be defined using the
  * setColor method.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Frank Noorlander
+ * @version 16/01/2015
  */
 public class SimulatorView extends JFrame
 {
+	// Current simulator version
+	private static final String VERSION = "Version 1.0";
+	
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
 
@@ -26,6 +29,11 @@ public class SimulatorView extends JFrame
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
     private FieldView fieldView;
+    
+    private JPanel simulationView;
+    private JPanel toolbar;
+    private JButton step1;
+    private JButton step100;
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
@@ -51,11 +59,42 @@ public class SimulatorView extends JFrame
         fieldView = new FieldView(height, width);
 
         Container contents = getContentPane();
-        contents.add(stepLabel, BorderLayout.NORTH);
-        contents.add(fieldView, BorderLayout.CENTER);
-        contents.add(population, BorderLayout.SOUTH);
+        makeMenuBar();
+        
+        simulationView = new JPanel();
+        simulationView.setLayout(new BorderLayout());
+        simulationView.add(stepLabel, BorderLayout.NORTH);
+        simulationView.add(fieldView, BorderLayout.CENTER);
+        simulationView.add(population, BorderLayout.SOUTH);
+        contents.add(simulationView, BorderLayout.CENTER);
+        
+        toolbar = new JPanel();
+        toolbar.setLayout(new GridLayout(0,1));
+        step1 = new JButton("Step 1");
+        step1.addActionListener(new ActionListener() {
+        							public void actionPerformed(ActionEvent e) {step1(); }
+        						});
+        toolbar.add(step1);
+        step100 = new JButton("Step 100");
+        step100.addActionListener(new ActionListener() {
+        							public void actionPerformed(ActionEvent e) {step100(); }
+        						});
+        toolbar.add(step100);
+        
+        JPanel flow = new JPanel();
+        flow.add(toolbar);
+        contents.add(flow, BorderLayout.WEST);
+        
         pack();
         setVisible(true);
+    }
+    
+    private void step1(){
+    	
+    }
+    
+    private void step100(){
+    	
     }
     
     /**
@@ -211,5 +250,42 @@ public class SimulatorView extends JFrame
                 }
             }
         }
+    }
+    
+    private void showAbout(){
+    	JOptionPane.showMessageDialog(this, "Foxes and Rabits\n" + VERSION, "About ImageViewer", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void makeMenuBar(){
+    	JMenuBar menubar = new JMenuBar();
+        setJMenuBar(menubar);
+        
+        JMenu menu;
+        JMenuItem item;
+        
+        // create the Menu 1 menu
+        menu = new JMenu("Menu 1");
+        menubar.add(menu);
+        
+        item = new JMenuItem("Item 1");
+        menu.add(item);
+        
+     // create the Menu 2 menu
+        menu = new JMenu("Menu 2");
+        menubar.add(menu);
+        
+        item = new JMenuItem("Item 1");
+        menu.add(item);
+        
+     // create the Help menu
+        menu = new JMenu("Help");
+        menubar.add(menu);
+        
+        item = new JMenuItem("About");
+        item = new JMenuItem("About ImageViewer");
+        item.addActionListener(new ActionListener() {
+                           		public void actionPerformed(ActionEvent e) { showAbout(); }
+                       		});
+        menu.add(item);
     }
 }
