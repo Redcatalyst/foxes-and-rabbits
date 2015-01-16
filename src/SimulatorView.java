@@ -28,10 +28,13 @@ public class SimulatorView extends JFrame
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
+    private JLabel versionLabel; 
     private FieldView fieldView;
     
+    private JPanel simulationPane;
     private JPanel simulationView;
     private JPanel toolbar;
+    private JPanel version;
     private JButton step1;
     private JButton step100;
     
@@ -61,12 +64,19 @@ public class SimulatorView extends JFrame
         Container contents = getContentPane();
         makeMenuBar();
         
+        // Container for the simulationView
+        simulationPane = new JPanel();
+        simulationPane.setLayout(new BorderLayout());
+        contents.add(simulationPane);
+        
+        // Container for the simulation visuals
         simulationView = new JPanel();
         simulationView.setLayout(new BorderLayout());
+        simulationView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         simulationView.add(stepLabel, BorderLayout.NORTH);
         simulationView.add(fieldView, BorderLayout.CENTER);
         simulationView.add(population, BorderLayout.SOUTH);
-        contents.add(simulationView, BorderLayout.CENTER);
+        simulationPane.add(simulationView, BorderLayout.CENTER);
         
         toolbar = new JPanel();
         toolbar.setLayout(new GridLayout(0,1));
@@ -83,7 +93,13 @@ public class SimulatorView extends JFrame
         
         JPanel flow = new JPanel();
         flow.add(toolbar);
-        contents.add(flow, BorderLayout.WEST);
+        simulationPane.add(flow, BorderLayout.WEST);
+        
+        JPanel version = new JPanel();
+        JLabel versionLabel = new JLabel(VERSION);
+        simulationPane.add(versionLabel, BorderLayout.SOUTH);
+        
+        
         
         pack();
         setVisible(true);
