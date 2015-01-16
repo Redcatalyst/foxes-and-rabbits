@@ -103,7 +103,7 @@ public class Simulator
 
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<Animal>();        
-        // Let all rabbits act.
+        // Let all animals act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
             animal.act(newAnimals);
@@ -153,5 +153,12 @@ public class Simulator
                 // else leave the location empty.
             }
         }
+    }
+    
+    /**
+     * @return animals in simmulation
+     */
+    public List<Animal> getAnimal(){
+    	return animals;
     }
 }
