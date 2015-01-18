@@ -1,3 +1,7 @@
+package hanze.PIV1E.leertaak2.animals;
+import hanze.PIV1E.leertaak2.location.Field;
+import hanze.PIV1E.leertaak2.location.Location;
+
 import java.util.List;
 
 /**
@@ -39,7 +43,7 @@ public abstract class Animal
      * Check whether the animal is alive or not.
      * @return true if the animal is still alive.
      */
-    protected boolean isAlive()
+    public boolean isAlive()
     {
         return alive;
     }

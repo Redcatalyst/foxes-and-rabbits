@@ -1,3 +1,4 @@
+package hanze.PIV1E.leertaak2.helper;
 import java.util.Random;
 
 /**

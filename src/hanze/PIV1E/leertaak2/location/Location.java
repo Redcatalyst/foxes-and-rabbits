@@ -1,3 +1,4 @@
+package hanze.PIV1E.leertaak2.location;
 /**
  * Represent a location in a rectangular grid.
  * 

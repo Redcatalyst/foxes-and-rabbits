@@ -1,3 +1,8 @@
+package hanze.PIV1E.leertaak2.animals;
+import hanze.PIV1E.leertaak2.helper.Randomizer;
+import hanze.PIV1E.leertaak2.location.Field;
+import hanze.PIV1E.leertaak2.location.Location;
+
 import java.util.List;
 import java.util.Random;
 

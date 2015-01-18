@@ -1,3 +1,6 @@
+package hanze.PIV1E.leertaak2.location;
+import hanze.PIV1E.leertaak2.helper.Randomizer;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;

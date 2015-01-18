@@ -1,6 +1,12 @@
+package hanze.PIV1E.leertaak2.GUI;
+import hanze.PIV1E.leertaak2.location.Field;
+import hanze.PIV1E.leertaak2.location.FieldStats;
+
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
