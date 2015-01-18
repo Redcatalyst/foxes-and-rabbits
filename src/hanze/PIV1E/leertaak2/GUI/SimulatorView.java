@@ -1,6 +1,7 @@
 package hanze.PIV1E.leertaak2.GUI;
-import hanze.PIV1E.leertaak2.location.Field;
-import hanze.PIV1E.leertaak2.location.FieldStats;
+import hanze.PIV1E.leertaak2.*;
+import hanze.PIV1E.leertaak2.location.*;
+import hanze.PIV1E.leertaak2.animals.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -105,18 +106,22 @@ public class SimulatorView extends JFrame
         JLabel versionLabel = new JLabel(VERSION);
         simulationPane.add(versionLabel, BorderLayout.SOUTH);
         
-        
-        
         pack();
         setVisible(true);
     }
     
+    /**
+     * Simulates 1 step in the simulation
+     */
     private void step1(){
-    	
+    	Simulator.simulator.simulateOneStep();
     }
     
+    /**
+     * Simulates 100 steps in the simulation
+     */
     private void step100(){
-    	
+    	Simulator.simulator.simulate(100);
     }
     
     /**
@@ -274,8 +279,18 @@ public class SimulatorView extends JFrame
         }
     }
     
+    /**
+     * shows information about the Foxes and Rabbits simulation
+     */
     private void showAbout(){
     	JOptionPane.showMessageDialog(this, "Foxes and Rabits\n" + VERSION, "About ImageViewer", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    /**
+     * stops the program
+     */
+    private void quit(){
+    	System.exit(0);;
     }
     
     public void makeMenuBar(){
@@ -286,10 +301,13 @@ public class SimulatorView extends JFrame
         JMenuItem item;
         
         // create the Menu 1 menu
-        menu = new JMenu("Menu 1");
+        menu = new JMenu("File");
         menubar.add(menu);
         
-        item = new JMenuItem("Item 1");
+        item = new JMenuItem("quit");
+        item.addActionListener(new ActionListener() {
+					       		public void actionPerformed(ActionEvent e) { quit(); }
+					   		});
         menu.add(item);
         
      // create the Menu 2 menu
@@ -303,7 +321,6 @@ public class SimulatorView extends JFrame
         menu = new JMenu("Help");
         menubar.add(menu);
         
-        item = new JMenuItem("About");
         item = new JMenuItem("About ImageViewer");
         item.addActionListener(new ActionListener() {
                            		public void actionPerformed(ActionEvent e) { showAbout(); }

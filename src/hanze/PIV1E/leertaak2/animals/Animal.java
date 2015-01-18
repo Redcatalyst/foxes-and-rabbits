@@ -75,7 +75,7 @@ public abstract class Animal
      * Place the animal at the new location in the given field.
      * @param newLocation The animal's new location.
      */
-    protected void setLocation(Location newLocation)
+    public void setLocation(Location newLocation)
     {
         if(location != null) {
             field.clear(location);

@@ -37,10 +37,12 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
+    // The simulation itself
+    public static Simulator simulator;
     
     
     public static void main(String[] args){
-    	new Simulator();
+    	simulator = new Simulator();
     }
     
     /**
@@ -162,7 +164,7 @@ public class Simulator
     }
     
     /**
-     * @return animals in simmulation
+     * @return animals in simulation
      */
     public List<Animal> getAnimal(){
     	return animals;
