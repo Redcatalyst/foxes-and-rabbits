@@ -1,5 +1,6 @@
-package hanze.PIV1E.leertaak2.location;
+package hanze.PIV1E.leertaak2.GUI;
 import hanze.PIV1E.leertaak2.helper.Counter;
+import hanze.PIV1E.leertaak2.location.Field;
 
 import java.awt.Color;
 import java.util.HashMap;
