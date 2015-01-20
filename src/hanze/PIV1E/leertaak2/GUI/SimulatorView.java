@@ -56,7 +56,8 @@ public class SimulatorView extends JFrame
      * @param width  The simulation's width.
      */
     public SimulatorView(int height, int width)
-    {
+    {    	
+    	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
 
