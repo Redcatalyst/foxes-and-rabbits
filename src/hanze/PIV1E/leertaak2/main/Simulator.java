@@ -1,4 +1,4 @@
-package hanze.PIV1E.leertaak2;
+package hanze.PIV1E.leertaak2.main;
 import hanze.PIV1E.leertaak2.GUI.*;
 import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.helper.*;
@@ -17,7 +17,7 @@ import java.awt.Color;
  * @author Frank Noorlander
  * @version 16/01/2015
  */
-public class Simulator
+public class Simulator implements Runnable
 {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
@@ -30,20 +30,19 @@ public class Simulator
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
 
     // List of animals in the field.
-    private List<Animal> animals;
+    public static List<Animal> animals;
+    // List of new animals
+    public static List<Animal> newAnimals;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
-    // The simulation itself
+    // The simulator itself
     public static Simulator simulator;
-    
-    
-    public static void main(String[] args){
-    	simulator = new Simulator();
-    }
+    // Steps that need to be simulated
+    private int steps;
     
     /**
      * Construct a simulation field with default size.
@@ -60,6 +59,8 @@ public class Simulator
      */
     public Simulator(int depth, int width)
     {
+    	simulator = this;
+    	
         if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
             System.out.println("Using default values.");
@@ -68,6 +69,7 @@ public class Simulator
         }
         
         animals = new ArrayList<Animal>();
+        newAnimals = new ArrayList<Animal>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
@@ -95,9 +97,8 @@ public class Simulator
      */
     public void simulate(int numSteps)
     {
-        for(int step = 1; step <= numSteps && view.isViable(field); step++) {
-            simulateOneStep();
-        }
+    	steps += numSteps;
+    	new Thread(this).start();
     }
     
     /**
@@ -108,21 +109,17 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
-
-        // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<Animal>();        
+       
         // Let all animals act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
-            animal.act(newAnimals);
+            animal.act();
             if(! animal.isAlive()) {
                 it.remove();
             }
         }
-               
-        // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
-
+        
         view.showStatus(step, field);
     }
         
@@ -163,10 +160,13 @@ public class Simulator
         }
     }
     
-    /**
-     * @return animals in simulation
-     */
-    public List<Animal> getAnimal(){
-    	return animals;
+    public void run(){
+    	while(steps > 0){
+    		simulateOneStep();
+	        steps--;
+	        try {
+				Thread.sleep(100);
+			} catch (Exception e) {}
+	    }
     }
 }

@@ -1,7 +1,6 @@
 package hanze.PIV1E.leertaak2.GUI;
-import hanze.PIV1E.leertaak2.*;
+import hanze.PIV1E.leertaak2.main.*;
 import hanze.PIV1E.leertaak2.location.*;
-import hanze.PIV1E.leertaak2.actor.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -35,20 +34,20 @@ public class SimulatorView extends JFrame
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
-    private JLabel versionLabel; 
     private FieldView fieldView;
     
     private JPanel simulationPane;
     private JPanel simulationView;
     private JPanel toolbar;
-    private JPanel version;
     private JButton step1;
     private JButton step100;
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
-    private FieldStats stats;
+    private FieldStats stats;;
+    // The top-level container
+    private Container contents;
 
     /**
      * Create a view of the given width and height.
@@ -56,73 +55,23 @@ public class SimulatorView extends JFrame
      * @param width  The simulation's width.
      */
     public SimulatorView(int height, int width)
-    {    	
-    	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    {
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
-
-        setTitle("Fox and Rabbit Simulation");
+        
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
-        
-        setLocation(100, 50);
-        
         fieldView = new FieldView(height, width);
 
-        Container contents = getContentPane();
+        contents = getContentPane();
         makeMenuBar();
+        makeFrame();
         
-        // Container for the simulationView
-        simulationPane = new JPanel();
-        simulationPane.setLayout(new BorderLayout());
-        contents.add(simulationPane);
-        
-        // Container for the simulation visuals
-        simulationView = new JPanel();
-        simulationView.setLayout(new BorderLayout());
-        simulationView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        simulationView.add(stepLabel, BorderLayout.NORTH);
-        simulationView.add(fieldView, BorderLayout.CENTER);
-        simulationView.add(population, BorderLayout.SOUTH);
-        simulationPane.add(simulationView, BorderLayout.CENTER);
-        
-        toolbar = new JPanel();
-        toolbar.setLayout(new GridLayout(0,1));
-        step1 = new JButton("Step 1");
-        step1.addActionListener(new ActionListener() {
-        							public void actionPerformed(ActionEvent e) {step1(); }
-        						});
-        toolbar.add(step1);
-        step100 = new JButton("Step 100");
-        step100.addActionListener(new ActionListener() {
-        							public void actionPerformed(ActionEvent e) {step100(); }
-        						});
-        toolbar.add(step100);
-        
-        JPanel flow = new JPanel();
-        flow.add(toolbar);
-        simulationPane.add(flow, BorderLayout.WEST);
-        
-        JPanel version = new JPanel();
-        JLabel versionLabel = new JLabel(VERSION);
-        simulationPane.add(versionLabel, BorderLayout.SOUTH);
-        
+        setTitle("Fox and Rabbit Simulation");
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setLocation(100, 50);
         pack();
         setVisible(true);
-    }
-    
-    /**
-     * Simulates 1 step in the simulation
-     */
-    private void step1(){
-    	Simulator.simulator.simulateOneStep();
-    }
-    
-    /**
-     * Simulates 100 steps in the simulation
-     */
-    private void step100(){
-    	Simulator.simulator.simulate(100);
     }
     
     /**
@@ -194,12 +143,7 @@ public class SimulatorView extends JFrame
     }
     
     /**
-     * Provide a graphical view of a rectangular field. This is 
-     * a nested class (a class defined inside a class) which
-     * defines a custom component for the user interface. This
-     * component displays the field.
-     * This is rather advanced GUI stuff - you can ignore this 
-     * for your project if you like.
+     * Provide a graphical view of a rectangular field.
      */
     private class FieldView extends JPanel
     {
@@ -294,6 +238,20 @@ public class SimulatorView extends JFrame
     	System.exit(0);;
     }
     
+    /**
+     * Simulates 1 step in the simulation
+     */
+    private void step1(){
+    	Simulator.simulator.simulateOneStep();
+    }
+    
+    /**
+     * Simulates 100 steps in the simulation
+     */
+    private void step100(){
+    	Simulator.simulator.simulate(100);
+    }
+    
     public void makeMenuBar(){
     	JMenuBar menubar = new JMenuBar();
         setJMenuBar(menubar);
@@ -327,5 +285,41 @@ public class SimulatorView extends JFrame
                            		public void actionPerformed(ActionEvent e) { showAbout(); }
                        		});
         menu.add(item);
+    }
+    
+    public void makeFrame(){
+    	// Container for the simulationView
+        simulationPane = new JPanel();
+        simulationPane.setLayout(new BorderLayout());
+        contents.add(simulationPane);
+        
+        // Container for the simulation visuals
+        simulationView = new JPanel();
+        simulationView.setLayout(new BorderLayout());
+        simulationView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        simulationView.add(stepLabel, BorderLayout.NORTH);
+        simulationView.add(fieldView, BorderLayout.CENTER);
+        simulationView.add(population, BorderLayout.SOUTH);
+        simulationPane.add(simulationView, BorderLayout.CENTER);
+        
+        toolbar = new JPanel();
+        toolbar.setLayout(new GridLayout(0,1));
+        step1 = new JButton("Step 1");
+        step1.addActionListener(new ActionListener() {
+        							public void actionPerformed(ActionEvent e) {step1(); }
+        						});
+        toolbar.add(step1);
+        step100 = new JButton("Step 100");
+        step100.addActionListener(new ActionListener() {
+        							public void actionPerformed(ActionEvent e) {step100(); }
+        						});
+        toolbar.add(step100);
+        
+        JPanel flow = new JPanel();
+        flow.add(toolbar);
+        simulationPane.add(flow, BorderLayout.WEST);
+
+        JLabel versionLabel = new JLabel(VERSION);
+        simulationPane.add(versionLabel, BorderLayout.SOUTH);
     }
 }

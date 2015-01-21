@@ -2,6 +2,7 @@ package hanze.PIV1E.leertaak2.actor;
 import hanze.PIV1E.leertaak2.helper.Randomizer;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
+import hanze.PIV1E.leertaak2.main.Simulator;
 
 import java.util.List;
 import java.util.Iterator;
@@ -66,12 +67,12 @@ public class Fox extends Animal
      * @param field The field currently occupied.
      * @param newFoxes A list to return newly born foxes.
      */
-    public void act(List<Animal> newFoxes)
+    public void act()
     {
         incrementAge();
         incrementHunger();
         if(isAlive()) {
-            giveBirth(newFoxes);            
+            giveBirth();            
             // Move towards a source of food if found.
             Location newLocation = findFood();
             if(newLocation == null) { 
@@ -142,7 +143,7 @@ public class Fox extends Animal
      * New births will be made into free adjacent locations.
      * @param newFoxes A list to return newly born foxes.
      */
-    private void giveBirth(List<Animal> newFoxes)
+    private void giveBirth()
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -152,7 +153,7 @@ public class Fox extends Animal
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Fox young = new Fox(false, field, loc);
-            newFoxes.add(young);
+            Simulator.newAnimals.add(young);
         }
     }
         
