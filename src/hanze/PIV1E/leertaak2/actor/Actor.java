@@ -2,12 +2,13 @@ package hanze.PIV1E.leertaak2.actor;
 
 import hanze.PIV1E.leertaak2.location.Location;
 
-import java.util.List;
 
 
 /**
  * The interface Actor.
  * @author Tsjeard de Winter
+ * @version 1.0 
+ * @date 21-01-2015
  *
  */
 public interface Actor {
@@ -16,7 +17,7 @@ public interface Actor {
 	 * The method act, used by the actor to act.
 	 * @param newActors, a list containing actors.
 	 */
-	 void act(List<Actor> newActors);
+	 void act();
 	
 	/**
 	 * The method isAlive, used by the actor to check if it's alive or not.
