@@ -10,7 +10,7 @@ import java.util.List;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public abstract class Animal
+public abstract class Animal implements Actor
 {
     // Whether the animal is alive or not.
     private boolean alive;
@@ -52,7 +52,7 @@ public abstract class Animal
      * Indicate that the animal is no longer alive.
      * It is removed from the field.
      */
-    protected void setDead()
+     public void setDead()
     {
         alive = false;
         if(location != null) {
@@ -66,7 +66,7 @@ public abstract class Animal
      * Return the animal's location.
      * @return The animal's location.
      */
-    protected Location getLocation()
+    public Location getLocation()
     {
         return location;
     }
