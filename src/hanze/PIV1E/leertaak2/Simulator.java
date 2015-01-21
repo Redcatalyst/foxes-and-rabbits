@@ -1,6 +1,6 @@
 package hanze.PIV1E.leertaak2;
 import hanze.PIV1E.leertaak2.GUI.*;
-import hanze.PIV1E.leertaak2.animals.*;
+import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.helper.*;
 import hanze.PIV1E.leertaak2.location.*;
 

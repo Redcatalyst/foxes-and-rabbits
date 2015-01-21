@@ -1,7 +1,7 @@
 package hanze.PIV1E.leertaak2.GUI;
 import hanze.PIV1E.leertaak2.*;
 import hanze.PIV1E.leertaak2.location.*;
-import hanze.PIV1E.leertaak2.animals.*;
+import hanze.PIV1E.leertaak2.actor.*;
 
 import java.awt.*;
 import java.awt.event.*;

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import hanze.PIV1E.leertaak2.animals.*;
+import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.location.*;
 
 import org.junit.After;
