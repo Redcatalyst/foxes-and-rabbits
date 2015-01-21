@@ -17,7 +17,7 @@ import java.awt.Color;
  * @author Frank Noorlander
  * @version 16/01/2015
  */
-public class Simulator implements Runnable
+public class Simulator
 {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
@@ -41,8 +41,6 @@ public class Simulator implements Runnable
     private SimulatorView view;
     // The simulator itself
     public static Simulator simulator;
-    // Steps that need to be simulated
-    private int steps;
     
     /**
      * Construct a simulation field with default size.
@@ -97,8 +95,9 @@ public class Simulator implements Runnable
      */
     public void simulate(int numSteps)
     {
-    	steps += numSteps;
-    	new Thread(this).start();
+    	for(int step = 1; step <= numSteps && view.isViable(field); step++) {
+            simulateOneStep();
+        }
     }
     
     /**
@@ -108,18 +107,19 @@ public class Simulator implements Runnable
      */
     public void simulateOneStep()
     {
-        step++;
-       
-        // Let all animals act.
+    	step++;
+     
+        // Let all rabbits act.
+    	newAnimals.clear();
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
             animal.act();
-            if(! animal.isAlive()) {
+            if(!animal.isAlive()) {
                 it.remove();
             }
         }
         animals.addAll(newAnimals);
-        
+
         view.showStatus(step, field);
     }
         
@@ -158,15 +158,5 @@ public class Simulator implements Runnable
                 // else leave the location empty.
             }
         }
-    }
-    
-    public void run(){
-    	while(steps > 0){
-    		simulateOneStep();
-	        steps--;
-	        try {
-				Thread.sleep(100);
-			} catch (Exception e) {}
-	    }
     }
 }

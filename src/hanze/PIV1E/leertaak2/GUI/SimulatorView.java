@@ -41,6 +41,7 @@ public class SimulatorView extends JFrame
     private JPanel toolbar;
     private JButton step1;
     private JButton step100;
+    private JButton reset;
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
@@ -68,7 +69,7 @@ public class SimulatorView extends JFrame
         makeFrame();
         
         setTitle("Fox and Rabbit Simulation");
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(100, 50);
         pack();
         setVisible(true);
@@ -252,6 +253,13 @@ public class SimulatorView extends JFrame
     	Simulator.simulator.simulate(100);
     }
     
+    /**
+     * resets the simulation
+     */
+    private void reset(){
+    	Simulator.simulator.reset();
+    }
+    
     public void makeMenuBar(){
     	JMenuBar menubar = new JMenuBar();
         setJMenuBar(menubar);
@@ -309,11 +317,18 @@ public class SimulatorView extends JFrame
         							public void actionPerformed(ActionEvent e) {step1(); }
         						});
         toolbar.add(step1);
+        
         step100 = new JButton("Step 100");
         step100.addActionListener(new ActionListener() {
         							public void actionPerformed(ActionEvent e) {step100(); }
         						});
         toolbar.add(step100);
+        
+        reset = new JButton("reset");
+        reset.addActionListener(new ActionListener() {
+        							public void actionPerformed(ActionEvent e) {reset(); }
+        						});
+        toolbar.add(reset);
         
         JPanel flow = new JPanel();
         flow.add(toolbar);

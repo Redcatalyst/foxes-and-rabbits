@@ -18,6 +18,8 @@ public abstract class Animal implements Actor
     private Field field;
     // The animal's position in the field.
     private Location location;
+    // The animal's name
+    private String name;
     
     /**
      * Create a new animal at location in field.
@@ -84,5 +86,9 @@ public abstract class Animal implements Actor
     protected Field getField()
     {
         return field;
+    }
+    
+    public String getName(){
+    	return name;
     }
 }

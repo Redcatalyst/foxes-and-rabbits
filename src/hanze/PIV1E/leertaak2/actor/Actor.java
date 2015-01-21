@@ -42,4 +42,6 @@ public interface Actor {
 	  */
 	 void setLocation(Location newLocation);
 	 
+	 String getName();
+	 
 }
