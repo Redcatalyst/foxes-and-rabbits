@@ -1,8 +1,6 @@
 package hanze.PIV1E.leertaak2.model;
 
-import hanze.PIV1E.leertaak2.actor.Animal;
-import hanze.PIV1E.leertaak2.actor.Fox;
-import hanze.PIV1E.leertaak2.actor.Rabbit;
+import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.helper.Randomizer;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
@@ -15,9 +13,11 @@ import java.util.Random;
 
 public class SimulationModel extends AbstractModel {
 	// The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
+    private static final double FOX_CREATION_PROBABILITY = 0.04;
     // The probability that a rabbit will be created in any given grid position.
     private static final double RABBIT_CREATION_PROBABILITY = 0.08; 
+    // The probability that a bear will be created in any given grid position.
+    private static final double BEAR_CREATION_PROBABILITY = 0.01; 
     
     // List of animals in the field.
     public static List<Animal> animals;
@@ -115,6 +115,11 @@ public class SimulationModel extends AbstractModel {
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
                     animals.add(rabbit);
+                }
+                else if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Bear bear = new Bear(true, field, location);
+                    animals.add(bear);
                 }
                 // else leave the location empty.
             }

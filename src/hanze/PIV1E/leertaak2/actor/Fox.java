@@ -27,7 +27,7 @@ public class Fox extends Animal
     // The likelihood of a fox breeding.
     public static final double BREEDING_PROBABILITY = 0.08;
     // The maximum number of births.
-    public static final int MAX_LITTER_SIZE = 2;
+    public static final int MAX_LITTER_SIZE = 7;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     public static final int RABBIT_FOOD_VALUE = 9;
