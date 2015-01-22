@@ -3,6 +3,7 @@ import hanze.PIV1E.leertaak2.helper.Randomizer;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.main.Simulator;
+import hanze.PIV1E.leertaak2.model.SimulationModel;
 
 import java.util.List;
 import java.util.Iterator;
@@ -153,7 +154,7 @@ public class Fox extends Animal
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Fox young = new Fox(false, field, loc);
-            Simulator.newAnimals.add(young);
+            SimulationModel.newAnimals.add(young);
         }
     }
         

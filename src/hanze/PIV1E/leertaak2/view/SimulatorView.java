@@ -1,9 +1,9 @@
-package hanze.PIV1E.leertaak2.GUI;
-import hanze.PIV1E.leertaak2.main.*;
+package hanze.PIV1E.leertaak2.view;
+import hanze.PIV1E.leertaak2.main.Simulator;
+import hanze.PIV1E.leertaak2.model.*;
 import hanze.PIV1E.leertaak2.location.*;
 
 import java.awt.*;
-import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -20,59 +20,40 @@ import java.util.Map;
  * @author Frank Noorlander
  * @version 16/01/2015
  */
-public class SimulatorView extends JFrame
+public class SimulatorView extends AbstractView 
 {
-	// Current simulator version
-	private static final String VERSION = "Version 1.0";
 	
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
 
     // Color used for objects that have no defined color.
     private static final Color UNKNOWN_COLOR = Color.gray;
-
+    
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
     private FieldView fieldView;
     
-    private JPanel simulationPane;
-    private JPanel simulationView;
-    private JPanel toolbar;
-    private JButton step1;
-    private JButton step100;
-    private JButton reset;
-    
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
-    // A statistics object computing and storing simulation information
-    private FieldStats stats;;
-    // The top-level container
-    private Container contents;
-
+    
     /**
      * Create a view of the given width and height.
      * @param height The simulation's height.
      * @param width  The simulation's width.
      */
-    public SimulatorView(int height, int width)
+    public SimulatorView(int height, int width, SimulationModel simulation)
     {
-        stats = new FieldStats();
+    	super(simulation);
+    	setLayout(new BorderLayout());
         colors = new LinkedHashMap<Class, Color>();
         
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
+        add(stepLabel, BorderLayout.NORTH);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
+        add(population, BorderLayout.SOUTH);
         fieldView = new FieldView(height, width);
-
-        contents = getContentPane();
-        makeMenuBar();
-        makeFrame();
-        
-        setTitle("Fox and Rabbit Simulation");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocation(100, 50);
-        pack();
-        setVisible(true);
+        add(fieldView, BorderLayout.CENTER);
     }
     
     /**
@@ -105,7 +86,7 @@ public class SimulatorView extends JFrame
      * @param step Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */
-    public void showStatus(int step, Field field)
+    public void showStatus(int step, Field field, FieldStats stats)
     {
         if(!isVisible()) {
             setVisible(true);
@@ -133,14 +114,10 @@ public class SimulatorView extends JFrame
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
         fieldView.repaint();
     }
-
-    /**
-     * Determine whether the simulation should continue to run.
-     * @return true If there is more than one species alive.
-     */
-    public boolean isViable(Field field)
+    
+    public void paintComponent(Graphics g)
     {
-        return stats.isViable(field);
+        showStatus(getModel().getStep(), getModel().getField(), getModel().getStats());
     }
     
     /**
@@ -182,7 +159,7 @@ public class SimulatorView extends JFrame
         public void preparePaint()
         {
             if(! size.equals(getSize())) {  // if the size has changed...
-                size = getSize();
+            	size = getSize();
                 fieldImage = fieldView.createImage(size.width, size.height);
                 g = fieldImage.getGraphics();
 
@@ -223,118 +200,5 @@ public class SimulatorView extends JFrame
                 }
             }
         }
-    }
-    
-    /**
-     * shows information about the Foxes and Rabbits simulation
-     */
-    private void showAbout(){
-    	JOptionPane.showMessageDialog(this, "Foxes and Rabits\n" + VERSION, "About ImageViewer", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-    /**
-     * stops the program
-     */
-    private void quit(){
-    	System.exit(0);;
-    }
-    
-    /**
-     * Simulates 1 step in the simulation
-     */
-    private void step1(){
-    	Simulator.simulator.simulateOneStep();
-    }
-    
-    /**
-     * Simulates 100 steps in the simulation
-     */
-    private void step100(){
-    	Simulator.simulator.simulate(100);
-    }
-    
-    /**
-     * resets the simulation
-     */
-    private void reset(){
-    	Simulator.simulator.reset();
-    }
-    
-    public void makeMenuBar(){
-    	JMenuBar menubar = new JMenuBar();
-        setJMenuBar(menubar);
-        
-        JMenu menu;
-        JMenuItem item;
-        
-        // create the Menu 1 menu
-        menu = new JMenu("File");
-        menubar.add(menu);
-        
-        item = new JMenuItem("quit");
-        item.addActionListener(new ActionListener() {
-					       		public void actionPerformed(ActionEvent e) { quit(); }
-					   		});
-        menu.add(item);
-        
-     // create the Menu 2 menu
-        menu = new JMenu("Menu 2");
-        menubar.add(menu);
-        
-        item = new JMenuItem("Item 1");
-        menu.add(item);
-        
-     // create the Help menu
-        menu = new JMenu("Help");
-        menubar.add(menu);
-        
-        item = new JMenuItem("About ImageViewer");
-        item.addActionListener(new ActionListener() {
-                           		public void actionPerformed(ActionEvent e) { showAbout(); }
-                       		});
-        menu.add(item);
-    }
-    
-    public void makeFrame(){
-    	// Container for the simulationView
-        simulationPane = new JPanel();
-        simulationPane.setLayout(new BorderLayout());
-        contents.add(simulationPane);
-        
-        // Container for the simulation visuals
-        simulationView = new JPanel();
-        simulationView.setLayout(new BorderLayout());
-        simulationView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        simulationView.add(stepLabel, BorderLayout.NORTH);
-        simulationView.add(fieldView, BorderLayout.CENTER);
-        simulationView.add(population, BorderLayout.SOUTH);
-        simulationPane.add(simulationView, BorderLayout.CENTER);
-        
-        toolbar = new JPanel();
-        toolbar.setLayout(new GridLayout(0,1));
-        step1 = new JButton("Step 1");
-        step1.addActionListener(new ActionListener() {
-        							public void actionPerformed(ActionEvent e) {step1(); }
-        						});
-        toolbar.add(step1);
-        
-        step100 = new JButton("Step 100");
-        step100.addActionListener(new ActionListener() {
-        							public void actionPerformed(ActionEvent e) {step100(); }
-        						});
-        toolbar.add(step100);
-        
-        reset = new JButton("reset");
-        reset.addActionListener(new ActionListener() {
-        							public void actionPerformed(ActionEvent e) {reset(); }
-        						});
-        toolbar.add(reset);
-        
-        JPanel flow = new JPanel();
-        flow.add(toolbar);
-        simulationPane.add(flow, BorderLayout.WEST);
-
-        JLabel versionLabel = new JLabel(VERSION);
-        simulationPane.add(versionLabel, BorderLayout.SOUTH);
     }
 }

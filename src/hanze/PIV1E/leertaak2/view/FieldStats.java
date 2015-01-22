@@ -1,4 +1,4 @@
-package hanze.PIV1E.leertaak2.GUI;
+package hanze.PIV1E.leertaak2.view;
 import hanze.PIV1E.leertaak2.helper.Counter;
 import hanze.PIV1E.leertaak2.location.Field;
 
