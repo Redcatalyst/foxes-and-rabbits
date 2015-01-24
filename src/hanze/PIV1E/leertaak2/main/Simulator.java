@@ -70,9 +70,11 @@ public class Simulator
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
         view.setColor(Bear.class, Color.RED);
+        view.setColor(Hunter.class, Color.BLACK);
         graph.setColor(Rabbit.class, Color.ORANGE);
         graph.setColor(Fox.class, Color.BLUE);
         graph.setColor(Bear.class, Color.RED);
+        graph.setColor(Bear.class, Color.BLACK);
         
         
         // Setup a valid starting point.

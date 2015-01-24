@@ -18,11 +18,13 @@ public class SimulationModel extends AbstractModel {
     private static final double RABBIT_CREATION_PROBABILITY = 0.08; 
     // The probability that a bear will be created in any given grid position.
     private static final double BEAR_CREATION_PROBABILITY = 0.01; 
+    // The probability that a bear will be created in any given grid position.
+    private static final double HUNTER_CREATION_PROBABILITY = 0.01; 
     
     // List of animals in the field.
-    public static List<Animal> animals;
+    public static List<Actor> actors;
     // List of new animals
-    public static List<Animal> newAnimals;
+    public static List<Actor> newActors;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -31,8 +33,8 @@ public class SimulationModel extends AbstractModel {
     private FieldStats stats;
     
     public SimulationModel(int depth, int width){
-    	animals = new ArrayList<Animal>();
-        newAnimals = new ArrayList<Animal>();
+    	actors = new ArrayList<Actor>();
+        newActors = new ArrayList<Actor>();
         
         field = new Field(depth, width);
         stats = new FieldStats();
@@ -69,15 +71,15 @@ public class SimulationModel extends AbstractModel {
     	step++;
      
         // Let all rabbits act.
-    	newAnimals.clear();
-        for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
-            Animal animal = it.next();
-            animal.act();
-            if(!animal.isAlive()) {
+    	newActors.clear();
+        for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
+            Actor actor = it.next();
+            actor.act();
+            if(!actor.isAlive()) {
                 it.remove();
             }
         }
-        animals.addAll(newAnimals);
+        actors.addAll(newActors);
 
         notifyViews();
         stats.reset();
@@ -89,7 +91,7 @@ public class SimulationModel extends AbstractModel {
     public void reset()
     {
         step = 0;
-        animals.clear();
+        actors.clear();
         populate();
         
         // Show the starting state in the view.
@@ -109,17 +111,22 @@ public class SimulationModel extends AbstractModel {
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, field, location);
-                    animals.add(fox);
+                    actors.add(fox);
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
-                    animals.add(rabbit);
+                    actors.add(rabbit);
                 }
                 else if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Bear bear = new Bear(true, field, location);
-                    animals.add(bear);
+                    actors.add(bear);
+                }
+                else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Hunter hunter = new Hunter(true, field, location);
+                    actors.add(hunter);
                 }
                 // else leave the location empty.
             }

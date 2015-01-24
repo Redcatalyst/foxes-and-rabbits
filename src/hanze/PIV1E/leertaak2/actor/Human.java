@@ -6,10 +6,10 @@ import hanze.PIV1E.leertaak2.location.Location;
 /**
  * A class representing shared characteristics of humans.
  * 
- * @author Tsjeard de Winter
+ * @author Tsjeard de Winter en Rick van der Poel
  * @version 22.01.2015
  */
-public class Human implements Actor 
+public abstract class Human implements Actor 
 {
     // Whether the human is alive or not.
     private boolean alive;

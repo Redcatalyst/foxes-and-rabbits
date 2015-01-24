@@ -154,7 +154,7 @@ public class Fox extends Animal
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Fox young = new Fox(false, field, loc);
-            SimulationModel.newAnimals.add(young);
+            SimulationModel.newActors.add(young);
         }
     }
         
