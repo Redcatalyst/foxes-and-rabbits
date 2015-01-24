@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
@@ -42,13 +43,17 @@ public class Simulator
     {
         SimulationModel simulation = new SimulationModel(DEFAULT_DEPTH, DEFAULT_WIDTH);
         SimulatorView view = new SimulatorView(DEFAULT_DEPTH, DEFAULT_WIDTH, simulation);
+        GraphView graph = new GraphView(100, 140, 100, simulation);
         RunController controller = new RunController(simulation);
         menuController = new MenuController(simulation);
         
         frame = new JFrame();
         makeMenuBar();
+        JPanel extraViews = new JPanel();
+        extraViews.add(graph);
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(view, BorderLayout.CENTER);
+        frame.getContentPane().add(extraViews, BorderLayout.EAST);
         frame.getContentPane().add(controller, BorderLayout.WEST);
         frame.getContentPane().add(menuController, BorderLayout.NORTH);
         
@@ -61,10 +66,14 @@ public class Simulator
         frame.pack();
         frame.setVisible(true);
 
-        // Create a view of the state of each location in the field.
+        // Set the color of the animals in the simulation
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
         view.setColor(Bear.class, Color.RED);
+        graph.setColor(Rabbit.class, Color.ORANGE);
+        graph.setColor(Fox.class, Color.BLUE);
+        graph.setColor(Bear.class, Color.RED);
+        
         
         // Setup a valid starting point.
         simulation.reset();

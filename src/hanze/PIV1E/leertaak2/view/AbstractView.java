@@ -1,6 +1,8 @@
 package hanze.PIV1E.leertaak2.view;
 
 import javax.swing.*;
+
+import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.model.*;
 
 public abstract class AbstractView extends JPanel {
@@ -16,6 +18,8 @@ public abstract class AbstractView extends JPanel {
 	}
 	
 	public void updateView() {
-		repaint();
+		showStatus(getModel().getStep(), getModel().getField(), getModel().getStats());
 	}
+	
+	public abstract void showStatus(int step, Field field, FieldStats stats);
 }

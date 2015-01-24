@@ -115,11 +115,6 @@ public class SimulatorView extends AbstractView
         fieldView.repaint();
     }
     
-    public void paintComponent(Graphics g)
-    {
-        showStatus(getModel().getStep(), getModel().getField(), getModel().getStats());
-    }
-    
     /**
      * Provide a graphical view of a rectangular field.
      */
