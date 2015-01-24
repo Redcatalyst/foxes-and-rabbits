@@ -7,6 +7,7 @@ import hanze.PIV1E.leertaak2.model.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,8 +32,21 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
     
+    // Color of fox
+    private static final Color FOXCOLOR = Color.BLUE;
+    // Color of fox
+    private static final Color RABBITCOLOR = Color.ORANGE;
+    // Color of fox
+    private static final Color BEARCOLOR = Color.RED;
+    // Color of fox
+    private static final Color HUNTERCOLOR = Color.GREEN;
+    // List of all views
+    private ArrayList<AbstractView> views;
+    
     public static JFrame frame;
+    private SimulationModel simulation;
     private MenuController menuController;
+    private AbstractView view, graph, pie;
     
     /**
      * Create a simulation field with the given size.
@@ -41,9 +55,14 @@ public class Simulator
      */
     public Simulator()
     {
-        SimulationModel simulation = new SimulationModel(DEFAULT_DEPTH, DEFAULT_WIDTH);
-        SimulatorView view = new SimulatorView(DEFAULT_DEPTH, DEFAULT_WIDTH, simulation);
-        GraphView graph = new GraphView(100, 140, 100, simulation);
+    	views = new ArrayList<AbstractView>();
+        simulation = new SimulationModel(DEFAULT_DEPTH, DEFAULT_WIDTH);
+        view = new SimulatorView(DEFAULT_DEPTH, DEFAULT_WIDTH, simulation);
+        views.add(view);
+        graph = new GraphView(100, 140, 100, simulation);
+        views.add(graph);
+//        pie = new PieView(simulation);
+//        views.add(pie);
         RunController controller = new RunController(simulation);
         menuController = new MenuController(simulation);
         
@@ -66,21 +85,27 @@ public class Simulator
         frame.pack();
         frame.setVisible(true);
 
-        // Set the color of the animals in the simulation
-        view.setColor(Rabbit.class, Color.ORANGE);
-        view.setColor(Fox.class, Color.BLUE);
-        view.setColor(Bear.class, Color.RED);
-        view.setColor(Hunter.class, Color.BLACK);
-        graph.setColor(Rabbit.class, Color.ORANGE);
-        graph.setColor(Fox.class, Color.BLUE);
-        graph.setColor(Bear.class, Color.RED);
-        graph.setColor(Bear.class, Color.BLACK);
-        
+        setColor();
         
         // Setup a valid starting point.
         simulation.reset();
     }
     
+    /*
+     * give everything a color
+     */
+    public void setColor() {
+    	for (AbstractView view : views){
+	    	view.setColor(Rabbit.class, RABBITCOLOR);
+	        view.setColor(Fox.class, FOXCOLOR);
+	        view.setColor(Bear.class, BEARCOLOR);
+	        view.setColor(Hunter.class, HUNTERCOLOR);
+    	}
+    }
+    
+    /*
+     * make the menu in the simulation and give it the controller as actionlistener
+     */
     public void makeMenuBar(){
     	JMenuBar menubar = new JMenuBar();
         frame.setJMenuBar(menubar);

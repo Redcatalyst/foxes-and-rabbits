@@ -1,5 +1,7 @@
 package hanze.PIV1E.leertaak2.view;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 import hanze.PIV1E.leertaak2.location.Field;
@@ -22,4 +24,7 @@ public abstract class AbstractView extends JPanel {
 	}
 	
 	public abstract void showStatus(int step, Field field, FieldStats stats);
+	
+	public abstract void setColor(Class animalClass, Color color);
+	
 }
