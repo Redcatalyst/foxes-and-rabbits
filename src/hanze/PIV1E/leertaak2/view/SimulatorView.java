@@ -91,7 +91,7 @@ public class SimulatorView extends AbstractView
         if(!isVisible()) {
             setVisible(true);
         }
-            
+                
         stepLabel.setText(STEP_PREFIX + step);
         stats.reset();
         
@@ -112,7 +112,7 @@ public class SimulatorView extends AbstractView
         stats.countFinished();
 
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
-        fieldView.repaint();
+        fieldView.repaintNow();
     }
     
     /**
@@ -145,6 +145,14 @@ public class SimulatorView extends AbstractView
         {
             return new Dimension(gridWidth * GRID_VIEW_SCALING_FACTOR,
                                  gridHeight * GRID_VIEW_SCALING_FACTOR);
+        }
+        
+        /**
+         * Cause immediate update of the panel.
+         */
+        public void repaintNow()
+        {
+            paintImmediately(0, 0, fieldImage.getWidth(fieldView) , fieldImage.getHeight(fieldView));
         }
 
         /**
@@ -183,7 +191,7 @@ public class SimulatorView extends AbstractView
          * internal image to screen.
          */
         public void paintComponent(Graphics g)
-        {
+        {        	
             if(fieldImage != null) {
                 Dimension currentSize = getSize();
                 if(size.equals(currentSize)) {
