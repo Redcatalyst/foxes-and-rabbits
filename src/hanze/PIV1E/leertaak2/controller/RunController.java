@@ -1,13 +1,10 @@
 package hanze.PIV1E.leertaak2.controller;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hanze.PIV1E.leertaak2.model.SimulationModel;
@@ -22,7 +19,9 @@ public class RunController extends AbstractController {
 	
 	public void makePanel(){
 		JPanel flow = new JPanel();
-	    flow.setLayout(new GridLayout(0,1));
+		GridLayout layout = new GridLayout(3, 1);
+		layout.setVgap(3);
+	    flow.setLayout(layout);
 	    JButton step1 = new JButton("Step 1");
 	    step1.addActionListener(new ActionListener() {
 	    							public void actionPerformed(ActionEvent e) {step1(); }
