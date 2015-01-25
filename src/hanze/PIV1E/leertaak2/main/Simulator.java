@@ -61,8 +61,8 @@ public class Simulator
         views.add(view);
         graph = new GraphView(100, 140, 100, simulation);
         views.add(graph);
-//        pie = new PieView(simulation);
-//        views.add(pie);
+        pie = new PieView(100, 140, simulation);
+        views.add(pie);
         RunController controller = new RunController(simulation);
         menuController = new MenuController(simulation);
         
