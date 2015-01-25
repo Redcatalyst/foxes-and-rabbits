@@ -19,11 +19,11 @@ public class Hunter extends Human
 {
     // Characteristics shared by all hunters (class variables).
     
-    public static final int INTRODUCING_AGE = 24;
+    public static final int INTRODUCING_AGE = 28;
 	// The age to which a hunter can live.
     public static final int MAX_AGE = 280;
     // The likelihood of a hunter breeding.
-    public static final double INTRODUCING_PROBABILITY = 0.04;
+    public static final double INTRODUCING_PROBABILITY = 0.03;
     // The maximum number of new hunters.
     public static final int MAX_NEW_HUNTERS = 1;
     // The food value of a single rabbit.
