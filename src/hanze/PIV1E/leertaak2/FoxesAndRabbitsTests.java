@@ -1,9 +1,6 @@
 package hanze.PIV1E.leertaak2;
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.location.*;
 
@@ -27,16 +24,26 @@ public class FoxesAndRabbitsTests {
         Field field = new Field(100, 100);
         Rabbit rabbit1 = new Rabbit(false, field, new Location(50, 50));
         Fox fox1 = new Fox(false, field, new Location(40,40));
-        int foodLevel = fox1.getFoodLevel();
+        Bear bear1 = new Bear(false, field, new Location(60,60));
+        Hunter hunter1 = new Hunter(false, field, new Location(30,30));
+        int foodLevelFox = fox1.getFoodLevel();
+        int foodLevelBear = bear1.getFoodLevel();
+        int foodLevelHunter = hunter1.getFoodLevel();
         
         //simulate 1 step
         rabbit1.act();
         fox1.act();
+        bear1.act();
+        hunter1.act();
         
         //test conditions
         assertTrue(rabbit1.getAge() == 1);
-        assertTrue(foodLevel == fox1.getFoodLevel() + 1);
+        assertTrue(foodLevelFox == fox1.getFoodLevel() + 1);
         assertTrue(fox1.getAge() == 1);
+        assertTrue(foodLevelBear == bear1.getFoodLevel() + 1);
+        assertTrue(bear1.getAge() == 1);
+        assertTrue(foodLevelHunter == hunter1.getFoodLevel() + 1);
+        assertTrue(hunter1.getAge() == 1);
         
         //teleport the fox next to the rabbit, the fox should eat the rabbit when he acts
         fox1.setLocation(new Location(50,49));
@@ -63,12 +70,109 @@ public class FoxesAndRabbitsTests {
         fox3 = null;
         fox4 = null;
         
-        //make a rabbit and let him live until he should die
+        //create 4 bears and make 1 unable to move, this way he should die
+        bear1 = new Bear(false, field, new Location(0,0));
+        Bear bear2 = new Bear(false, field, new Location(1,0));
+        Bear bear3 = new Bear(false, field, new Location(0,1));
+        Bear bear4 = new Bear(false, field, new Location(1,1));
+        bear1.act();
+        assertFalse(bear1.isAlive());        
+        
+        //reset the field and the animals
+        field.clear();
+        bear1 = null;
+        bear2 = null;
+        bear3 = null;
+        bear4 = null;
+        
+        //create 4 hunters and make 1 unable to move, this way he should die
+        hunter1 = new Hunter(false, field, new Location(0,0));
+        Hunter hunter2 = new Hunter(false, field, new Location(1,0));
+        Hunter hunter3 = new Hunter(false, field, new Location(0,1));
+        Hunter hunter4 = new Hunter(false, field, new Location(1,1));
+        hunter1.act();
+        assertFalse(hunter1.isAlive());
+        
+        //reset the field and the animals
+        field.clear();
+        hunter1 = null;
+        hunter2 = null;
+        hunter3 = null;
+        hunter4 = null;
+
+        /* make a rabbit and let him live until he should die
         rabbit1 = new Rabbit(false, field, new Location(50, 50));
         for(int step = 0; step <= rabbit1.MAX_AGE ; step++) {
-            rabbit1.act();
+           rabbit1.act();
         }
         assertFalse(rabbit1.isAlive());
+        */
+        
+        // Check if a fox eats a rabbit
+        rabbit1 = new Rabbit(false, field, new Location(0,0));
+        fox1 = new Fox(false, field, new Location(0,1));
+        fox1.act();
+        assertFalse(rabbit1.isAlive());
+        
+        //reset the field and the animals
+        field.clear();
+        rabbit1 = null;
+        fox1 = null;
+        
+        // Check if a bear eats a rabbit
+        rabbit1 = new Rabbit(false, field, new Location(0,0));
+        bear1 = new Bear(false, field, new Location(0,1));
+        bear1.act();
+        assertFalse(rabbit1.isAlive());
+        
+        //reset the field and the animals
+        field.clear();
+        rabbit1 = null;
+        bear1 = null;
+        
+        // Check if a bear eats a fox
+        fox1 = new Fox(false, field, new Location(0,0));
+        bear1 = new Bear(false, field, new Location(0,1));
+        bear1.act();
+        assertFalse(fox1.isAlive());
+        
+        //reset the field and the animals
+        field.clear();
+        fox1 = null;
+        bear1 = null;
+        
+        // Check if a hunter hunts for a rabbit
+        rabbit1 = new Rabbit(false, field, new Location(0,0));
+        hunter1 = new Hunter(false, field, new Location(0,1));
+        hunter1.act();
+        assertFalse(rabbit1.isAlive());
+        
+        //reset the field and the animals
+        field.clear();
+        rabbit1 = null;
+        hunter1 = null;
+        
+        // Check if a hunter hunts for a fox
+        fox1 = new Fox(false, field, new Location(0,0));
+        hunter1 = new Hunter(false, field, new Location(0,1));
+        hunter1.act();
+        assertFalse(fox1.isAlive());
+        
+        //reset the field and the animals
+        field.clear();
+        fox1 = null;
+        hunter1 = null;
+        
+        // Check if a hunter hunts for a bear
+        bear1 = new Bear(false, field, new Location(0,0));
+        hunter1 = new Hunter(false, field, new Location(0,1));
+        hunter1.act();
+        assertFalse(bear1.isAlive());
+        
+        //reset the field and the animals
+        field.clear();
+        bear1 = null;
+        hunter1 = null;
         
         
 	}
