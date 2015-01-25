@@ -2,7 +2,6 @@ package hanze.PIV1E.leertaak2.actor;
 import hanze.PIV1E.leertaak2.helper.Randomizer;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
-import hanze.PIV1E.leertaak2.main.Simulator;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 
 import java.util.List;
@@ -21,16 +20,16 @@ public class Fox extends Animal
     // Characteristics shared by all foxes (class variables).
     
     // The age at which a fox can start to breed.
-    public static final int BREEDING_AGE = 15;
+    public static final int BREEDING_AGE = 6;
     // The age to which a fox can live.
     public static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    public static final double BREEDING_PROBABILITY = 0.08;
+    public static final double BREEDING_PROBABILITY = 0.09;
     // The maximum number of births.
     public static final int MAX_LITTER_SIZE = 7;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    public static final int RABBIT_FOOD_VALUE = 9;
+    public static final int RABBIT_FOOD_VALUE = 6;
     // A shared random number generator to control breeding.
     public static final Random rand = Randomizer.getRandom();
     
@@ -125,9 +124,9 @@ public class Fox extends Animal
         Iterator<Location> it = adjacent.iterator();
         while(it.hasNext()) {
             Location where = it.next();
-            Object animal = field.getObjectAt(where);
-            if(animal instanceof Rabbit) {
-                Rabbit rabbit = (Rabbit) animal;
+            Object actor = field.getObjectAt(where);
+            if(actor instanceof Rabbit) {
+                Rabbit rabbit = (Rabbit) actor;
                 if(rabbit.isAlive()) { 
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;

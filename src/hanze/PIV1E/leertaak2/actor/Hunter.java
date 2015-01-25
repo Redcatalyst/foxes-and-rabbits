@@ -19,20 +19,20 @@ public class Hunter extends Human
 {
     // Characteristics shared by all hunters (class variables).
     
-    public static final int INTRODUCING_AGE = 20;
+    public static final int INTRODUCING_AGE = 24;
 	// The age to which a hunter can live.
-    public static final int MAX_AGE = 80;
+    public static final int MAX_AGE = 280;
     // The likelihood of a hunter breeding.
     public static final double INTRODUCING_PROBABILITY = 0.04;
     // The maximum number of new hunters.
-    public static final int MAX_NEW_HUNTERS = 2;
+    public static final int MAX_NEW_HUNTERS = 1;
     // The food value of a single rabbit.
-    public static final int RABBIT_FOOD_VALUE = 9;
+    public static final int RABBIT_FOOD_VALUE = 6;
     // The food value of a single fox.
-    // public static final int FOX_FOOD_VALUE = 18;
+    public static final int FOX_FOOD_VALUE = 12;
     // The food value of a single bear.
     // This is also the number of steps a hunter can go before it has to eat again.
-    public static final int BEAR_FOOD_VALUE = 40;    
+    public static final int BEAR_FOOD_VALUE = 24;    
     // A shared random number generator to control breeding.
     public static final Random rand = Randomizer.getRandom();
     
@@ -126,9 +126,9 @@ public class Hunter extends Human
         Iterator<Location> it = adjacent.iterator();
         while(it.hasNext()) {
             Location where = it.next();
-            Object animal = field.getObjectAt(where);
-            if(animal instanceof Rabbit) {
-                Rabbit rabbit = (Rabbit) animal;
+            Object actor = field.getObjectAt(where);
+            if(actor instanceof Rabbit) {
+                Rabbit rabbit = (Rabbit) actor;
                 if(rabbit.isAlive()) { 
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
@@ -136,18 +136,17 @@ public class Hunter extends Human
                     return where;
                 }
             }
-            /*
-            if(animal instanceof Fox) {
-                Fox fox = (Fox) animal;
+            if(actor instanceof Fox) {
+                Fox fox = (Fox) actor;
                 if(fox.isAlive()) { 
                     fox.setDead();
                     foodLevel = FOX_FOOD_VALUE;
                     // Remove the dead fox from the field.
                     return where;
                 }
-            } */ 
-            if(animal instanceof Bear) {
-                Bear bear = (Bear) animal;
+            }  
+            if(actor instanceof Bear) {
+                Bear bear = (Bear) actor;
                 if(bear.isAlive()) { 
                     bear.setDead();
                     foodLevel = BEAR_FOOD_VALUE;

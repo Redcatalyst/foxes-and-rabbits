@@ -2,7 +2,6 @@ package hanze.PIV1E.leertaak2.actor;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 
-import java.util.List;
 
 /**
  * A class representing shared characteristics of animals.
