@@ -282,7 +282,6 @@ public class GraphView extends AbstractView {
         public void paintComponent(Graphics g)
         {
             Dimension size = getSize();
-            //g.clearRect(0, 0, size.width, size.height);
             if(graphImage != null) {
                 g.drawImage(graphImage, 0, 0, null);
             }

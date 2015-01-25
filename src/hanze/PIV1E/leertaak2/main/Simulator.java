@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -59,9 +60,9 @@ public class Simulator
         simulation = new SimulationModel(DEFAULT_DEPTH, DEFAULT_WIDTH);
         view = new SimulatorView(DEFAULT_DEPTH, DEFAULT_WIDTH, simulation);
         views.add(view);
-        graph = new GraphView(100, 140, 100, simulation);
+        graph = new GraphView(140, 140, 100, simulation);
         views.add(graph);
-        pie = new PieView(100, 140, simulation);
+        pie = new PieView(140, 140, simulation);
         views.add(pie);
         RunController controller = new RunController(simulation);
         menuController = new MenuController(simulation);
@@ -69,7 +70,9 @@ public class Simulator
         frame = new JFrame();
         makeMenuBar();
         JPanel extraViews = new JPanel();
+        extraViews.setLayout(new BoxLayout(extraViews, 1));
         extraViews.add(graph);
+        extraViews.add(pie);
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(view, BorderLayout.CENTER);
         frame.getContentPane().add(extraViews, BorderLayout.EAST);
