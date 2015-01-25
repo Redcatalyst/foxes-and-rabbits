@@ -26,7 +26,7 @@ import javax.swing.JPanel;
 public class Simulator
 {
     // Current simulator version
- 	public static final String VERSION = "Version 1.0";
+ 	public static final String VERSION = "Version 2.5";
  	// The default width for the grid.
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.

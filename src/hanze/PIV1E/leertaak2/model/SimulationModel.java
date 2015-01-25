@@ -81,8 +81,8 @@ public class SimulationModel extends AbstractModel {
         }
         actors.addAll(newActors);
 
-        notifyViews();
         stats.reset();
+        notifyViews();
     }
         
     /**
