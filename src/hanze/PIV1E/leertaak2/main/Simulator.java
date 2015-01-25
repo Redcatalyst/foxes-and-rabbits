@@ -47,7 +47,7 @@ public class Simulator
     public static JFrame frame;
     private SimulationModel simulation;
     private MenuController menuController;
-    private AbstractView view, graph, pie;
+    private AbstractView view, graph, pie, chart;
     
     /**
      * Create a simulation field with the given size.
@@ -64,6 +64,8 @@ public class Simulator
         views.add(graph);
         pie = new PieView(140, 140, simulation);
         views.add(pie);
+        chart = new ChartView(140, 140, simulation);
+        views.add(chart);
         RunController controller = new RunController(simulation);
         menuController = new MenuController(simulation);
         
@@ -73,6 +75,7 @@ public class Simulator
         extraViews.setLayout(new BoxLayout(extraViews, 1));
         extraViews.add(graph);
         extraViews.add(pie);
+        extraViews.add(chart);
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(view, BorderLayout.CENTER);
         frame.getContentPane().add(extraViews, BorderLayout.EAST);

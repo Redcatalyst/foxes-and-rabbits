@@ -214,7 +214,7 @@ public class GraphView extends AbstractView {
 
             int oldTop = (int) (height * (1.0-SCALE_FACTOR));
 
-            g.setColor(Color.WHITE);
+            g.setColor(this.getBackground());
             g.fillRect(0, 0, width, oldTop);
             g.drawImage(tmpImage, 0, oldTop, null);
 
@@ -244,7 +244,7 @@ public class GraphView extends AbstractView {
         public void clearImage()
         {
             Graphics g = graphImage.getGraphics();
-            g.setColor(Color.WHITE);
+            g.setColor(this.getBackground());
             g.fillRect(0, 0, graphImage.getWidth(), graphImage.getHeight());
             repaint();
         }

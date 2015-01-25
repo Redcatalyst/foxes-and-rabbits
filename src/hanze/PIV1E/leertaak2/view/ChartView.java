@@ -17,30 +17,30 @@ import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 import hanze.PIV1E.leertaak2.view.GraphView.GraphPanel;
 
-public class PieView extends AbstractView {
+public class ChartView extends AbstractView {
 
-	private static PiePanel pie;
+	private static ChartPanel chart;
 	
 	// The classes being tracked by this view
     private Set<Class> classes;
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
 	
-	public PieView(int width, int height, SimulationModel simulation) {
+	public ChartView(int width, int height, SimulationModel simulation) {
 		super(simulation);
 		classes = new HashSet<Class>();
 		colors = new HashMap<Class, Color>();
-        pie = new PiePanel(width, height);
-        pie.newRun();
-        add(pie);
+        chart = new ChartPanel(width, height);
+        chart.newRun();
+        add(chart);
 	}
 
 	@Override
 	public void showStatus(int step, Field field, FieldStats stats) {
 		if(step == 0){
-        	pie.newRun();
+        	chart.newRun();
         } else {
-        	pie.update(step, field, stats);
+        	chart.update(step, field, stats);
         }		
 	}
 
@@ -50,18 +50,18 @@ public class PieView extends AbstractView {
         classes = colors.keySet();		
 	}
 	
-	class PiePanel extends JPanel
+	class ChartPanel extends JPanel
     {
         // An internal image buffer that is used for painting. For
         // actual display, this image buffer is then copied to screen.
-        private BufferedImage pieImage;
+        private BufferedImage chartImage;
 		
 		/**
          * Create a new, empty GraphPanel.
          */
-        public PiePanel(int width, int height)
+        public ChartPanel(int width, int height)
         {
-            pieImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        	chartImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             clearImage();
         }
         
@@ -82,10 +82,10 @@ public class PieView extends AbstractView {
             if (classes.size() >= 2) {
                 stats.reset();
                 
-                Graphics g = pieImage.getGraphics();
+                Graphics g = chartImage.getGraphics();
 
-                int height = pieImage.getHeight();
-                int width = pieImage.getWidth();
+                int height = chartImage.getHeight();
+                int width = chartImage.getWidth();
 
                 g.setColor(this.getBackground());
     			g.fillRect(0, 0, width, height);
@@ -97,17 +97,17 @@ public class PieView extends AbstractView {
                 	total += stats.getPopulationCount(field, class1);
                 }
     			
-                int previous = 0;
                 it = classes.iterator();
+                int x = 10;
                 while (it.hasNext()) {
                 	Class class1 = it.next();
                 	int count = stats.getPopulationCount(field, class1);
                 	g.setColor(colors.get(class1));
-                	double arc = ((double)count / (double)total) * (double)360;
-                	Long l = Math.round(arc);
-                	int newArc = Integer.valueOf(l.intValue());
-                	g.fillArc(10, 10, width - 20, height - 20, previous, newArc);
-                	previous += newArc;
+                	double value = ((double)height / (double)total) * (double)count;
+                	Long l = Math.round(value);
+                	int newValue = Integer.valueOf(l.intValue());
+                	g.fillRect(x, height - newValue - 1, 20 , newValue);
+                	x += 30 ;
                 }
                 
                 repaintNow();
@@ -119,7 +119,7 @@ public class PieView extends AbstractView {
          */
         public void repaintNow()
         {
-            paintImmediately(0, 0, pieImage.getWidth(), pieImage.getHeight());
+            paintImmediately(0, 0, chartImage.getWidth(), chartImage.getHeight());
         }
 
         /**
@@ -127,9 +127,9 @@ public class PieView extends AbstractView {
          */
         public void clearImage()
         {
-            Graphics g = pieImage.getGraphics();
+            Graphics g = chartImage.getGraphics();
             g.setColor(this.getBackground());
-            g.fillRect(0, 0, pieImage.getWidth(), pieImage.getHeight());
+            g.fillRect(0, 0, chartImage.getWidth(), chartImage.getHeight());
             repaint();
         }
 
@@ -145,7 +145,7 @@ public class PieView extends AbstractView {
          */
         public Dimension getPreferredSize()
         {
-            return new Dimension(pieImage.getWidth(), pieImage.getHeight());
+            return new Dimension(chartImage.getWidth(), chartImage.getHeight());
         }
 
         /**
@@ -165,8 +165,8 @@ public class PieView extends AbstractView {
          */
 		public void paintComponent(Graphics g) {
 			Dimension size = getSize();
-            if(pieImage != null) {
-                g.drawImage(pieImage, 0, 0, null);
+            if(chartImage != null) {
+                g.drawImage(chartImage, 0, 0, null);
             }
 		}
     }
