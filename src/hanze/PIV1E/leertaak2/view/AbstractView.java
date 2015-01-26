@@ -8,14 +8,14 @@ import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.model.*;
 
 public abstract class AbstractView extends JPanel {
-	protected SimulationModel simulation;
+	protected AbstractModel simulation;
 
-	public AbstractView(SimulationModel simulation) {
+	public AbstractView(AbstractModel simulation) {
 		this.simulation = simulation;
 		simulation.addView(this);
 	}
 	
-	public SimulationModel getModel() {
+	public AbstractModel getModel() {
 		return simulation;
 	}
 	
