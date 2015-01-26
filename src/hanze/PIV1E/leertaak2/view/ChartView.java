@@ -37,11 +37,7 @@ public class ChartView extends AbstractView {
 
 	@Override
 	public void showStatus(int step, Field field, FieldStats stats) {
-		if(step == 0){
-        	chart.newRun();
-        } else {
-        	chart.update(step, field, stats);
-        }		
+        chart.update(step, field, stats);	
 	}
 
 	@Override
