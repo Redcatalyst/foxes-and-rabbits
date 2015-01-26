@@ -91,8 +91,7 @@ public class SimulatorView extends AbstractView
         if(!isVisible()) {
             setVisible(true);
         }
-                
-        stepLabel.setText(STEP_PREFIX + step);
+        
         stats.reset();
         
         fieldView.preparePaint();
@@ -110,9 +109,15 @@ public class SimulatorView extends AbstractView
             }
         }
         stats.countFinished();
-
+        
+        stepLabel.setText(STEP_PREFIX + step);
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
+        
         fieldView.repaintNow();
+    }
+    
+    public void run(){
+    	
     }
     
     /**
