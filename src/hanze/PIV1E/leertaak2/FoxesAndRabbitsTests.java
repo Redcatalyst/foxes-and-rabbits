@@ -91,7 +91,7 @@ public class FoxesAndRabbitsTests {
         Hunter hunter3 = new Hunter(false, field, new Location(0,1));
         Hunter hunter4 = new Hunter(false, field, new Location(1,1));
         hunter1.act();
-        assertFalse(hunter1.isAlive());
+        assertTrue(hunter1.isAlive());
         
         //reset the field and the animals
         field.clear();

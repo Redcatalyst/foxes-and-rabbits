@@ -84,10 +84,10 @@ public class Hunter extends Human
             if(newLocation != null) {
                 setLocation(newLocation);
             }
-            else {
+            /* else {
                 // Overcrowding.
                 setDead();
-            }
+            } */
         }
     }
 
