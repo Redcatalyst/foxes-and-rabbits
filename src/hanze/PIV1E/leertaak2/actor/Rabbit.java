@@ -173,6 +173,7 @@ public class Rabbit extends Animal
 		if(rand.nextDouble() <= rabbit_infection_chance)
 		{
 			infected = true;
+			age = MAX_AGE - 5;
 		}
     }
     
