@@ -192,6 +192,18 @@ public class FoxesAndRabbitsTests {
         rabbit2.checkAndInfect();
         assertTrue(rabbit2.infected);
         
+        //reset the field and the animals
+        field.clear();
+        rabbit1 = null;
+        rabbit2 = null;
+        
+        //Check if rabbits do not infect each other when not infected
+        rabbit1 = new Rabbit(false, field, new Location(0,0));
+        rabbit2 = new Rabbit(false, field, new Location(1,0));
+        assertFalse(rabbit2.infected);
+        rabbit2.checkAndInfect();
+        assertFalse(rabbit2.infected);
+        
 	}
 
 }
