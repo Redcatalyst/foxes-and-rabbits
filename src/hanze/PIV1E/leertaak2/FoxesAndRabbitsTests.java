@@ -36,7 +36,7 @@ public class FoxesAndRabbitsTests {
         bear1.act();
         hunter1.act();
         
-        //test conditions
+        //test if animals age
         assertTrue(rabbit1.getAge() == 1);
         assertTrue(foodLevelFox == fox1.getFoodLevel() + 1);
         assertTrue(fox1.getAge() == 1);
@@ -174,6 +174,23 @@ public class FoxesAndRabbitsTests {
         bear1 = null;
         hunter1 = null;
         
+        //Check if rabbits status updates to infected
+        rabbit1 = new Rabbit(false, field, new Location(0,0));
+        rabbit1.setInfected();
+        assertTrue(rabbit1.infected);
+        
+        //reset the field and the animals
+        field.clear();
+        rabbit1 = null;
+        
+        //Check if rabbits infect each other (only viable at 100% infection rate)
+        rabbit1 = new Rabbit(false, field, new Location(0,0));
+        rabbit1.setInfected();
+ 
+        Rabbit rabbit2 = new Rabbit(false, field, new Location(1,0));
+        assertFalse(rabbit2.infected);
+        rabbit2.checkAndInfect();
+        assertTrue(rabbit2.infected);
         
 	}
 

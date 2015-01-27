@@ -4,8 +4,10 @@ import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 
 /**
  * A simple model of a rabbit.
@@ -26,8 +28,13 @@ public class Rabbit extends Animal
     public static final double BREEDING_PROBABILITY = 0.12;
     // The maximum number of births.
     public static final int MAX_LITTER_SIZE = 4;
+    // The chance a rabbit can get infected
+    public double rabbit_infection_chance = 1;
+    // Indicates if a rabbit is infected
+    public boolean infected = false;
     // A shared random number generator to control breeding.
     public static final Random rand = Randomizer.getRandom();
+    
     
     // Individual characteristics (instance fields).
     
@@ -133,4 +140,53 @@ public class Rabbit extends Animal
     public int getAge(){
     	return age;
     }
+    
+    
+    /*
+     * A rabbit can get ill with a rabbit virus when rabbits around him got the virus. 
+     * 
+     */
+    public void checkAndInfect()
+    {
+    	Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object animal = field.getObjectAt(where);
+            // Check if one of the adjacent locations has a rabbit
+            if(animal instanceof Rabbit) {
+                Rabbit rabbit = (Rabbit) animal;
+                // Infect rabbit if other rabbit is infected
+                if(rabbit.checkForInfection()) {
+                	setInfected();
+                }
+            }
+        }
+    }
+    
+    /*
+     * Rabbits have a determined chance to become infected
+     */
+    public void setInfected()
+    {
+		if(rand.nextDouble() <= rabbit_infection_chance)
+		{
+			infected = true;
+		}
+    }
+    
+    /*
+     * Check if the rabbit is infected or not.
+     */
+    public boolean checkForInfection()
+    {
+    	if(infected == true){
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
+    
 }
