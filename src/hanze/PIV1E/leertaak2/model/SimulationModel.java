@@ -66,7 +66,7 @@ public class SimulationModel extends AbstractModel {
      * Iterate over the whole field updating the state of each
      * fox and rabbit.
      */
-    public void simulateOneStep()
+    private void simulateOneStep()
     {
     	step++;
      

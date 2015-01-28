@@ -3,6 +3,7 @@ package hanze.PIV1E.leertaak2.main;
 import hanze.PIV1E.leertaak2.view.*;
 import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.controller.*;
+import hanze.PIV1E.leertaak2.helper.MusicPlayer;
 import hanze.PIV1E.leertaak2.model.*;
 
 import java.awt.BorderLayout;
@@ -56,6 +57,8 @@ public class Simulator
      */
     public Simulator()
     {
+    	MusicPlayer.playMusic("wind.mp3");
+    	
     	views = new ArrayList<AbstractView>();
         simulation = new SimulationModel(DEFAULT_DEPTH, DEFAULT_WIDTH);
         view = new SimulatorView(DEFAULT_DEPTH, DEFAULT_WIDTH, simulation);
