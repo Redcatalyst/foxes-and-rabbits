@@ -29,7 +29,7 @@ public class Rabbit extends Animal
     // The maximum number of births.
     public static final int MAX_LITTER_SIZE = 4;
     // The chance a rabbit can get infected
-    public double rabbit_infection_chance = 1;
+    public double rabbit_infection_chance = 0.9;
     // Indicates if a rabbit is infected
     public boolean infected = false;
     // A shared random number generator to control breeding.
@@ -182,11 +182,7 @@ public class Rabbit extends Animal
      */
     public boolean checkForInfection()
     {
-    	if(infected == true){
-    		return true;
-    	} else {
-    		return false;
-    	}
+    	return infected;
     }
     
     
