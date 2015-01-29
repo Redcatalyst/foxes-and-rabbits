@@ -1,8 +1,8 @@
 package hanze.PIV1E.leertaak2.location;
 import hanze.PIV1E.leertaak2.helper.Randomizer;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -187,6 +187,20 @@ public class Field
             Collections.shuffle(locations, rand);
         }
         return locations;
+    }
+    
+    /**
+     * Looks for free locations and return a random free location
+     * @return A random free location
+     */
+    public Location getFreeLocation(){
+        List<Location> freeLocations = new ArrayList<Location>();
+        for(int r = 0; r < field.length; r++){
+            for(int c = 0; c < field[r].length; c++){
+                if(field[r][c] == null) freeLocations.add(new Location(r, c));
+            }
+        }
+        return freeLocations.isEmpty() ? null : freeLocations.get(rand.nextInt(freeLocations.size()));
     }
 
     /**
