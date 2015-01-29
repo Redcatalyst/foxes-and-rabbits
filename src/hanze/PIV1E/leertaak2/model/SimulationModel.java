@@ -1,10 +1,10 @@
 package hanze.PIV1E.leertaak2.model;
 
 import hanze.PIV1E.leertaak2.actor.*;
-import hanze.PIV1E.leertaak2.helper.Randomizer;
-import hanze.PIV1E.leertaak2.location.Field;
-import hanze.PIV1E.leertaak2.location.Location;
-import hanze.PIV1E.leertaak2.view.FieldStats;
+import hanze.PIV1E.leertaak2.helper.*;
+import hanze.PIV1E.leertaak2.location.*;
+import hanze.PIV1E.leertaak2.music.*;
+import hanze.PIV1E.leertaak2.view.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,9 +21,9 @@ public class SimulationModel extends AbstractModel {
     // The probability that a bear will be created in any given grid position.
     private static final double HUNTER_CREATION_PROBABILITY = 0.01; 
     
-    // List of animals in the field.
+    // List of actors in the field.
     public static List<Actor> actors;
-    // List of new animals
+    // List of new actors
     public static List<Actor> newActors;
     // The current state of the field.
     private Field field;
@@ -31,6 +31,10 @@ public class SimulationModel extends AbstractModel {
     private int step;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
+    // Plays sound
+    private MusicHandler musicHandler = new MusicHandler();
+    // all the sounds
+    private MusicFile backgroundSound, car;
     
     public SimulationModel(int depth, int width){
     	actors = new ArrayList<Actor>();
@@ -38,6 +42,20 @@ public class SimulationModel extends AbstractModel {
         
         field = new Field(depth, width);
         stats = new FieldStats();
+        initSound();
+    }
+    
+    /**
+     * Initializes all the sounds.
+     */
+    public void initSound() {
+    	//background
+    	backgroundSound = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/wind.wav", musicHandler, -25.0f, "Background");
+        backgroundSound.adjustVolume(-30.0f);
+        musicHandler.startInfinite(backgroundSound);
+        
+        //simulate 1 step/car moving
+        car = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/car.wav", musicHandler, 0f, "1 Step");
     }
     
     /**
@@ -69,6 +87,7 @@ public class SimulationModel extends AbstractModel {
     private void simulateOneStep()
     {
     	step++;
+    	musicHandler.start(car);
      
         // Let all rabbits act.
     	newActors.clear();
@@ -152,5 +171,9 @@ public class SimulationModel extends AbstractModel {
 	
 	public FieldStats getStats(){
 		return stats;
+	}
+	
+	public MusicHandler getMusicHandler() {
+		return musicHandler;
 	}
 }
