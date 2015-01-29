@@ -119,7 +119,7 @@ public class Simulator
         JMenu menu;
         JMenuItem item;
         
-        // create the Menu 1 menu
+        // create the file menu
         menu = new JMenu("File");
         menubar.add(menu);
         
@@ -127,11 +127,20 @@ public class Simulator
         item.addActionListener(menuController.new Quit());
         menu.add(item);
         
-     // create the Menu 2 menu
-        menu = new JMenu("Menu 2");
+     // create the options menu
+        menu = new JMenu("Options");
         menubar.add(menu);
         
-        item = new JMenuItem("Item 1");
+        item = new JMenuItem("Mute all sound");
+        item.addActionListener(menuController.new MuteAllSound());
+        menu.add(item);
+        
+        item = new JMenuItem("Unmute all sound");
+        item.addActionListener(menuController.new UnMuteAllSound());
+        menu.add(item);
+        
+        item = new JMenuItem("Adjust sound");
+        item.addActionListener(menuController.new AdjustSound());
         menu.add(item);
         
      // create the Help menu

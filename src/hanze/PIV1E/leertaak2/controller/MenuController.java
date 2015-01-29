@@ -3,34 +3,31 @@ package hanze.PIV1E.leertaak2.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import hanze.PIV1E.leertaak2.main.Simulator;
-import hanze.PIV1E.leertaak2.model.SimulationModel;
+import hanze.PIV1E.leertaak2.model.*;
 
+/**
+ * Handles the events created by the menu in the JFrame.
+ */
 public class MenuController extends AbstractController {
-
+	
+	/**
+	 * Creates a MenuController. It needs a model to give his information to.
+	 * @param simulation the SimulationController to give the information to
+	 */
 	public MenuController(SimulationModel simulation) {
 		super(simulation);
 	}
 	
-	/**
-     * shows information about the Foxes and Rabbits simulation
-     */
     private void showAbout(){
     	JOptionPane.showMessageDialog(this, "Foxes and Rabits\n" + Simulator.VERSION, "About ImageViewer", JOptionPane.INFORMATION_MESSAGE);
     }
     
     /**
-     * stops the program
+     * Shows information about the Foxes and Rabbits simulation.
      */
-    private void quit(){
-    	System.exit(0);;
-    }
-
 	public class ShowAbout implements ActionListener {
 
 		@Override
@@ -39,11 +36,47 @@ public class MenuController extends AbstractController {
 		}
 	}
 	
+	/**
+     * Stops the program.
+     */
 	public class Quit implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			quit();
+			System.exit(0);
+		}
+	}
+	
+	/**
+	 * Mutes all game sounds.
+	 */
+	public class MuteAllSound implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			simulation.getMusicHandler().muteAllSound();
+		}
+	}
+	
+	/**
+	 * Unmutes all game sounds.
+	 */
+	public class UnMuteAllSound implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			simulation.getMusicHandler().unMuteAllSound();
+		}
+	}
+	
+	/**
+	 * Shows the menu to adjust the game sounds.
+	 */
+	public class AdjustSound implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			simulation.getMusicHandler().adjustSound();
 		}
 	}
 }
