@@ -7,9 +7,12 @@ import javax.swing.event.ChangeListener;
 
 public class SoundListener {
 
-	/**
-	 * 
-	 */
+	public void adjustSound(JTextField field, MusicFile file, JSlider source) {
+		int value = source.getValue();
+		field.setText(String.valueOf(value));			
+		file.adjustVolume(value);
+	}
+	
 	public class AdjustSound implements ChangeListener {
 		private MusicFile file;
 		private JTextField field;
@@ -22,6 +25,7 @@ public class SoundListener {
 		@Override
 		public void stateChanged(ChangeEvent e) {
 			JSlider source = (JSlider)e.getSource();
+			
 			int value = source.getValue();
 			field.setText(String.valueOf(value));			
 			file.adjustVolume(value);

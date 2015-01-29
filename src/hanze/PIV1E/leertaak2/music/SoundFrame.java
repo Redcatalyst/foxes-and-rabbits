@@ -76,7 +76,7 @@ public class SoundFrame {
 			double value = entry.getValue().getCurrentVolume();
 			panel = new JPanel();
 			text = new JTextField(2);
-			text.setText(String.valueOf(value));
+			text.setText(String.valueOf(Math.round(value)));
 			panel.add(text);
 			slider = new JSlider(0, 100, 50);
 			slider.addChangeListener(listener.new AdjustSound(entry.getValue(), text));

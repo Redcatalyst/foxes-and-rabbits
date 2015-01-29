@@ -1,9 +1,5 @@
 package hanze.PIV1E.leertaak2.music;
 
-/**
- * Illustrates a musicfile, the class only contains a Clip object but just makes it easier to use.
- * The musicfile can only be of type '.wav'.
- */
 import java.io.File;
 
 import javax.sound.sampled.AudioInputStream;
@@ -11,6 +7,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
+/**
+ * Illustrates a musicfile, the class only contains a Clip object but just makes it easier to use.
+ * The musicfile can only be of type '.wav'.
+ */
 public class MusicFile {
 	private Clip sound;
 	private AudioInputStream audioInputStream;
