@@ -20,22 +20,22 @@ public class Hunter extends Human
 {
     // Characteristics shared by all hunters (class variables).
     
-    public static final int INTRODUCING_AGE = 28;
+	private static final int INTRODUCING_AGE = 28;
 	// The age to which a hunter can live.
-    public static final int MAX_AGE = 280;
+	private static final int MAX_AGE = 280;
     // The likelihood of a hunter breeding.
-    public static final double INTRODUCING_PROBABILITY = 0.03;
+	private static final double INTRODUCING_PROBABILITY = 0.03;
     // The maximum number of new hunters.
-    public static final int MAX_NEW_HUNTERS = 1;
+	private static final int MAX_NEW_HUNTERS = 1;
     // The food value of a single rabbit.
-    public static final int RABBIT_FOOD_VALUE = 6;
+	private static final int RABBIT_FOOD_VALUE = 6;
     // The food value of a single fox.
-    public static final int FOX_FOOD_VALUE = 12;
+	private static final int FOX_FOOD_VALUE = 12;
     // The food value of a single bear.
     // This is also the number of steps a hunter can go before it has to eat again.
-    public static final int BEAR_FOOD_VALUE = 24;    
+	private static final int BEAR_FOOD_VALUE = 24;    
     // A shared random number generator to control breeding.
-    public static final Random rand = Randomizer.getRandom();
+	private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
     // The hunter's age.
