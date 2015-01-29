@@ -13,8 +13,8 @@ import java.util.Random;
  * A simple model of a fox.
  * Foxes age, move, eat rabbits, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Tsjeard de Winter en Rick van der Poel
+ * @version 2015.01.29
  */
 public class Fox extends Animal
 {
@@ -31,6 +31,8 @@ public class Fox extends Animal
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     public static final int RABBIT_FOOD_VALUE = 6;
+    // The chance a Fox can get infected when he eats a rabbit.
+    public static final double INFECTION_CHANCE = 0.5;
     // A shared random number generator to control breeding.
     public static final Random rand = Randomizer.getRandom();
     
@@ -129,6 +131,9 @@ public class Fox extends Animal
             if(actor instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) actor;
                 if(rabbit.isAlive()) { 
+                	 if(rabbit.checkForInfection()) {
+                     	setInfection(true);
+                     }
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
                     // Remove the dead rabbit from the field.
@@ -192,5 +197,16 @@ public class Fox extends Animal
      */
     public int getFoodLevel(){
     	return foodLevel;
+    }
+    
+    /**
+     * Set the Fox to infected
+     * @param infect true to make this Fox sick
+     */
+    public void setInfection(boolean infected) {
+        if(infected){
+            age = age + 5;
+        }
+        this.infected = infected;
     }
 }

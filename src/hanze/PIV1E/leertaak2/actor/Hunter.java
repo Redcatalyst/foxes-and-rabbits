@@ -14,7 +14,7 @@ import java.util.Random;
  * A simple model of a hunter.
  * hunters age, move, eat foxes, rabbits and bears and die.
  * @author Tsjeard de Winter en Rick van der Poel
- * @Version 24.01.2015
+ * @version 2015.01.29
  */
 public class Hunter extends Human 
 {

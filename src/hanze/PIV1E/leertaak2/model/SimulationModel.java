@@ -20,6 +20,8 @@ public class SimulationModel extends AbstractModel {
     private static final double BEAR_CREATION_PROBABILITY = 0.01; 
     // The probability that a bear will be created in any given grid position.
     private static final double HUNTER_CREATION_PROBABILITY = 0.01; 
+    // The probability that a rabbit is infected when created
+    private static final double RABBIT_INFECTED_PROBABILITY = 0.05;
     
     // List of actors in the field.
     public static List<Actor> actors;
@@ -134,6 +136,7 @@ public class SimulationModel extends AbstractModel {
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location, this);
+                    rabbit.setInfection(rand.nextDouble() <= RABBIT_INFECTED_PROBABILITY);
                     actors.add(rabbit);
                 }
                 else if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {

@@ -14,8 +14,8 @@ import java.util.Random;
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Tsjeard de Winter en Rick van der Poel
+ * @version 2015.01.29
  */
 public class Rabbit extends Animal
 {
@@ -30,9 +30,7 @@ public class Rabbit extends Animal
     // The maximum number of births.
     public static int MAX_LITTER_SIZE = 4;
     // The chance a rabbit can get infected
-    public double rabbit_infection_chance = 0.9;
-    // Indicates if a rabbit is infected
-    public boolean infected = false;
+    public static final double RABBIT_INFECTION_CHANCE = 0.9;
     // A shared random number generator to control breeding.
     public static final Random rand = Randomizer.getRandom();
     
@@ -68,7 +66,7 @@ public class Rabbit extends Animal
     {
         incrementAge();
         if(isAlive()) {
-        	setInfected();
+        	checkAndInfect();
             giveBirth();            
             // Try to move into a free location.
             Location newLocation = getField().freeAdjacentLocation(getLocation());
@@ -127,6 +125,10 @@ public class Rabbit extends Animal
         return births;
     }
     
+    /**
+     * Determine the litter size based on the amount of rabbits currently in the field
+     * @return MAX_LITTER_SIZE
+     */
     private int getLitterSize() 
     {
 
@@ -156,9 +158,8 @@ public class Rabbit extends Animal
     }
     
     
-    /*
+    /**
      * A rabbit can get ill with a rabbit virus when rabbits around him got the virus. 
-     * 
      */
     public void checkAndInfect()
     {
@@ -173,34 +174,31 @@ public class Rabbit extends Animal
                 Rabbit rabbit = (Rabbit) animal;
                 // Infect rabbit if other rabbit is infected
                 if(rabbit.checkForInfection()) {
-                	if(infected = false) {
-                		setInfected();
+                	if(infected == false){
+                		setInfection(rand.nextDouble() <= RABBIT_INFECTION_CHANCE);
                 	}
                 }
             }
         }
     }
     
-    /*
-     * Rabbits have a determined chance to become infected
+    /**
+     * Set the rabbit to infected
+     * @param infect true to make this Rabbit sick
      */
-    public void setInfected()
-    {
-		if(rand.nextDouble() <= rabbit_infection_chance)
-		{
-			infected = true;
-			age = MAX_AGE - 5;
-		}
+    public void setInfection(boolean infected) {
+        if(infected){
+            age = MAX_AGE - 5;
+        }
+        this.infected = infected;
     }
     
-    /*
-     * Check if the rabbit is infected or not
-     */
-    public boolean checkForInfection()
-    {
-    	return infected;
-    }
     
+    
+    /**
+     * Used to get the current count of rabbits on the field.
+     * @return getPopulationCount the current count of the rabbits in the field
+     */
     private int getRabbitCount()
     {
     	return getModel().getStats().getPopulationCount(getModel().getField(), getClass());

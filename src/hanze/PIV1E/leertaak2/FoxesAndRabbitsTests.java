@@ -175,35 +175,7 @@ public class FoxesAndRabbitsTests {
         bear1 = null;
         hunter1 = null;
         
-        //Check if rabbits status updates to infected
-        rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
-        rabbit1.setInfected();
-        assertTrue(rabbit1.infected);
         
-        //reset the field and the animals
-        field.clear();
-        rabbit1 = null;
-        
-        //Check if rabbits infect each other (only viable at 100% infection rate)
-        rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
-        rabbit1.setInfected();
- 
-        Rabbit rabbit2 = new Rabbit(false, field, new Location(1,0), simulation);
-        assertFalse(rabbit2.infected);
-        rabbit2.checkAndInfect();
-        assertTrue(rabbit2.infected);
-        
-        //reset the field and the animals
-        field.clear();
-        rabbit1 = null;
-        rabbit2 = null;
-        
-        //Check if rabbits do not infect each other when not infected
-        rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
-        rabbit2 = new Rabbit(false, field, new Location(1,0), simulation);
-        assertFalse(rabbit2.infected);
-        rabbit2.checkAndInfect();
-        assertFalse(rabbit2.infected);
         
 	}
 
