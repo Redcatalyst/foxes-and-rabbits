@@ -13,27 +13,30 @@ import javax.sound.sampled.FloatControl;
 
 public class MusicFile {
 	private Clip sound;
+	private AudioInputStream audioInputStream;
 	private String name;
 	private FloatControl gainControl;
 	private float standerdVolume;
 	private float currentVolume;
 	
 	/**
-	 * Creates a MusicFile and adds itself to a musichandler.
+	 * Creates a MusicFile and adds itself to a MusicHandler.
 	 * @param path the path to the file
 	 * @param handler the MusicHandler this MusicFile should be added to
-	 * @param volume the standerd volume the sound should have (0 is normal)
+	 * @param volume the standerd volume the sound should have (50 is normal)
+	 * @param name the name of the MusicFile
 	 */
-	public MusicFile(String path, MusicHandler handler, float volume, String name) {
+	public MusicFile(String path, MusicHandler handler, int volume, String name) {
 		handler.addMusicFile(name, this);
 		try {
-	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
+	        audioInputStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
 	        sound = AudioSystem.getClip();
 	        sound.open(audioInputStream);
 	        
 	        gainControl = (FloatControl) sound.getControl(FloatControl.Type.MASTER_GAIN);
-	        standerdVolume = volume;
+	        standerdVolume = doubleToFloatVolume(volume);
 	        adjustVolume(volume);
+	        //sound.close();
 	    } catch(Exception e) {
 	        System.out.println("Error with sound.");
 	        e.printStackTrace();
@@ -56,33 +59,57 @@ public class MusicFile {
 		return name;
 	}
 	
+	
+	
 	/**
 	 * Adjusts the volume of the MusicFile.
-	 * @param volume the volume adjustment that should be made (0 is nothing)
+	 * @param volume the volume is should be set to
 	 */
-	public void adjustVolume(float volume) {
-		gainControl.setValue(volume);
-		currentVolume = volume;
+	public void adjustVolume(double volume) {
+		gainControl.setValue(doubleToFloatVolume(volume));
+		currentVolume = doubleToFloatVolume(volume);
 	}
 	
 	/**
 	 * Adjusts the volume to the standerd volume.
 	 */
-	public void setToStanderdVolume() {
-		adjustVolume(standerdVolume);
+	public void resetVolume() {
+		gainControl.setValue(standerdVolume);
 	}
 	
 	/**
 	 * Unmutes the sound.
 	 */
 	public void unMute() {
-		adjustVolume(currentVolume);
+		gainControl.setValue(currentVolume);
 	}
 	
 	/**
 	 * Mutes the sound.
 	 */
 	public void mute(){
-		gainControl.setValue(-80.0f);
+		gainControl.setValue(gainControl.getMinimum());
+	}
+	
+	/**
+	 * Gives the current volume the MusicFile is playing on
+	 * @return current volume
+	 */
+	public double getCurrentVolume() {
+		return floatToDoubleVolume(currentVolume);
+	}
+	
+	/*
+	 * Converts a given float to a value between 0(incl.) and 100(incl.)
+	 */
+	private double floatToDoubleVolume(float volume) {
+		return (100 / (gainControl.getMinimum() - gainControl.getMaximum())) * volume;
+	}
+	
+	/*
+	 * Converts a given int to a float value.
+	 */
+	private float doubleToFloatVolume(double volume) {
+		return (float)((gainControl.getMinimum() - gainControl.getMaximum()) / 100) * (float)volume;
 	}
 }

@@ -56,7 +56,18 @@ public class MusicHandler {
 	 */
 	public void startInfinite(MusicFile file) {
 		if(!file.getClip().isRunning()) {
-			file.getClip().loop(Clip.LOOP_CONTINUOUSLY);
+			Thread thread = new Thread(new Runnable(){
+				public void run(){
+					try {
+						file.getClip().setMicrosecondPosition(0);
+						file.getClip().loop(Clip.LOOP_CONTINUOUSLY);
+					} catch(Exception e) {
+						System.out.println("Error with sound.");
+				        e.printStackTrace();
+					}
+				}
+			});
+			thread.start();
 		}
 	}
 	
@@ -66,8 +77,18 @@ public class MusicHandler {
 	 */
 	public void start(MusicFile file) {
 		if(!file.getClip().isRunning()) {
-			file.getClip().start();
-			file.getClip().close();
+			Thread thread = new Thread(new Runnable(){
+				public void run(){
+					try {
+						file.getClip().setMicrosecondPosition(0);
+						file.getClip().start();
+					} catch(Exception e) {
+						System.out.println("Error with sound.");
+				        e.printStackTrace();
+					}
+				}
+			});
+			thread.start();
 		}
 	}
 	

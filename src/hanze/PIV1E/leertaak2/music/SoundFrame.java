@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 
 /**
  * Class that makes a JFrame which is able to adjust the sound.
@@ -20,6 +21,7 @@ public class SoundFrame {
 	private MusicHandler handler;
 	JFrame frame;
 	Container content;
+	SoundListener listener;
 	
 	/**
 	 * Makes a SoundFrame
@@ -27,6 +29,7 @@ public class SoundFrame {
 	 */
 	public SoundFrame(MusicHandler handler) {
 		this.handler = handler;
+		listener = new SoundListener();
 		makeFrame();
 		makeOptions();
 		frame.pack();
@@ -64,11 +67,22 @@ public class SoundFrame {
 		
 		JLabel name;
 		JSlider slider;
+		JTextField text;
+		JPanel panel;
 		for (HashMap.Entry<String, MusicFile> entry : handler.getMusicFiles().entrySet()) {
 			name = new JLabel(entry.getKey());
 			sliders.add(name);
+			
+			double value = entry.getValue().getCurrentVolume();
+			panel = new JPanel();
+			text = new JTextField(2);
+			text.setText(String.valueOf(value));
+			panel.add(text);
 			slider = new JSlider(0, 100, 50);
-			sliders.add(slider);
+			slider.addChangeListener(listener.new AdjustSound(entry.getValue(), text));
+			slider.setValue((int)Math.round(value));
+			panel.add(slider);
+			sliders.add(panel);
 		}
 	}
 }
