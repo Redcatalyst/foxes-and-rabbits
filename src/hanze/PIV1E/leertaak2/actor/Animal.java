@@ -1,6 +1,6 @@
 package hanze.PIV1E.leertaak2.actor;
-import hanze.PIV1E.leertaak2.location.Field;
-import hanze.PIV1E.leertaak2.location.Location;
+import hanze.PIV1E.leertaak2.location.*;
+import hanze.PIV1E.leertaak2.model.*;
 
 
 /**
@@ -17,6 +17,8 @@ public abstract class Animal implements Actor
     private Field field;
     // The animal's position in the field.
     private Location location;
+    // The animal's model
+    private AbstractModel model;
     // The animal's name
     private String name;
     
@@ -26,10 +28,11 @@ public abstract class Animal implements Actor
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Animal(Field field, Location location)
+    public Animal(Field field, Location location, AbstractModel model)
     {
         alive = true;
         this.field = field;
+        this.model = model;
         setLocation(location);
     }
 
@@ -89,5 +92,9 @@ public abstract class Animal implements Actor
     
     public String getName(){
     	return name;
+    }
+    
+    public AbstractModel getModel(){
+    	return model;
     }
 }

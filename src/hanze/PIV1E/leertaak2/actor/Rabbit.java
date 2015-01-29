@@ -2,6 +2,7 @@ package hanze.PIV1E.leertaak2.actor;
 import hanze.PIV1E.leertaak2.helper.Randomizer;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
+import hanze.PIV1E.leertaak2.model.AbstractModel;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 
 import java.util.Iterator;
@@ -21,15 +22,15 @@ public class Rabbit extends Animal
     // Characteristics shared by all rabbits (class variables).
 
     // The age at which a rabbit can start to breed.
-    public static final int BREEDING_AGE = 5;
+    public static int BREEDING_AGE = 5;
     // The age to which a rabbit can live.
-    public static final int MAX_AGE = 40;
+    public static int MAX_AGE = 40;
     // The likelihood of a rabbit breeding.
-    public static final double BREEDING_PROBABILITY = 0.12;
+    public static double BREEDING_PROBABILITY = 0.12;
     // The maximum number of births.
-    public static final int MAX_LITTER_SIZE = 4;
+    public static int MAX_LITTER_SIZE = 4;
     // The chance a rabbit can get infected
-    public double rabbit_infection_chance = 1;
+    public double rabbit_infection_chance = 0.90;
     // Indicates if a rabbit is infected
     public boolean infected = false;
     // A shared random number generator to control breeding.
@@ -49,9 +50,9 @@ public class Rabbit extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Rabbit(boolean randomAge, Field field, Location location)
+    public Rabbit(boolean randomAge, Field field, Location location, AbstractModel model)
     {
-        super(field, location);
+        super(field, location, model);
         age = 0;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
@@ -67,6 +68,7 @@ public class Rabbit extends Animal
     {
         incrementAge();
         if(isAlive()) {
+        	setInfected();
             giveBirth();            
             // Try to move into a free location.
             Location newLocation = getField().freeAdjacentLocation(getLocation());
@@ -106,7 +108,7 @@ public class Rabbit extends Animal
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Rabbit young = new Rabbit(false, field, loc);
+            Rabbit young = new Rabbit(false, field, loc, getModel());
             SimulationModel.newActors.add(young);
         }
     }
@@ -120,9 +122,21 @@ public class Rabbit extends Animal
     {
         int births = 0;
         if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+            births = rand.nextInt(getLitterSize()) + 1;
         }
         return births;
+    }
+    
+    private int getLitterSize() 
+    {
+
+    	if(getRabbitCount() > 400 && getRabbitCount() <= 800){
+    		return MAX_LITTER_SIZE / 2; 
+    	}
+    	if(getRabbitCount() > 800){
+    		return MAX_LITTER_SIZE / 4;
+    	}
+		return MAX_LITTER_SIZE;
     }
 
     /**
@@ -159,7 +173,9 @@ public class Rabbit extends Animal
                 Rabbit rabbit = (Rabbit) animal;
                 // Infect rabbit if other rabbit is infected
                 if(rabbit.checkForInfection()) {
-                	setInfected();
+                	if(infected = false) {
+                		setInfected();
+                	}
                 }
             }
         }
@@ -178,16 +194,16 @@ public class Rabbit extends Animal
     }
     
     /*
-     * Check if the rabbit is infected or not.
+     * Check if the rabbit is infected or not
      */
     public boolean checkForInfection()
     {
-    	if(infected == true){
-    		return true;
-    	} else {
-    		return false;
-    	}
+    	return infected;
     }
     
+    private int getRabbitCount()
+    {
+    	return getModel().getStats().getPopulationCount(getModel().getField(), getClass());
+    }
     
 }

@@ -2,6 +2,7 @@ package hanze.PIV1E.leertaak2.actor;
 
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
+import hanze.PIV1E.leertaak2.model.AbstractModel;
 
 /**
  * A class representing shared characteristics of humans.
@@ -17,6 +18,8 @@ public abstract class Human implements Actor
     private Field field;
     // The human's position in the field.
     private Location location;
+    // The human's model
+    private AbstractModel model;
     // The human's name
     private String name;
     
@@ -26,10 +29,11 @@ public abstract class Human implements Actor
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Human(Field field, Location location)
+    public Human(Field field, Location location, AbstractModel model)
     {
         alive = true;
         this.field = field;
+        this.model = model;
         setLocation(location);
     }
 
@@ -93,5 +97,9 @@ public abstract class Human implements Actor
      */
     public String getName(){
     	return name;
+    }
+    
+    public AbstractModel getModel(){
+    	return model;
     }
 }

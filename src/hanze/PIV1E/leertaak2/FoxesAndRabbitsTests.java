@@ -1,8 +1,8 @@
 package hanze.PIV1E.leertaak2;
 import static org.junit.Assert.*;
-
 import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.location.*;
+import hanze.PIV1E.leertaak2.model.SimulationModel;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,11 +21,12 @@ public class FoxesAndRabbitsTests {
 	@Test
 	public void test() {
 		//create the objects needed to simulate
+		SimulationModel simulation = new SimulationModel(100, 100);
         Field field = new Field(100, 100);
-        Rabbit rabbit1 = new Rabbit(false, field, new Location(50, 50));
-        Fox fox1 = new Fox(false, field, new Location(40,40));
-        Bear bear1 = new Bear(false, field, new Location(60,60));
-        Hunter hunter1 = new Hunter(false, field, new Location(30,30));
+        Rabbit rabbit1 = new Rabbit(false, field, new Location(50, 50), simulation);
+        Fox fox1 = new Fox(false, field, new Location(40,40), simulation);
+        Bear bear1 = new Bear(false, field, new Location(60,60), simulation);
+        Hunter hunter1 = new Hunter(false, field, new Location(30,30), simulation);
         int foodLevelFox = fox1.getFoodLevel();
         int foodLevelBear = bear1.getFoodLevel();
         int foodLevelHunter = hunter1.getFoodLevel();
@@ -56,10 +57,10 @@ public class FoxesAndRabbitsTests {
         rabbit1 = null;
         
         //create 4 foxes and make 1 unable to move, this way he should die
-        fox1 = new Fox(false, field, new Location(0,0));
-        Fox fox2 = new Fox(false, field, new Location(1,0));
-        Fox fox3 = new Fox(false, field, new Location(0,1));
-        Fox fox4 = new Fox(false, field, new Location(1,1));
+        fox1 = new Fox(false, field, new Location(0,0), simulation);
+        Fox fox2 = new Fox(false, field, new Location(1,0), simulation);
+        Fox fox3 = new Fox(false, field, new Location(0,1), simulation);
+        Fox fox4 = new Fox(false, field, new Location(1,1), simulation);
         fox1.act();
         assertFalse(fox1.isAlive());
         
@@ -71,10 +72,10 @@ public class FoxesAndRabbitsTests {
         fox4 = null;
         
         //create 4 bears and make 1 unable to move, this way he should die
-        bear1 = new Bear(false, field, new Location(0,0));
-        Bear bear2 = new Bear(false, field, new Location(1,0));
-        Bear bear3 = new Bear(false, field, new Location(0,1));
-        Bear bear4 = new Bear(false, field, new Location(1,1));
+        bear1 = new Bear(false, field, new Location(0,0), simulation);
+        Bear bear2 = new Bear(false, field, new Location(1,0), simulation);
+        Bear bear3 = new Bear(false, field, new Location(0,1), simulation);
+        Bear bear4 = new Bear(false, field, new Location(1,1), simulation);
         bear1.act();
         assertFalse(bear1.isAlive());        
         
@@ -86,10 +87,10 @@ public class FoxesAndRabbitsTests {
         bear4 = null;
         
         //create 4 hunters and make 1 unable to move, this way he should die
-        hunter1 = new Hunter(false, field, new Location(0,0));
-        Hunter hunter2 = new Hunter(false, field, new Location(1,0));
-        Hunter hunter3 = new Hunter(false, field, new Location(0,1));
-        Hunter hunter4 = new Hunter(false, field, new Location(1,1));
+        hunter1 = new Hunter(false, field, new Location(0,0), simulation);
+        Hunter hunter2 = new Hunter(false, field, new Location(1,0), simulation);
+        Hunter hunter3 = new Hunter(false, field, new Location(0,1), simulation);
+        Hunter hunter4 = new Hunter(false, field, new Location(1,1), simulation);
         hunter1.act();
         assertTrue(hunter1.isAlive());
         
@@ -109,8 +110,8 @@ public class FoxesAndRabbitsTests {
         */
         
         // Check if a fox eats a rabbit
-        rabbit1 = new Rabbit(false, field, new Location(0,0));
-        fox1 = new Fox(false, field, new Location(0,1));
+        rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
+        fox1 = new Fox(false, field, new Location(0,1), simulation);
         fox1.act();
         assertFalse(rabbit1.isAlive());
         
@@ -120,8 +121,8 @@ public class FoxesAndRabbitsTests {
         fox1 = null;
         
         // Check if a bear eats a rabbit
-        rabbit1 = new Rabbit(false, field, new Location(0,0));
-        bear1 = new Bear(false, field, new Location(0,1));
+        rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
+        bear1 = new Bear(false, field, new Location(0,1), simulation);
         bear1.act();
         assertFalse(rabbit1.isAlive());
         
@@ -131,8 +132,8 @@ public class FoxesAndRabbitsTests {
         bear1 = null;
         
         // Check if a bear eats a fox
-        fox1 = new Fox(false, field, new Location(0,0));
-        bear1 = new Bear(false, field, new Location(0,1));
+        fox1 = new Fox(false, field, new Location(0,0), simulation);
+        bear1 = new Bear(false, field, new Location(0,1), simulation);
         bear1.act();
         assertFalse(fox1.isAlive());
         
@@ -142,8 +143,8 @@ public class FoxesAndRabbitsTests {
         bear1 = null;
         
         // Check if a hunter hunts for a rabbit
-        rabbit1 = new Rabbit(false, field, new Location(0,0));
-        hunter1 = new Hunter(false, field, new Location(0,1));
+        rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
+        hunter1 = new Hunter(false, field, new Location(0,1), simulation);
         hunter1.act();
         assertFalse(rabbit1.isAlive());
         
@@ -153,8 +154,8 @@ public class FoxesAndRabbitsTests {
         hunter1 = null;
         
         // Check if a hunter hunts for a fox
-        fox1 = new Fox(false, field, new Location(0,0));
-        hunter1 = new Hunter(false, field, new Location(0,1));
+        fox1 = new Fox(false, field, new Location(0,0), simulation);
+        hunter1 = new Hunter(false, field, new Location(0,1), simulation);
         hunter1.act();
         assertFalse(fox1.isAlive());
         
@@ -164,8 +165,8 @@ public class FoxesAndRabbitsTests {
         hunter1 = null;
         
         // Check if a hunter hunts for a bear
-        bear1 = new Bear(false, field, new Location(0,0));
-        hunter1 = new Hunter(false, field, new Location(0,1));
+        bear1 = new Bear(false, field, new Location(0,0), simulation);
+        hunter1 = new Hunter(false, field, new Location(0,1), simulation);
         hunter1.act();
         assertFalse(bear1.isAlive());
         
@@ -175,7 +176,7 @@ public class FoxesAndRabbitsTests {
         hunter1 = null;
         
         //Check if rabbits status updates to infected
-        rabbit1 = new Rabbit(false, field, new Location(0,0));
+        rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
         rabbit1.setInfected();
         assertTrue(rabbit1.infected);
         
@@ -184,10 +185,10 @@ public class FoxesAndRabbitsTests {
         rabbit1 = null;
         
         //Check if rabbits infect each other (only viable at 100% infection rate)
-        rabbit1 = new Rabbit(false, field, new Location(0,0));
+        rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
         rabbit1.setInfected();
  
-        Rabbit rabbit2 = new Rabbit(false, field, new Location(1,0));
+        Rabbit rabbit2 = new Rabbit(false, field, new Location(1,0), simulation);
         assertFalse(rabbit2.infected);
         rabbit2.checkAndInfect();
         assertTrue(rabbit2.infected);
@@ -198,8 +199,8 @@ public class FoxesAndRabbitsTests {
         rabbit2 = null;
         
         //Check if rabbits do not infect each other when not infected
-        rabbit1 = new Rabbit(false, field, new Location(0,0));
-        rabbit2 = new Rabbit(false, field, new Location(1,0));
+        rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
+        rabbit2 = new Rabbit(false, field, new Location(1,0), simulation);
         assertFalse(rabbit2.infected);
         rabbit2.checkAndInfect();
         assertFalse(rabbit2.infected);

@@ -70,7 +70,7 @@ public class SimulationModel extends AbstractModel {
     {
     	step++;
      
-        // Let all rabbits act.
+        // Let all Actors act.
     	newActors.clear();
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
@@ -110,22 +110,22 @@ public class SimulationModel extends AbstractModel {
             for(int col = 0; col < field.getWidth(); col++) {
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
+                    Fox fox = new Fox(true, field, location, this);
                     actors.add(fox);
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
+                    Rabbit rabbit = new Rabbit(true, field, location, this);
                     actors.add(rabbit);
                 }
                 else if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Bear bear = new Bear(true, field, location);
+                    Bear bear = new Bear(true, field, location, this);
                     actors.add(bear);
                 }
                 else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Hunter hunter = new Hunter(true, field, location);
+                    Hunter hunter = new Hunter(true, field, location, this);
                     actors.add(hunter);
                 }
                 // else leave the location empty.

@@ -3,6 +3,7 @@ package hanze.PIV1E.leertaak2.actor;
 import hanze.PIV1E.leertaak2.helper.Randomizer;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
+import hanze.PIV1E.leertaak2.model.AbstractModel;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 
 import java.util.Iterator;
@@ -50,9 +51,9 @@ public class Hunter extends Human
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Hunter(boolean randomAge, Field field, Location location)
+    public Hunter(boolean randomAge, Field field, Location location, AbstractModel model)
     {
-        super(field, location);
+        super(field, location, model);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(BEAR_FOOD_VALUE);
@@ -186,7 +187,7 @@ public class Hunter extends Human
         int introduces = introduceHunting();
         for(int b = 0; b < introduces && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Hunter young = new Hunter(false, field, loc);
+            Hunter young = new Hunter(false, field, loc, getModel());
             SimulationModel.newActors.add(young);
         }
     }
