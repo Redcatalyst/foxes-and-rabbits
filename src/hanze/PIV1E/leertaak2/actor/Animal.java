@@ -118,4 +118,13 @@ public abstract class Animal implements Actor
     	return infected;
     }
     
+    /**
+     * Used to get the current count of rabbits on the field.
+     * @return getPopulationCount the current count of the rabbits in the field
+     */
+    protected int getCount()
+    {
+    	return getModel().getStats().getPopulationCount(getModel().getField(), getClass());
+    }
+    
 }

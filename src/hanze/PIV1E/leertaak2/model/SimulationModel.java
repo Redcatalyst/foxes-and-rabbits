@@ -21,7 +21,7 @@ public class SimulationModel extends AbstractModel {
     // The probability that a bear will be created in any given grid position.
     private static final double HUNTER_CREATION_PROBABILITY = 0.01; 
     // The probability that a rabbit is infected when created
-    private static final double RABBIT_INFECTED_PROBABILITY = 0.05;
+    private static final double RABBIT_INFECTED_PROBABILITY = 0.01;
     
     // List of actors in the field.
     public static List<Actor> actors;

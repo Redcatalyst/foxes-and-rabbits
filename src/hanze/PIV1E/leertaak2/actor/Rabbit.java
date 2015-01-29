@@ -132,10 +132,10 @@ public class Rabbit extends Animal
     private int getLitterSize() 
     {
 
-    	if(getRabbitCount() > 400 && getRabbitCount() <= 800){
+    	if(getCount() > 400 && getCount() <= 800){
     		return MAX_LITTER_SIZE / 2; 
     	}
-    	if(getRabbitCount() > 800){
+    	if(getCount() > 800){
     		return MAX_LITTER_SIZE / 4;
     	}
 		return MAX_LITTER_SIZE;
@@ -195,13 +195,6 @@ public class Rabbit extends Animal
     
     
     
-    /**
-     * Used to get the current count of rabbits on the field.
-     * @return getPopulationCount the current count of the rabbits in the field
-     */
-    private int getRabbitCount()
-    {
-    	return getModel().getStats().getPopulationCount(getModel().getField(), getClass());
-    }
+    
     
 }
