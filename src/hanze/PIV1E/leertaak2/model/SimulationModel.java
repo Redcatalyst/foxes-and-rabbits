@@ -52,14 +52,14 @@ public class SimulationModel extends AbstractModel {
      */
     public void initSound() {
     	//background
-    	backgroundSound = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/wind.wav", musicHandler, 40, "Background");
+    	backgroundSound = new MusicFile("resources/sound/wind.wav", musicHandler, 40, "Background");
         musicHandler.startInfinite(backgroundSound);
         
-        rabbit =	new MusicFile("src/hanze/PIV1E/leertaak2/music/files/rabbit.wav",	musicHandler, 70, "Rabbit");
-        fox =		new MusicFile("src/hanze/PIV1E/leertaak2/music/files/fox.wav",		musicHandler, 70, "Fox");
-        hunter =	new MusicFile("src/hanze/PIV1E/leertaak2/music/files/hunter.wav",	musicHandler, 70, "Hunter");
-        bear =		new MusicFile("src/hanze/PIV1E/leertaak2/music/files/bear.wav",		musicHandler, 70, "Bear");
-        tourist =	new MusicFile("src/hanze/PIV1E/leertaak2/music/files/tourist.wav",	musicHandler, 70, "Tourist");
+        rabbit =	new MusicFile("resources/sound/rabbit.wav",	musicHandler, 70, "Rabbit");
+        fox =		new MusicFile("resources/sound/fox.wav",	musicHandler, 70, "Fox");
+        hunter =	new MusicFile("resources/sound/hunter.wav",	musicHandler, 70, "Hunter");
+        bear =		new MusicFile("resources/sound/bear.wav",	musicHandler, 70, "Bear");
+        tourist =	new MusicFile("resources/sound/tourist.wav",musicHandler, 70, "Tourist");
     }
     
     /**

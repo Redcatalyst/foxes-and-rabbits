@@ -3,6 +3,7 @@ package hanze.PIV1E.leertaak2.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import hanze.PIV1E.leertaak2.main.Simulator;
@@ -22,7 +23,9 @@ public class MenuController extends AbstractController {
 	}
 	
     private void showAbout(){
-    	JOptionPane.showMessageDialog(this, "Foxes and Rabits\n" + Simulator.VERSION, "About ImageViewer", JOptionPane.INFORMATION_MESSAGE);
+    	final ImageIcon icon = new ImageIcon("resources/icon.png");
+        JOptionPane.showMessageDialog(null, "Foxes and Rabits\n" + Simulator.VERSION, "About Foxes and Rabbits", JOptionPane.INFORMATION_MESSAGE, icon);
+    	//JOptionPane.showMessageDialog(this, "Foxes and Rabits\n" + Simulator.VERSION, "About Foxes and Rabbits", icon);
     }
     
     /**

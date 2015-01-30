@@ -7,6 +7,8 @@ import hanze.PIV1E.leertaak2.model.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -27,7 +29,7 @@ import javax.swing.JPanel;
 public class Simulator
 {
     // Current simulator version
- 	public static final String VERSION = "Version 2.5";
+ 	public static final String VERSION = "Version 3.0";
  	// The default width for the grid.
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
@@ -86,6 +88,8 @@ public class Simulator
 	    frame.getContentPane().add(versionLabel, BorderLayout.SOUTH);        
         frame.setTitle("Fox and Rabbit Simulation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Image icon = Toolkit.getDefaultToolkit().createImage("resources/icon.png");
+        frame.setIconImage(icon);
         frame.setLocation(100, 50);
         frame.setResizable(false);
         frame.pack();
@@ -147,7 +151,7 @@ public class Simulator
         menu = new JMenu("Help");
         menubar.add(menu);
         
-        item = new JMenuItem("About ImageViewer");
+        item = new JMenuItem("About Foxes and Rabbits");
         item.addActionListener(menuController.new ShowAbout());
         menu.add(item);
     }
