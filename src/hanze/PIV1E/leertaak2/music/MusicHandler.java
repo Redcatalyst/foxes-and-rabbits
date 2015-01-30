@@ -102,6 +102,9 @@ public class MusicHandler {
 		}
 	}
 	
+	/**
+	 * resets all the sounds to their default volume
+	 */
 	public void resetDefaults() {
 		for (HashMap.Entry<String, MusicFile> entry : files.entrySet()) {
 			entry.getValue().resetVolume();

@@ -36,7 +36,7 @@ public class SimulationModel extends AbstractModel {
     // Plays sound
     private MusicHandler musicHandler = new MusicHandler();
     // all the sounds
-    private MusicFile backgroundSound, car;
+    public static MusicFile backgroundSound, rabbit, fox, hunter, bear, tourist;
     
     public SimulationModel(int depth, int width){
     	actors = new ArrayList<Actor>();
@@ -52,11 +52,14 @@ public class SimulationModel extends AbstractModel {
      */
     public void initSound() {
     	//background
-    	backgroundSound = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/wind.wav", musicHandler, 20, "Background");
+    	backgroundSound = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/wind.wav", musicHandler, 40, "Background");
         musicHandler.startInfinite(backgroundSound);
         
-        //simulate 1 step/car moving
-        car = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/car.wav", musicHandler, 70, "1 Step");
+        rabbit =	new MusicFile("src/hanze/PIV1E/leertaak2/music/files/rabbit.wav",	musicHandler, 70, "Rabbit");
+        fox =		new MusicFile("src/hanze/PIV1E/leertaak2/music/files/fox.wav",		musicHandler, 70, "Fox");
+        hunter =	new MusicFile("src/hanze/PIV1E/leertaak2/music/files/hunter.wav",	musicHandler, 70, "Hunter");
+        bear =		new MusicFile("src/hanze/PIV1E/leertaak2/music/files/bear.wav",		musicHandler, 70, "Bear");
+        tourist =	new MusicFile("src/hanze/PIV1E/leertaak2/music/files/tourist.wav",	musicHandler, 70, "Tourist");
     }
     
     /**
@@ -88,8 +91,7 @@ public class SimulationModel extends AbstractModel {
     private void simulateOneStep()
     {
     	step++;
-    	musicHandler.start(car);
-     
+    	
         // Let all Actors act.
     	newActors.clear();
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
@@ -103,6 +105,9 @@ public class SimulationModel extends AbstractModel {
 
         stats.reset();
         notifyViews();
+        if(Randomizer.getRandom().nextDouble() > 0.75) {
+    		playMostPopulatedSound();
+    	}
     }
         
     /**
@@ -152,6 +157,23 @@ public class SimulationModel extends AbstractModel {
         	Hunter hunter = new Hunter(field, field.getFreeLocation(), this);
         	actors.add(hunter);
         }
+    }
+    
+    /**
+     * Plays the sound of the actor which has the biggest population.
+     */
+    private void playMostPopulatedSound() {
+	    Actor biggest = null;
+	    for(Actor actor : actors) {
+	    	if(biggest == null) {
+	    		biggest = actor;
+	    	} else if(stats.getPopulationCount(field, actor.getClass()) > stats.getPopulationCount(field, biggest.getClass())) {
+	    		biggest = actor;
+	    	}
+	    }
+	    if(biggest != null) {
+	    	musicHandler.start(biggest.getSound());
+	    }
     }
     
     /**

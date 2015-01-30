@@ -4,6 +4,7 @@ import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.model.AbstractModel;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
+import hanze.PIV1E.leertaak2.music.MusicFile;
 
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +21,9 @@ import java.util.Random;
 public class Rabbit extends Animal
 {
     // Characteristics shared by all rabbits (class variables).
-
+	
+	// The sound a rabbit makes
+	private static final MusicFile sound = SimulationModel.rabbit;
     // The age at which a rabbit can start to breed.
     private static int BREEDING_AGE = 5;
     // The age to which a rabbit can live.
@@ -193,8 +196,8 @@ public class Rabbit extends Animal
         this.infected = infected;
     }
     
-    
-    
-    
+    public MusicFile getSound() {
+		return sound;
+	}   
     
 }

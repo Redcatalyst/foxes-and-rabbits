@@ -26,7 +26,7 @@ public class MusicFile {
 	 * @param volume the standerd volume the sound should have (50 is normal)
 	 * @param name the name of the MusicFile
 	 */
-	public MusicFile(String path, MusicHandler handler, int volume, String name) {
+	public MusicFile(String path, MusicHandler handler, double volume, String name) {
 		handler.addMusicFile(name, this);
 		try {
 	        audioInputStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
@@ -75,6 +75,7 @@ public class MusicFile {
 	 */
 	public void resetVolume() {
 		gainControl.setValue(standerdVolume);
+		currentVolume = standerdVolume;
 	}
 	
 	/**
@@ -106,21 +107,20 @@ public class MusicFile {
 		float doubleVolume = gainControl.getMinimum() - gainControl.getMaximum();
 		doubleVolume = 100 / doubleVolume;
 		doubleVolume = doubleVolume * volume;
-		doubleVolume = doubleVolume + gainControl.getMaximum();
+		doubleVolume = doubleVolume + gainControl.getMaximum() + 1;
+		doubleVolume = 100 - doubleVolume;
+		doubleVolume = Math.round(doubleVolume);
 		return doubleVolume;
-		//return (100 / (gainControl.getMinimum() - gainControl.getMaximum())) * volume;
 	}
 	
 	/*
 	 * Converts a given int to a float value.
 	 */
 	private float doubleToFloatVolume(double volume) {
-		float floatVolume = gainControl.getMinimum() - gainControl.getMaximum();
-		floatVolume = floatVolume / 100;
-		volume = volume * -1;
-		floatVolume = floatVolume * (float)volume;
-		floatVolume = floatVolume + gainControl.getMinimum();
-		return floatVolume;
-		//return (float)(((gainControl.getMinimum() - gainControl.getMaximum()) / 100) * (float)-volume) - gainControl.getMinimum();
+		float floatVolume = -80 - 6;
+        floatVolume = floatVolume / 100;
+        floatVolume = floatVolume * (float)volume;
+        floatVolume = -80 - floatVolume;
+        return floatVolume;
 	}
 }

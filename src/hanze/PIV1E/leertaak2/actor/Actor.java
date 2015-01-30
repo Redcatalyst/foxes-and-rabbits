@@ -1,6 +1,7 @@
 package hanze.PIV1E.leertaak2.actor;
 
 import hanze.PIV1E.leertaak2.location.Location;
+import hanze.PIV1E.leertaak2.music.*;
 
 
 
@@ -41,5 +42,7 @@ public interface Actor {
 	 void setLocation(Location newLocation);
 	 
 	 String getName();
+	 
+	 public MusicFile getSound();
 	 
 }
