@@ -102,4 +102,13 @@ public abstract class Human implements Actor
     public AbstractModel getModel(){
     	return model;
     }
+    
+    /**
+     * Used to get the current count of rabbits on the field.
+     * @return getPopulationCount the current count of the rabbits in the field
+     */
+    protected int getCount()
+    {
+    	return getModel().getStats().getPopulationCount(getModel().getField(), getClass());
+    }
 }

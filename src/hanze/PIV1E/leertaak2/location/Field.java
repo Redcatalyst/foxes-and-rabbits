@@ -195,9 +195,9 @@ public class Field
      */
     public Location getFreeLocation(){
         List<Location> freeLocations = new ArrayList<Location>();
-        for(int r = 0; r < field.length; r++){
-            for(int c = 0; c < field[r].length; c++){
-                if(field[r][c] == null) freeLocations.add(new Location(r, c));
+        for(int i = 0; i < field.length; i++){
+            for(int r = 0; r < field[i].length; r++){
+                if(field[i][r] == null) freeLocations.add(new Location(i, r));
             }
         }
         return freeLocations.isEmpty() ? null : freeLocations.get(rand.nextInt(freeLocations.size()));

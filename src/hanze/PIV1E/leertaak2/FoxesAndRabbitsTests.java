@@ -26,16 +26,14 @@ public class FoxesAndRabbitsTests {
         Rabbit rabbit1 = new Rabbit(false, field, new Location(50, 50), simulation);
         Fox fox1 = new Fox(false, field, new Location(40,40), simulation);
         Bear bear1 = new Bear(false, field, new Location(60,60), simulation);
-        Hunter hunter1 = new Hunter(false, field, new Location(30,30), simulation);
         int foodLevelFox = fox1.getFoodLevel();
         int foodLevelBear = bear1.getFoodLevel();
-        int foodLevelHunter = hunter1.getFoodLevel();
+
         
         //simulate 1 step
         rabbit1.act();
         fox1.act();
         bear1.act();
-        hunter1.act();
         
         //test if animals age
         assertTrue(rabbit1.getAge() == 1);
@@ -43,8 +41,6 @@ public class FoxesAndRabbitsTests {
         assertTrue(fox1.getAge() == 1);
         assertTrue(foodLevelBear == bear1.getFoodLevel() + 1);
         assertTrue(bear1.getAge() == 1);
-        assertTrue(foodLevelHunter == hunter1.getFoodLevel() + 1);
-        assertTrue(hunter1.getAge() == 1);
         
         //teleport the fox next to the rabbit, the fox should eat the rabbit when he acts
         fox1.setLocation(new Location(50,49));
@@ -85,22 +81,7 @@ public class FoxesAndRabbitsTests {
         bear2 = null;
         bear3 = null;
         bear4 = null;
-        
-        //create 4 hunters and make 1 unable to move, this way he should die
-        hunter1 = new Hunter(false, field, new Location(0,0), simulation);
-        Hunter hunter2 = new Hunter(false, field, new Location(1,0), simulation);
-        Hunter hunter3 = new Hunter(false, field, new Location(0,1), simulation);
-        Hunter hunter4 = new Hunter(false, field, new Location(1,1), simulation);
-        hunter1.act();
-        assertTrue(hunter1.isAlive());
-        
-        //reset the field and the animals
-        field.clear();
-        hunter1 = null;
-        hunter2 = null;
-        hunter3 = null;
-        hunter4 = null;
-
+    
         /* make a rabbit and let him live until he should die
         rabbit1 = new Rabbit(false, field, new Location(50, 50));
         for(int step = 0; step <= rabbit1.MAX_AGE ; step++) {
@@ -144,7 +125,7 @@ public class FoxesAndRabbitsTests {
         
         // Check if a hunter hunts for a rabbit
         rabbit1 = new Rabbit(false, field, new Location(0,0), simulation);
-        hunter1 = new Hunter(false, field, new Location(0,1), simulation);
+        Hunter hunter1 = new Hunter(field, new Location(0,1), simulation);
         hunter1.act();
         assertFalse(rabbit1.isAlive());
         
@@ -155,7 +136,7 @@ public class FoxesAndRabbitsTests {
         
         // Check if a hunter hunts for a fox
         fox1 = new Fox(false, field, new Location(0,0), simulation);
-        hunter1 = new Hunter(false, field, new Location(0,1), simulation);
+        hunter1 = new Hunter(field, new Location(0,1), simulation);
         hunter1.act();
         assertFalse(fox1.isAlive());
         
@@ -166,7 +147,7 @@ public class FoxesAndRabbitsTests {
         
         // Check if a hunter hunts for a bear
         bear1 = new Bear(false, field, new Location(0,0), simulation);
-        hunter1 = new Hunter(false, field, new Location(0,1), simulation);
+        hunter1 = new Hunter(field, new Location(0,1), simulation);
         hunter1.act();
         assertFalse(bear1.isAlive());
         

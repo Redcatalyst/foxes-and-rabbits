@@ -18,8 +18,8 @@ public class SimulationModel extends AbstractModel {
     private static final double RABBIT_CREATION_PROBABILITY = 0.08; 
     // The probability that a bear will be created in any given grid position.
     private static final double BEAR_CREATION_PROBABILITY = 0.01; 
-    // The probability that a bear will be created in any given grid position.
-    private static final double HUNTER_CREATION_PROBABILITY = 0.01; 
+    // The number of hunters that are hunting in the woods
+    private static final int NUMBER_OF_HUNTERS = 20; 
     // The probability that a rabbit is infected when created
     private static final double RABBIT_INFECTED_PROBABILITY = 0.01;
     
@@ -144,13 +144,13 @@ public class SimulationModel extends AbstractModel {
                     Bear bear = new Bear(true, field, location, this);
                     actors.add(bear);
                 }
-                else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Hunter hunter = new Hunter(true, field, location, this);
-                    actors.add(hunter);
-                }
                 // else leave the location empty.
             }
+        }
+        // Add the hunters to the field
+        for(int i = 0; i < NUMBER_OF_HUNTERS; i++){
+        	Hunter hunter = new Hunter(field, field.getFreeLocation(), this);
+        	actors.add(hunter);
         }
     }
     

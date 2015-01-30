@@ -29,7 +29,7 @@ public class Bear extends Animal
     // The maximum number of births.
 	private static final int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit.
-	private static final int RABBIT_FOOD_VALUE = 6;
+	private static final int RABBIT_FOOD_VALUE = 10;
     // The food value of a single fox.
     // This is also the number of steps a bear can go before it has to eat again.
 	private static final int FOX_FOOD_VALUE = 12;

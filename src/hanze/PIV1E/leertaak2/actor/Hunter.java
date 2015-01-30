@@ -1,14 +1,11 @@
 package hanze.PIV1E.leertaak2.actor;
 
-import hanze.PIV1E.leertaak2.helper.Randomizer;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.model.AbstractModel;
-import hanze.PIV1E.leertaak2.model.SimulationModel;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 /**
  * A simple model of a hunter.
@@ -18,50 +15,24 @@ import java.util.Random;
  */
 public class Hunter extends Human 
 {
-    // Characteristics shared by all hunters (class variables).
-    
-	private static final int INTRODUCING_AGE = 28;
-	// The age to which a hunter can live.
-	private static final int MAX_AGE = 280;
-    // The likelihood of a hunter breeding.
-	private static final double INTRODUCING_PROBABILITY = 0.03;
-    // The maximum number of new hunters.
-	private static final int MAX_NEW_HUNTERS = 1;
-    // The food value of a single rabbit.
-	private static final int RABBIT_FOOD_VALUE = 6;
-    // The food value of a single fox.
-	private static final int FOX_FOOD_VALUE = 12;
-    // The food value of a single bear.
-    // This is also the number of steps a hunter can go before it has to eat again.
-	private static final int BEAR_FOOD_VALUE = 24;    
-    // A shared random number generator to control breeding.
-	private static final Random rand = Randomizer.getRandom();
-    
-    // Individual characteristics (instance fields).
-    // The hunter's age.
-    private int age;
-    // The hunter's food level, which is increased by eating rabbits, foxes or bears.
-    private int foodLevel;
-    
+	
+	// The fields that determine when a animal is over populated
+	// Max population for a Rabbit
+	private static final int RABBIT_MAX_POPULATION = 1400;
+	// Max population for a Fox
+	private static final int FOX_MAX_POPULATION = 300;
+	// Max population for a Bear
+	private static final int BEAR_MAX_POPULATION = 300;
+
     /**
-     * Create a hunter. A hunter can be created as a new born (age zero
-     * and not hungry) or with a random age and food level.
-     * 
-     * @param randomAge If true, the hunter will have random age and hunger level.
+     * Create a hunter. A hunter stays in the game to hunt the over populated species. 
      * @param field The field currently occupied.
      * @param location The location within the field.
+     * @param model The model that is used
      */
-    public Hunter(boolean randomAge, Field field, Location location, AbstractModel model)
+    public Hunter(Field field, Location location, AbstractModel model)
     {
         super(field, location, model);
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(BEAR_FOOD_VALUE);
-        }
-        else {
-            age = 0;
-            foodLevel = BEAR_FOOD_VALUE;
-        }
     } 
     
     /**
@@ -71,12 +42,9 @@ public class Hunter extends Human
      */
     public void act()
     {
-        incrementAge();
-        incrementHunger();
         if(isAlive()) {   
-        	newHunter(); 
             // Move towards a source of food if found.
-            Location newLocation = findFood();
+            Location newLocation = findHunt();
             if(newLocation == null) { 
                 // No food found - try to move to a free location.
                 newLocation = getField().freeAdjacentLocation(getLocation());
@@ -91,36 +59,13 @@ public class Hunter extends Human
             } */
         }
     }
-
-    
-    /**
-     * Increase the age. This could result in the hunters death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
-    
-    /**
-     * This makes the hunter more hungry. This could result in the hunters death.
-     */
-    private void incrementHunger()
-    {
-        foodLevel--;
-        if(foodLevel <= 0) {
-            setDead();
-        }
-    }
     
     /**
      * Look for rabbits, foxes and bears adjacent to the current location.
      * Only the first live rabbit, fox or bear is eaten.
      * @return Where food was found, or null if it wasn't.
      */
-    private Location findFood()
+    private Location findHunt()
     {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
@@ -130,27 +75,24 @@ public class Hunter extends Human
             Object actor = field.getObjectAt(where);
             if(actor instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) actor;
-                if(rabbit.isAlive()) { 
+                if(rabbit.isAlive() && rabbit.getCount() > RABBIT_MAX_POPULATION) { 
                     rabbit.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE;
                     // Remove the dead rabbit from the field.
                     return where;
                 }
             }
             if(actor instanceof Fox) {
                 Fox fox = (Fox) actor;
-                if(fox.isAlive()) { 
+                if(fox.isAlive() && fox.getCount() > FOX_MAX_POPULATION) { 
                     fox.setDead();
-                    foodLevel = FOX_FOOD_VALUE;
                     // Remove the dead fox from the field.
                     return where;
                 }
             }  
             if(actor instanceof Bear) {
                 Bear bear = (Bear) actor;
-                if(bear.isAlive()) { 
+                if(bear.isAlive() && bear.getCount() > BEAR_MAX_POPULATION) { 
                     bear.setDead();
-                    foodLevel = BEAR_FOOD_VALUE;
                     // Remove the dead bear from the field.
                     return where;
                 }
@@ -159,59 +101,5 @@ public class Hunter extends Human
         return null;
     }
     
-    /**
-     * @return age of the hunter.
-     */
-    public int getAge(){
-    	return age;
-    }
-    
-    /**
-     * @return foodLevel of the hunter.
-     */
-    public int getFoodLevel(){
-    	return foodLevel;
-    }
-    
-    /**
-     * Check whether or not the hunter lets his child go hunt.  
-     * New hunters will be made into free adjacent locations.
-     * @param newFoxes A list to return newly born foxes.
-     */
-    private void newHunter()
-    {
-        // New foxes are born into adjacent locations.
-        // Get a list of adjacent free locations.
-        Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
-        int introduces = introduceHunting();
-        for(int b = 0; b < introduces && free.size() > 0; b++) {
-            Location loc = free.remove(0);
-            Hunter young = new Hunter(false, field, loc, getModel());
-            SimulationModel.newActors.add(young);
-        }
-    }
-    
-    /**
-     * Generate a number representing the number of introduces,
-     * if it can introduce.
-     * @return The number of introduces (may be zero).
-     */
-    private int introduceHunting()
-    {
-        int newHunters = 0;
-        if(canIntroduce() && rand.nextDouble() <= INTRODUCING_PROBABILITY) {
-        	newHunters = rand.nextInt(MAX_NEW_HUNTERS) + 1;
-        }
-        return newHunters;
-    }
-
-    /**
-     * A fox can breed if it has reached the breeding age.
-     */
-    private boolean canIntroduce()
-    {
-        return age >= INTRODUCING_AGE;
-    }
     
 }
