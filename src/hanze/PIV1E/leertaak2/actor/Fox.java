@@ -32,7 +32,7 @@ public class Fox extends Animal
     // number of steps a fox can go before it has to eat again.
 	private static final int RABBIT_FOOD_VALUE = 10;
     // The chance a Fox can get infected when he eats a rabbit.
-	private static final double INFECTION_CHANCE = 0.25;
+	private static final double INFECTION_CHANCE = 0.5;
     // A shared random number generator to control breeding.
 	private static final Random rand = Randomizer.getRandom();
     
@@ -204,9 +204,6 @@ public class Fox extends Animal
      * @param infect true to make this Fox sick
      */
     public void setInfection(boolean infected) {
-        if(infected){
-            age = age + 5;
-        }
         this.infected = infected;
     }
 }

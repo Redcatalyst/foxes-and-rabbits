@@ -33,7 +33,9 @@ public class Bear extends Animal
     // The food value of a single fox.
     // This is also the number of steps a bear can go before it has to eat again.
 	private static final int FOX_FOOD_VALUE = 12;
-    // A shared random number generator to control breeding.
+	// The chance a Bear can get infected when he eats a Fox.
+	private static final double INFECTION_CHANCE = 0.30;
+	// A shared random number generator to control breeding.
 	private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
@@ -141,6 +143,9 @@ public class Bear extends Animal
                 Fox fox = (Fox) actor;
                 if(fox.isAlive()) { 
                     fox.setDead();
+                    if(fox.checkForInfection()) {
+                     	setInfection(rand.nextDouble() <= INFECTION_CHANCE);
+                     }
                     foodLevel = FOX_FOOD_VALUE;
                     // Remove the dead fox from the field.
                     return where;
@@ -203,5 +208,16 @@ public class Bear extends Animal
      */
     public int getFoodLevel(){
     	return foodLevel;
+    }
+    
+    /**
+     * Set the Bear to infected
+     * @param infect true to make this Bear sick
+     */
+    public void setInfection(boolean infected) {
+        if(infected){
+            age = age + 20;
+        }
+        this.infected = infected;
     }
 }
