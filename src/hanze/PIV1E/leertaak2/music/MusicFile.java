@@ -103,13 +103,24 @@ public class MusicFile {
 	 * Converts a given float to a value between 0(incl.) and 100(incl.)
 	 */
 	private double floatToDoubleVolume(float volume) {
-		return (100 / (gainControl.getMinimum() - gainControl.getMaximum())) * volume;
+		float doubleVolume = gainControl.getMinimum() - gainControl.getMaximum();
+		doubleVolume = 100 / doubleVolume;
+		doubleVolume = doubleVolume * volume;
+		doubleVolume = doubleVolume + gainControl.getMaximum();
+		return doubleVolume;
+		//return (100 / (gainControl.getMinimum() - gainControl.getMaximum())) * volume;
 	}
 	
 	/*
 	 * Converts a given int to a float value.
 	 */
 	private float doubleToFloatVolume(double volume) {
-		return (float)((gainControl.getMinimum() - gainControl.getMaximum()) / 100) * (float)volume;
+		float floatVolume = gainControl.getMinimum() - gainControl.getMaximum();
+		floatVolume = floatVolume / 100;
+		volume = volume * -1;
+		floatVolume = floatVolume * (float)volume;
+		floatVolume = floatVolume + gainControl.getMinimum();
+		return floatVolume;
+		//return (float)(((gainControl.getMinimum() - gainControl.getMaximum()) / 100) * (float)-volume) - gainControl.getMinimum();
 	}
 }

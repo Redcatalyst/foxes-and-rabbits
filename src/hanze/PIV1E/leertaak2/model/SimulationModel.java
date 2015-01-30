@@ -50,11 +50,11 @@ public class SimulationModel extends AbstractModel {
      */
     public void initSound() {
     	//background
-    	backgroundSound = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/wind.wav", musicHandler, 30, "Background");
+    	backgroundSound = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/wind.wav", musicHandler, 20, "Background");
         musicHandler.startInfinite(backgroundSound);
         
         //simulate 1 step/car moving
-        car = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/car.wav", musicHandler, 50, "1 Step");
+        car = new MusicFile("src/hanze/PIV1E/leertaak2/music/files/car.wav", musicHandler, 70, "1 Step");
     }
     
     /**

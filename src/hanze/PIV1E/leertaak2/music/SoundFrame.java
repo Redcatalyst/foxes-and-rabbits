@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import hanze.PIV1E.leertaak2.main.Simulator;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,9 +20,9 @@ import javax.swing.JTextField;
  */
 public class SoundFrame {
 	private MusicHandler handler;
-	JFrame frame;
-	Container content;
-	SoundListener listener;
+	private JFrame frame;
+	private Container content;
+	private SoundListener listener;
 	
 	/**
 	 * Makes a SoundFrame
@@ -29,7 +30,7 @@ public class SoundFrame {
 	 */
 	public SoundFrame(MusicHandler handler) {
 		this.handler = handler;
-		listener = new SoundListener();
+		listener = new SoundListener(handler);
 		makeFrame();
 		makeOptions();
 		frame.pack();
@@ -84,5 +85,10 @@ public class SoundFrame {
 			panel.add(slider);
 			sliders.add(panel);
 		}
+		JButton reset = new JButton("reset to defaults");
+		reset.addActionListener(listener.new RestoreDefaults(frame));
+		JPanel down = new JPanel();
+		down.add(reset);
+		sliders.add(down, BorderLayout.SOUTH);
 	}
 }

@@ -102,6 +102,12 @@ public class MusicHandler {
 		}
 	}
 	
+	public void resetDefaults() {
+		for (HashMap.Entry<String, MusicFile> entry : files.entrySet()) {
+			entry.getValue().resetVolume();
+		}
+	}
+	
 	/**
 	 * returns all the MusicFiles the MusicHandler has.
 	 * @return all the MusicFiles
