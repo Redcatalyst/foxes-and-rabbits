@@ -1,10 +1,14 @@
 package hanze.PIV1E.leertaak2.music;
 
+<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+=======
+import javax.swing.JLabel;
+>>>>>>> dingen
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
@@ -37,14 +41,18 @@ public class SoundListener {
 	 */
 	public class AdjustSound implements ChangeListener {
 		private MusicFile file;
-		private JTextField field;
+		private JLabel field;
 		
+<<<<<<< HEAD
 		/**
 		 * When making the listener additonal information is needed.
 		 * @param file the file associated by the slider
 		 * @param field the textfield that shoul be updated wit the slider
 		 */
 		public AdjustSound(MusicFile file, JTextField field) {
+=======
+		public AdjustSound(MusicFile file, JLabel field) {
+>>>>>>> dingen
 			this.file = file;
 			this.field = field;
 		}

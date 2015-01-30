@@ -68,15 +68,15 @@ public class SoundFrame {
 		
 		JLabel name;
 		JSlider slider;
-		JTextField text;
+		JLabel text;
 		JPanel panel;
-		for (HashMap.Entry<String, MusicFile> entry : handler.getMusicFiles().entrySet()) {
+		for(HashMap.Entry<String, MusicFile> entry : handler.getMusicFiles().entrySet()) {
 			name = new JLabel(entry.getKey());
 			sliders.add(name);
 			
 			double value = entry.getValue().getCurrentVolume();
 			panel = new JPanel();
-			text = new JTextField(2);
+			text = new JLabel();
 			text.setText(String.valueOf(Math.round(value)));
 			panel.add(text);
 			slider = new JSlider(0, 100, 50);
