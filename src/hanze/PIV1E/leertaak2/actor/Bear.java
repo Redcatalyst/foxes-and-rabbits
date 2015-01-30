@@ -5,6 +5,7 @@ import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.model.AbstractModel;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
+import hanze.PIV1E.leertaak2.music.MusicFile;
 
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +21,8 @@ public class Bear extends Animal
 {
     // Characteristics shared by all bears (class variables).
     
+	// The sound a bear makes
+	private static final MusicFile sound = SimulationModel.bear;
     // The age at which a bear can start to breed.
 	private static final int BREEDING_AGE = 10;
     // The age to which a bear can live.
@@ -220,4 +223,8 @@ public class Bear extends Animal
         }
         this.infected = infected;
     }
+
+	public MusicFile getSound() {
+		return sound;
+	}
 }

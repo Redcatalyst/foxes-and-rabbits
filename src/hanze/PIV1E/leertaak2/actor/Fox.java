@@ -4,6 +4,7 @@ import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.model.AbstractModel;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
+import hanze.PIV1E.leertaak2.music.MusicFile;
 
 import java.util.List;
 import java.util.Iterator;
@@ -20,6 +21,8 @@ public class Fox extends Animal
 {
     // Characteristics shared by all foxes (class variables).
     
+	// The sound a fox makes
+	private static final MusicFile sound = SimulationModel.fox;
     // The age at which a fox can start to breed.
 	private static final int BREEDING_AGE = 8;
     // The age to which a fox can live.
@@ -206,4 +209,8 @@ public class Fox extends Animal
     public void setInfection(boolean infected) {
         this.infected = infected;
     }
+    
+    public MusicFile getSound() {
+		return sound;
+	}
 }

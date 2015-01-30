@@ -3,6 +3,8 @@ package hanze.PIV1E.leertaak2.actor;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.model.AbstractModel;
+import hanze.PIV1E.leertaak2.model.SimulationModel;
+import hanze.PIV1E.leertaak2.music.MusicFile;
 
 import java.util.Iterator;
 import java.util.List;
@@ -16,7 +18,8 @@ import java.util.List;
 public class Hunter extends Human 
 {
 	
-	// The fields that determine when a animal is over populated
+	// The sound a hunter makes
+	private static final MusicFile sound = SimulationModel.hunter;
 	// Max population for a Rabbit
 	private static final int RABBIT_MAX_POPULATION = 1400;
 	// Max population for a Fox
@@ -101,5 +104,7 @@ public class Hunter extends Human
         return null;
     }
     
-    
+    public MusicFile getSound() {
+		return sound;
+	}
 }
