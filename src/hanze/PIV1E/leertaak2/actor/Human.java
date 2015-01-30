@@ -8,7 +8,7 @@ import hanze.PIV1E.leertaak2.model.AbstractModel;
  * A class representing shared characteristics of humans.
  * 
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 22.01.2015
+ * @version 2015.01.29
  */
 public abstract class Human implements Actor 
 {
@@ -101,5 +101,14 @@ public abstract class Human implements Actor
     
     public AbstractModel getModel(){
     	return model;
+    }
+    
+    /**
+     * Used to get the current count of rabbits on the field.
+     * @return getPopulationCount the current count of the rabbits in the field
+     */
+    protected int getCount()
+    {
+    	return getModel().getStats().getPopulationCount(getModel().getField(), getClass());
     }
 }

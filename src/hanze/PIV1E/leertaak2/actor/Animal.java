@@ -1,4 +1,5 @@
 package hanze.PIV1E.leertaak2.actor;
+
 import hanze.PIV1E.leertaak2.location.*;
 import hanze.PIV1E.leertaak2.model.*;
 
@@ -6,8 +7,8 @@ import hanze.PIV1E.leertaak2.model.*;
 /**
  * A class representing shared characteristics of animals.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Tsjeard de Winter en Rick van der Poel
+ * @version 2015.01.29
  */
 public abstract class Animal implements Actor
 {
@@ -21,6 +22,8 @@ public abstract class Animal implements Actor
     private AbstractModel model;
     // The animal's name
     private String name;
+    // Whether the animal is infected or not.
+    protected boolean infected = false;
     
     /**
      * Create a new animal at location in field.
@@ -90,11 +93,38 @@ public abstract class Animal implements Actor
         return field;
     }
     
-    public String getName(){
+    /**
+     * Return the animals name
+     * @return name
+     */
+    public String getName()
+    {
     	return name;
     }
     
+    /**
+     * Return the model that this animal is linked to
+     * @return model
+     */
     public AbstractModel getModel(){
     	return model;
     }
+    
+    /**
+     * Check whether the animal is infected or not
+     */
+    public boolean checkForInfection()
+    {
+    	return infected;
+    }
+    
+    /**
+     * Used to get the current count of rabbits on the field.
+     * @return getPopulationCount the current count of the rabbits in the field
+     */
+    protected int getCount()
+    {
+    	return getModel().getStats().getPopulationCount(getModel().getField(), getClass());
+    }
+    
 }

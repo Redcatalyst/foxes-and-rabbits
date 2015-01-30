@@ -1,8 +1,8 @@
 package hanze.PIV1E.leertaak2.location;
 import hanze.PIV1E.leertaak2.helper.Randomizer;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -11,8 +11,8 @@ import java.util.Random;
  * Represent a rectangular grid of field positions.
  * Each position is able to store a single animal.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Frank Noorlander, Tsjeard de Winter, Rick van der Poel
+ * @version 29/01/2015
  */
 public class Field
 {
@@ -187,6 +187,20 @@ public class Field
             Collections.shuffle(locations, rand);
         }
         return locations;
+    }
+    
+    /**
+     * Looks for free locations and return a random free location
+     * @return A random free location
+     */
+    public Location getFreeLocation(){
+        List<Location> freeLocations = new ArrayList<Location>();
+        for(int i = 0; i < field.length; i++){
+            for(int r = 0; r < field[i].length; r++){
+                if(field[i][r] == null) freeLocations.add(new Location(i, r));
+            }
+        }
+        return freeLocations.isEmpty() ? null : freeLocations.get(rand.nextInt(freeLocations.size()));
     }
 
     /**

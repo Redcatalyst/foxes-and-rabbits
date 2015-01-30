@@ -14,27 +14,25 @@ import java.util.Random;
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Tsjeard de Winter en Rick van der Poel
+ * @version 2015.01.29
  */
 public class Rabbit extends Animal
 {
     // Characteristics shared by all rabbits (class variables).
 
     // The age at which a rabbit can start to breed.
-    public static int BREEDING_AGE = 5;
+    private static int BREEDING_AGE = 5;
     // The age to which a rabbit can live.
-    public static int MAX_AGE = 40;
+    private static int MAX_AGE = 40;
     // The likelihood of a rabbit breeding.
-    public static double BREEDING_PROBABILITY = 0.12;
+    private static double BREEDING_PROBABILITY = 0.12;
     // The maximum number of births.
-    public static int MAX_LITTER_SIZE = 4;
+    private static int MAX_LITTER_SIZE = 4;
     // The chance a rabbit can get infected
-    public double rabbit_infection_chance = 0.9;
-    // Indicates if a rabbit is infected
-    public boolean infected = false;
+    private static final double INFECTION_CHANCE = 0.9;
     // A shared random number generator to control breeding.
-    public static final Random rand = Randomizer.getRandom();
+    private static final Random rand = Randomizer.getRandom();
     
     
     // Individual characteristics (instance fields).
@@ -68,7 +66,7 @@ public class Rabbit extends Animal
     {
         incrementAge();
         if(isAlive()) {
-        	setInfected();
+        	checkAndInfect();
             giveBirth();            
             // Try to move into a free location.
             Location newLocation = getField().freeAdjacentLocation(getLocation());
@@ -127,13 +125,17 @@ public class Rabbit extends Animal
         return births;
     }
     
+    /**
+     * Determine the litter size based on the amount of rabbits currently in the field
+     * @return MAX_LITTER_SIZE
+     */
     private int getLitterSize() 
     {
 
-    	if(getRabbitCount() > 400 && getRabbitCount() <= 800){
+    	if(getCount() > 400 && getCount() <= 800){
     		return MAX_LITTER_SIZE / 2; 
     	}
-    	if(getRabbitCount() > 800){
+    	if(getCount() > 800){
     		return MAX_LITTER_SIZE / 4;
     	}
 		return MAX_LITTER_SIZE;
@@ -156,9 +158,8 @@ public class Rabbit extends Animal
     }
     
     
-    /*
+    /**
      * A rabbit can get ill with a rabbit virus when rabbits around him got the virus. 
-     * 
      */
     public void checkAndInfect()
     {
@@ -173,37 +174,27 @@ public class Rabbit extends Animal
                 Rabbit rabbit = (Rabbit) animal;
                 // Infect rabbit if other rabbit is infected
                 if(rabbit.checkForInfection()) {
-                	if(infected = false) {
-                		setInfected();
+                	if(infected == false){
+                		setInfection(rand.nextDouble() <= INFECTION_CHANCE);
                 	}
                 }
             }
         }
     }
     
-    /*
-     * Rabbits have a determined chance to become infected
+    /**
+     * Set the rabbit to infected
+     * @param infect true to make this Rabbit sick
      */
-    public void setInfected()
-    {
-		if(rand.nextDouble() <= rabbit_infection_chance)
-		{
-			infected = true;
-			age = MAX_AGE - 5;
-		}
+    public void setInfection(boolean infected) {
+        if(infected){
+            age = MAX_AGE - 5;
+        }
+        this.infected = infected;
     }
     
-    /*
-     * Check if the rabbit is infected or not
-     */
-    public boolean checkForInfection()
-    {
-    	return infected;
-    }
     
-    private int getRabbitCount()
-    {
-    	return getModel().getStats().getPopulationCount(getModel().getField(), getClass());
-    }
+    
+    
     
 }

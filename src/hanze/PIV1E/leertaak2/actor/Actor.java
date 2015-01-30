@@ -6,8 +6,8 @@ import hanze.PIV1E.leertaak2.location.Location;
 
 /**
  * The interface Actor.
- * @author Tsjeard de Winter
- * @version 22.01.2015
+ * @author Tsjeard de Winter en Rick van der Poel
+ * @version 2015.01.29
  *
  */
 public interface Actor {

@@ -14,27 +14,29 @@ import java.util.Random;
  * A simple model of a bear.
  * Bears age, move, eat foxes and rabbits and die.
  * @author Tsjeard de Winter en Rick van der Poel
- * @Version 22.01.2015
+ * @version 2015.01.29
  */
 public class Bear extends Animal
 {
     // Characteristics shared by all bears (class variables).
     
     // The age at which a bear can start to breed.
-    public static final int BREEDING_AGE = 10;
+	private static final int BREEDING_AGE = 10;
     // The age to which a bear can live.
-    public static final int MAX_AGE = 200;
+	private static final int MAX_AGE = 200;
     // The likelihood of a bear breeding.
-    public static final double BREEDING_PROBABILITY = 0.05;
+	private static final double BREEDING_PROBABILITY = 0.05;
     // The maximum number of births.
-    public static final int MAX_LITTER_SIZE = 2;
+	private static final int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit.
-    public static final int RABBIT_FOOD_VALUE = 6;
+	private static final int RABBIT_FOOD_VALUE = 10;
     // The food value of a single fox.
     // This is also the number of steps a bear can go before it has to eat again.
-    public static final int FOX_FOOD_VALUE = 12;
-    // A shared random number generator to control breeding.
-    public static final Random rand = Randomizer.getRandom();
+	private static final int FOX_FOOD_VALUE = 12;
+	// The chance a Bear can get infected when he eats a Fox.
+	private static final double INFECTION_CHANCE = 0.30;
+	// A shared random number generator to control breeding.
+	private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
     // The bear's age.
@@ -141,6 +143,9 @@ public class Bear extends Animal
                 Fox fox = (Fox) actor;
                 if(fox.isAlive()) { 
                     fox.setDead();
+                    if(fox.checkForInfection()) {
+                     	setInfection(rand.nextDouble() <= INFECTION_CHANCE);
+                     }
                     foodLevel = FOX_FOOD_VALUE;
                     // Remove the dead fox from the field.
                     return where;
@@ -203,5 +208,16 @@ public class Bear extends Animal
      */
     public int getFoodLevel(){
     	return foodLevel;
+    }
+    
+    /**
+     * Set the Bear to infected
+     * @param infect true to make this Bear sick
+     */
+    public void setInfection(boolean infected) {
+        if(infected){
+            age = age + 20;
+        }
+        this.infected = infected;
     }
 }
