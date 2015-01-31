@@ -82,4 +82,16 @@ public class MenuController extends AbstractController {
 			simulation.getMusicHandler().adjustSound();
 		}
 	}
+	
+	/**
+	 * Shows the menu to adjust the simulaiton settings
+	 */
+	public class SetSettings implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			
+		}
+		
+	}
 }

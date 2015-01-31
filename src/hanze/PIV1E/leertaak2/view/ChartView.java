@@ -3,7 +3,6 @@ package hanze.PIV1E.leertaak2.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,7 +14,6 @@ import javax.swing.JPanel;
 
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
-import hanze.PIV1E.leertaak2.view.GraphView.GraphPanel;
 
 public class ChartView extends AbstractView {
 
