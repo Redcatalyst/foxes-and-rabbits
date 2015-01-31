@@ -32,6 +32,8 @@ public class Rabbit extends Animal
     private static double BREEDING_PROBABILITY = 0.12;
     // The maximum number of births.
     private static int MAX_LITTER_SIZE = 4;
+    // The number that determince when there are to much rabbits
+    private static int TO_MUCH_RABBITS = 800; 
     // The chance a rabbit can get infected
     private static final double INFECTION_CHANCE = 0.9;
     // A shared random number generator to control breeding.
@@ -135,11 +137,8 @@ public class Rabbit extends Animal
     private int getLitterSize() 
     {
 
-    	if(getCount() > 400 && getCount() <= 800){
+    	if(getCount() >= TO_MUCH_RABBITS){
     		return MAX_LITTER_SIZE / 2; 
-    	}
-    	if(getCount() > 800){
-    		return MAX_LITTER_SIZE / 4;
     	}
 		return MAX_LITTER_SIZE;
     }
