@@ -26,14 +26,23 @@ public class Tourist extends Human
     public static final int MAX_AGE = 500;
     // The likelihood of a tourist bringing friends.
     public static final double INTRODUCING_PROBABILITY = 0.01;
+    // The likelihood of a tourist making a campfire.
+    public static final double CAMPFIRE_PROBABILITY = 0.03;
+    // The likelihood of a campfire setting off a forestfire.
+    public static final double FORESTFIRE_PROBABILITY = 0.005;
     // The maximum number of new tourists.
     public static final int MAX_NEW_TOURISTS = 1;   
     // A shared random number generator to control the friends a tourist brings.
     public static final Random rand = Randomizer.getRandom();
-    
+    // A shared random number generator to control campfires a tourist can make.
+    public static final Random rand2 = Randomizer.getRandom();
+    // A shared random number generator to control chance a campfire sets off a forestfire..
+    public static final Random rand3 = Randomizer.getRandom();
     // Individual characteristics (instance fields).
     // The tourists age.
     private int age;
+    // boolean for a forestfire.
+    private boolean forestfire = false;
     
     /**
      * Create a tourist. A tourist can be created as a new born (age zero)
@@ -77,6 +86,9 @@ public class Tourist extends Human
                 // Overcrowding.
                 setDead();
             } */
+            if(makeCampfire() && canForestfire()){
+            	forestfire = true;
+            }
         }
     }
 
@@ -133,6 +145,30 @@ public class Tourist extends Human
             }
         }
         return null;
+    }
+    
+    /**
+     * Method to make a campfire.
+     */
+    private boolean makeCampfire()
+    {
+    	if(rand2.nextDouble() <= CAMPFIRE_PROBABILITY) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
+    /**
+     * Method to check if there can be a forestfire.
+     */
+    private boolean canForestfire()
+    {
+    	if(rand3.nextDouble() <= FORESTFIRE_PROBABILITY) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
     /**
