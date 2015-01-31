@@ -20,6 +20,8 @@ public class SimulationModel extends AbstractModel {
     private static final double BEAR_CREATION_PROBABILITY = 0.01; 
     // The number of hunters that are hunting in the woods
     private static final int NUMBER_OF_HUNTERS = 20; 
+    // The number of Tourist that are in the woods
+    private static final int NUMBER_OF_TOURISTS = 20; 
     // The probability that a rabbit is infected when created
     private static final double RABBIT_INFECTED_PROBABILITY = 0.01;
     
@@ -156,6 +158,11 @@ public class SimulationModel extends AbstractModel {
         for(int i = 0; i < NUMBER_OF_HUNTERS; i++){
         	Hunter hunter = new Hunter(field, field.getFreeLocation(), this);
         	actors.add(hunter);
+        }
+        // Add the tourists to the field
+        for(int i = 0; i < NUMBER_OF_TOURISTS; i++){
+        	Tourist tourist = new Tourist(true, field, field.getFreeLocation(), this);
+        	actors.add(tourist);
         }
     }
     

@@ -43,6 +43,8 @@ public class Simulator
     private static final Color BEARCOLOR = Color.RED;
     // Color of fox
     private static final Color HUNTERCOLOR = Color.GREEN;
+    // Color of the Tourist
+    private static final Color TOURISTCOLOR = Color.MAGENTA;
     // List of all views
     private ArrayList<AbstractView> views;
     
@@ -110,6 +112,7 @@ public class Simulator
 	        view.setColor(Fox.class, FOXCOLOR);
 	        view.setColor(Bear.class, BEARCOLOR);
 	        view.setColor(Hunter.class, HUNTERCOLOR);
+	        view.setColor(Tourist.class, TOURISTCOLOR);
     	}
     }
     

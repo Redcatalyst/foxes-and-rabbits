@@ -5,6 +5,7 @@ import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.model.AbstractModel;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
+import hanze.PIV1E.leertaak2.music.MusicFile;
 
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Tourist extends Human
     
     public static final int INTRODUCING_AGE = 0;
 	// The age to which a tourist can live.
-    public static final int MAX_AGE = 20;
+    public static final int MAX_AGE = 500;
     // The likelihood of a tourist bringing friends.
     public static final double INTRODUCING_PROBABILITY = 0.01;
     // The maximum number of new tourists.
@@ -62,8 +63,8 @@ public class Tourist extends Human
     {
         incrementAge();
         if(isAlive()) {   
-        	newTourist(); 
-            Location newLocation;
+        	// newTourist(); 
+            Location newLocation = moveTourist();
             if(newLocation == null) { 
                 // try to move to a free location.
                 newLocation = getField().freeAdjacentLocation(getLocation());
@@ -96,6 +97,42 @@ public class Tourist extends Human
      */
     public int getAge(){
     	return age;
+    }
+    
+    private Location moveTourist()
+    {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object actor = field.getObjectAt(where);
+            if(actor instanceof Rabbit) {
+                Rabbit rabbit = (Rabbit) actor;
+                if(rabbit.isAlive()) { 
+                    return null;
+                }
+            }
+            if(actor instanceof Fox) {
+                Fox fox = (Fox) actor;
+                if(fox.isAlive()) { 
+                    return null;
+                }
+            }  
+            if(actor instanceof Bear) {
+                Bear bear = (Bear) actor;
+                if(bear.isAlive()) { 
+                    return null;
+                }
+            }
+            if(actor instanceof Hunter) {
+                Hunter hunter = (Hunter) actor;
+                if(hunter.isAlive()) { 
+                    return null;
+                }
+            }
+        }
+        return null;
     }
     
     /**
@@ -138,5 +175,11 @@ public class Tourist extends Human
     {
         return age >= INTRODUCING_AGE;
     }
+
+	@Override
+	public MusicFile getSound() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }
