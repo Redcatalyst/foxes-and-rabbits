@@ -150,6 +150,10 @@ public class Simulator
         item.addActionListener(menuController.new AdjustSound());
         menu.add(item);
         
+        item = new JMenuItem("Set simulation settings");
+        item.addActionListener(menuController.new SetSettings());
+        menu.add(item);
+        
      // create the Help menu
         menu = new JMenu("Help");
         menubar.add(menu);
