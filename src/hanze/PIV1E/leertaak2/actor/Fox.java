@@ -26,11 +26,14 @@ public class Fox extends Animal
     // The age at which a fox can start to breed.
 	private static final int BREEDING_AGE = 8;
     // The age to which a fox can live.
-	private static final int MAX_AGE = 150;
+	public static final int MAX_AGE = 150;
+	public static int max_age = MAX_AGE;
     // The likelihood of a fox breeding.
-	private static final double BREEDING_PROBABILITY = 0.09;
+	public static final double BREEDING_PROBABILITY = 0.09;
+	public static double breeding_probability = BREEDING_PROBABILITY;
     // The maximum number of births.
-	private static final int MAX_LITTER_SIZE = 5;
+	public static final int MAX_LITTER_SIZE = 5;
+	public static int max_litter_size = MAX_LITTER_SIZE;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
 	private static final int RABBIT_FOOD_VALUE = 10;
@@ -57,7 +60,7 @@ public class Fox extends Animal
     {
         super(field, location, model);
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
+            age = rand.nextInt(max_age);
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
         }
         else {
@@ -102,7 +105,7 @@ public class Fox extends Animal
     private void incrementAge()
     {
         age++;
-        if(age > MAX_AGE) {
+        if(age > max_age) {
             setDead();
         }
     }
@@ -174,8 +177,8 @@ public class Fox extends Animal
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+        if(canBreed() && rand.nextDouble() <= breeding_probability) {
+            births = rand.nextInt(max_litter_size) + 1;
         }
         return births;
     }

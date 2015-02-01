@@ -30,6 +30,7 @@ public class SoundListener {
 	private void restoreDefaults(JFrame frame) {
 		handler.resetDefaults();
 		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+		new SoundFrame(handler);
 	}
 	
 	/**

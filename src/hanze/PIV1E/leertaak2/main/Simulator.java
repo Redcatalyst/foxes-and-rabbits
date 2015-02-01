@@ -35,17 +35,14 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
     
-    // Color of fox
+    // Color of actors
     private static final Color FOXCOLOR = Color.BLUE;
-    // Color of fox
     private static final Color RABBITCOLOR = Color.ORANGE;
-    // Color of fox
     private static final Color BEARCOLOR = Color.RED;
-    // Color of fox
     private static final Color HUNTERCOLOR = Color.GREEN;
-    // Color of the Tourist
     private static final Color TOURISTCOLOR = Color.MAGENTA;
-    // List of all views
+    private static final Color FIRECOLOR = Color.ORANGE;
+    
     private ArrayList<AbstractView> views;
     
     public static JFrame frame;
@@ -107,6 +104,7 @@ public class Simulator
      * give everything a color
      */
     public void setColor() {
+    	//view.setColor(Fire.class, FIRECOLOR);
     	for (AbstractView view : views){
 	    	view.setColor(Rabbit.class, RABBITCOLOR);
 	        view.setColor(Fox.class, FOXCOLOR);

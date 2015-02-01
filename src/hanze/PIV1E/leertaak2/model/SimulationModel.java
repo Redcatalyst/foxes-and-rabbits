@@ -207,4 +207,8 @@ public class SimulationModel extends AbstractModel {
 	public MusicHandler getMusicHandler() {
 		return musicHandler;
 	}
+	
+	public void setSettings() {
+		new SimulationSettings();
+	}
 }

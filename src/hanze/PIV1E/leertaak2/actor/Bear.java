@@ -24,20 +24,23 @@ public class Bear extends Animal
 	// The sound a bear makes
 	private static final MusicFile sound = SimulationModel.bear;
     // The age at which a bear can start to breed.
-	private static final int BREEDING_AGE = 10;
+	private static int BREEDING_AGE = 10;
     // The age to which a bear can live.
-	private static final int MAX_AGE = 200;
+	public static final int MAX_AGE = 200;
+	public static int max_age = MAX_AGE;
     // The likelihood of a bear breeding.
-	private static final double BREEDING_PROBABILITY = 0.05;
+	public static final double BREEDING_PROBABILITY = 0.05;
+	public static double breeding_probability = BREEDING_PROBABILITY;
     // The maximum number of births.
-	private static final int MAX_LITTER_SIZE = 2;
+	public static final int MAX_LITTER_SIZE = 2;
+	public static int max_litter_size = MAX_LITTER_SIZE;
     // The food value of a single rabbit.
-	private static final int RABBIT_FOOD_VALUE = 10;
+	private static int RABBIT_FOOD_VALUE = 10;
     // The food value of a single fox.
     // This is also the number of steps a bear can go before it has to eat again.
-	private static final int FOX_FOOD_VALUE = 12;
+	private static int FOX_FOOD_VALUE = 12;
 	// The chance a Bear can get infected when he eats a Fox.
-	private static final double INFECTION_CHANCE = 0.30;
+	private static double INFECTION_CHANCE = 0.30;
 	// A shared random number generator to control breeding.
 	private static final Random rand = Randomizer.getRandom();
     
@@ -59,7 +62,7 @@ public class Bear extends Animal
     {
         super(field, location, model);
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
+            age = rand.nextInt(max_age);
             foodLevel = rand.nextInt(FOX_FOOD_VALUE);
         }
         else {
@@ -104,7 +107,7 @@ public class Bear extends Animal
     private void incrementAge()
     {
         age++;
-        if(age > MAX_AGE) {
+        if(age > max_age) {
             setDead();
         }
     }
@@ -185,8 +188,8 @@ public class Bear extends Animal
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+        if(canBreed() && rand.nextDouble() <= breeding_probability) {
+            births = rand.nextInt(max_litter_size) + 1;
         }
         return births;
     }

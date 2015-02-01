@@ -89,8 +89,8 @@ public class MenuController extends AbstractController {
 	public class SetSettings implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			
+		public void actionPerformed(ActionEvent e) {
+			simulation.setSettings();
 		}
 		
 	}

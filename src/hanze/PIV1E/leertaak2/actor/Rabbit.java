@@ -27,11 +27,14 @@ public class Rabbit extends Animal
     // The age at which a rabbit can start to breed.
     private static int BREEDING_AGE = 5;
     // The age to which a rabbit can live.
-    private static int MAX_AGE = 40;
+    public static final int MAX_AGE = 40;
+    public static int max_age = MAX_AGE;
     // The likelihood of a rabbit breeding.
-    private static double BREEDING_PROBABILITY = 0.12;
+    public static final double BREEDING_PROBABILITY = 0.12;
+    public static double breeding_probability = BREEDING_PROBABILITY;
     // The maximum number of births.
-    private static int MAX_LITTER_SIZE = 4;
+    public static final int MAX_LITTER_SIZE = 4;
+    public static int max_litter_size = MAX_LITTER_SIZE;
     // The number that determince when there are to much rabbits
     private static int TO_MUCH_RABBITS = 800; 
     // The chance a rabbit can get infected
@@ -58,7 +61,7 @@ public class Rabbit extends Animal
         super(field, location, model);
         age = 0;
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
+            age = rand.nextInt(max_age);
         }
     }
     
@@ -92,7 +95,7 @@ public class Rabbit extends Animal
     private void incrementAge()
     {
         age++;
-        if(age > MAX_AGE) {
+        if(age > max_age) {
             setDead();
         }
     }
@@ -124,7 +127,7 @@ public class Rabbit extends Animal
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(canBreed() && rand.nextDouble() <= breeding_probability) {
             births = rand.nextInt(getLitterSize()) + 1;
         }
         return births;
@@ -138,9 +141,9 @@ public class Rabbit extends Animal
     {
 
     	if(getCount() >= TO_MUCH_RABBITS){
-    		return MAX_LITTER_SIZE / 2; 
+    		return max_litter_size / 2; 
     	}
-		return MAX_LITTER_SIZE;
+		return max_litter_size;
     }
 
     /**
@@ -190,7 +193,7 @@ public class Rabbit extends Animal
      */
     public void setInfection(boolean infected) {
         if(infected){
-            age = MAX_AGE - 5;
+            age = max_age - 5;
         }
         this.infected = infected;
     }

@@ -44,7 +44,7 @@ public class SoundFrame {
 		content = frame.getContentPane();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocation(Simulator.frame.getLocationOnScreen().x + Simulator.frame.getSize().width + 10, Simulator.frame.getLocationOnScreen().y);
-        //frame.setResizable(false);
+        frame.setResizable(false);
 		frame.setTitle("Sound volume");
 	}
 	

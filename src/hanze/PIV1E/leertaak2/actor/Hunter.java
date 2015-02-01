@@ -21,11 +21,14 @@ public class Hunter extends Human
 	// The sound a hunter makes
 	private static final MusicFile sound = SimulationModel.hunter;
 	// Max population for a Rabbit
-	private static final int RABBIT_MAX_POPULATION = 1400;
+	public static final int RABBIT_MAX_POPULATION = 1400;
+	public static int rabbit_max_population = RABBIT_MAX_POPULATION;
 	// Max population for a Fox
-	private static final int FOX_MAX_POPULATION = 300;
+	public static final int FOX_MAX_POPULATION = 300;
+	public static int fox_max_population = FOX_MAX_POPULATION;
 	// Max population for a Bear
-	private static final int BEAR_MAX_POPULATION = 300;
+	public static final int BEAR_MAX_POPULATION = 300;
+	public static int bear_max_population = BEAR_MAX_POPULATION;
 
     /**
      * Create a hunter. A hunter stays in the game to hunt the over populated species. 
@@ -78,7 +81,7 @@ public class Hunter extends Human
             Object actor = field.getObjectAt(where);
             if(actor instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) actor;
-                if(rabbit.isAlive() && rabbit.getCount() > RABBIT_MAX_POPULATION) { 
+                if(rabbit.isAlive() && rabbit.getCount() > rabbit_max_population) { 
                     rabbit.setDead();
                     // Remove the dead rabbit from the field.
                     return where;
@@ -86,7 +89,7 @@ public class Hunter extends Human
             }
             if(actor instanceof Fox) {
                 Fox fox = (Fox) actor;
-                if(fox.isAlive() && fox.getCount() > FOX_MAX_POPULATION) { 
+                if(fox.isAlive() && fox.getCount() > fox_max_population) { 
                     fox.setDead();
                     // Remove the dead fox from the field.
                     return where;
@@ -94,7 +97,7 @@ public class Hunter extends Human
             }  
             if(actor instanceof Bear) {
                 Bear bear = (Bear) actor;
-                if(bear.isAlive() && bear.getCount() > BEAR_MAX_POPULATION) { 
+                if(bear.isAlive() && bear.getCount() > bear_max_population) { 
                     bear.setDead();
                     // Remove the dead bear from the field.
                     return where;
