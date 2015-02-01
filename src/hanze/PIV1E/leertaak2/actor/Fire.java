@@ -9,14 +9,14 @@ import hanze.PIV1E.leertaak2.model.AbstractModel;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 import hanze.PIV1E.leertaak2.music.MusicFile;
 
-public class Fire extends Animal
+public class Fire extends Human
 {
     // Characteristics shared by all fires (class variables).
 	
 	// The sound a fire makes
 	private static final MusicFile sound = SimulationModel.rabbit;
     // The age to which a fire can live.
-    private static int MAX_AGE = 2;
+    private static int MAX_AGE = 1;
     // The maximal amount of fires.
     private static int MAX_FIRES = 3000;
     // A shared random number generator to control breeding.
