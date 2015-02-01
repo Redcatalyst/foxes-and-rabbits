@@ -24,7 +24,12 @@ public class SimulationModel extends AbstractModel {
     private static final int NUMBER_OF_TOURISTS = 1; 
     // The probability that a rabbit is infected when created
     private static final double RABBIT_INFECTED_PROBABILITY = 0.01;
-    
+    // The probability a tourist will visit the woods.
+    private static final double TOURIST_VISIT_PROBABILITY = 0.1;
+    // A random number generator to control the number of tourists.
+    private static final Random rand = Randomizer.getRandom();
+    // the current number of tourists.
+    private int numberOfTourists = 0;
     // List of actors in the field.
     public static List<Actor> actors;
     // List of new actors
@@ -93,7 +98,12 @@ public class SimulationModel extends AbstractModel {
     private void simulateOneStep()
     {
     	step++;
-    	
+    	// Decide if a tourist will visit the woods.
+    	if(numberOfTourists < NUMBER_OF_TOURISTS && rand.nextDouble() <= TOURIST_VISIT_PROBABILITY) {
+    		numberOfTourists++;
+    		Tourist tourist = new Tourist(field, field.getFreeLocation(), this);
+        	actors.add(tourist);
+    	}
         // Let all Actors act.
     	newActors.clear();
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
@@ -158,11 +168,6 @@ public class SimulationModel extends AbstractModel {
         for(int i = 0; i < NUMBER_OF_HUNTERS; i++){
         	Hunter hunter = new Hunter(field, field.getFreeLocation(), this);
         	actors.add(hunter);
-        }
-        // Add the tourists to the field
-        for(int i = 0; i < NUMBER_OF_TOURISTS; i++){
-        	Tourist tourist = new Tourist(field, field.getFreeLocation(), this);
-        	actors.add(tourist);
         }
     }
     

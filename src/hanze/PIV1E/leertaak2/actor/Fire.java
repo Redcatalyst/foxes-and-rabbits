@@ -20,9 +20,11 @@ public class Fire extends Animal
     // The age to which a fire can live.
     private static int MAX_AGE = 1;
     // The likelihood of a fire spreading.
-    private static double SPREADING_PROBABILITY = 0.12; 
+    //private static double SPREADING_PROBABILITY = 0.12; 
+    // The maximal amount of fires.
+    private static int MAX_FIRES = 3000;
     // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
+    //private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
     
@@ -48,7 +50,7 @@ public class Fire extends Animal
     public void act()
     {
         incrementAge();
-        if(isAlive()) {
+        if(isAlive() && this.getCount() < MAX_FIRES) {
             spreadFire();
             }
         }
