@@ -2,16 +2,14 @@ package hanze.PIV1E.leertaak2.actor;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
-import hanze.PIV1E.leertaak2.helper.Randomizer;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.model.AbstractModel;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 import hanze.PIV1E.leertaak2.music.MusicFile;
 
-public class Fire extends Animal
+public class Fire extends Human
 {
     // Characteristics shared by all fires (class variables).
 	
@@ -19,10 +17,10 @@ public class Fire extends Animal
 	private static final MusicFile sound = SimulationModel.rabbit;
     // The age to which a fire can live.
     private static int MAX_AGE = 1;
-    // The likelihood of a fire spreading.
-    private static double SPREADING_PROBABILITY = 0.12; 
+    // The maximal amount of fires.
+    private static int MAX_FIRES = 3000;
     // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
+    // private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
     
@@ -48,7 +46,7 @@ public class Fire extends Animal
     public void act()
     {
         incrementAge();
-        if(isAlive()) {
+        if(isAlive() && this.getCount() < MAX_FIRES) {
             spreadFire();
             }
         }
@@ -72,14 +70,14 @@ public class Fire extends Animal
     {
         // New fires are spread to adjacent locations.
         // Get a list of adjacent locations.
-    	KillAdjecent();
-        Field field = getField();
-        List<Location> adjacent = field.adjacentLocations(getLocation());
-    	for(int i = 0; i < adjacent.size(); i++) {
-    		Location loc = adjacent.remove(0);
-    		Fire young = new Fire(field, loc, getModel());
-            SimulationModel.newActors.add(young);
-        }
+    		KillAdjecent();
+	        Field field = getField();
+	        List<Location> adjacent = field.adjacentLocations(getLocation());
+	    	for(int i = 0; i < adjacent.size(); i++) {
+	    		Location loc = adjacent.remove(0);
+	    		Fire young = new Fire(field, loc, getModel());
+	            SimulationModel.newActors.add(young);
+	        }
     }
     
 	private void KillAdjecent() 
