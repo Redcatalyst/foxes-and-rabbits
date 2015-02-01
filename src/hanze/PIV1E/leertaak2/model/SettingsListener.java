@@ -78,7 +78,8 @@ public class SettingsListener {
 			Tourist.campfire_probability = Tourist.CAMPFIRE_PROBABILITY;
 			
 			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-			new SimulationSettings();
+			new SimulationSettings(SimulationSettings.model);
+			SimulationModel.sound = true;
 		}
 	}
 	

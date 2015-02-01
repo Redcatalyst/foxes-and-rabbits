@@ -2,6 +2,8 @@ package hanze.PIV1E.leertaak2.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -79,12 +81,14 @@ public class MenuController extends AbstractController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			simulation.getMusicHandler().adjustSound();
+			if(SimulationModel.sound != true){
+				simulation.getMusicHandler().adjustSound();
+			}
 		}
 	}
 	
 	/**
-	 * Shows the menu to adjust the simulaiton settings
+	 * Shows the menu to adjust the simulation settings
 	 */
 	public class SetSettings implements ActionListener {
 

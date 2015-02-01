@@ -2,6 +2,8 @@ package hanze.PIV1E.leertaak2.model;
 
 import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.main.Simulator;
+import hanze.PIV1E.leertaak2.controller.*;
+import hanze.PIV1E.leertaak2.controller.MenuController.ShowAbout;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -16,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
 
 /**
  * Class that makes a JFrame which is able to adjust simulation settings.
@@ -25,8 +26,11 @@ public class SimulationSettings {
 	private JFrame frame;
 	private Container content;
 	private SettingsListener listener;
+	public static SimulationModel model;
 	
-	public SimulationSettings() {
+	public SimulationSettings(SimulationModel model) {
+		SimulationModel.settings = true;
+		this.model = model;
 		makeFrame();
 		listener = new SettingsListener(frame);
 		makeOptions();
@@ -39,6 +43,7 @@ public class SimulationSettings {
 	 */
 	private void makeFrame() {
 		frame = new JFrame();
+		frame.addWindowListener(model.new SettingsListener());
 		content = frame.getContentPane();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocation(Simulator.frame.getLocationOnScreen().x + Simulator.frame.getSize().width + 10, Simulator.frame.getLocationOnScreen().y);

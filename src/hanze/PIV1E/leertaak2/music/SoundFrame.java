@@ -9,6 +9,8 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 
 import hanze.PIV1E.leertaak2.main.Simulator;
+import hanze.PIV1E.leertaak2.model.SimulationModel;
+import hanze.PIV1E.leertaak2.model.SimulationModel.SettingsListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,12 +26,15 @@ public class SoundFrame {
 	private JFrame frame;
 	private Container content;
 	private SoundListener listener;
+	public static SimulationModel model;
 	
 	/**
 	 * Makes a SoundFrame
 	 * @param handler The handler associated with this SoundFrame
 	 */
-	public SoundFrame(MusicHandler handler) {
+	public SoundFrame(MusicHandler handler, SimulationModel model) {
+		SimulationModel.sound = true;
+		this.model = model;
 		this.handler = handler;
 		listener = new SoundListener(handler);
 		makeFrame();
@@ -43,6 +48,7 @@ public class SoundFrame {
 	 */
 	private void makeFrame() {
 		frame = new JFrame();
+		frame.addWindowListener(model.new SoundListener());
 		content = frame.getContentPane();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocation(Simulator.frame.getLocationOnScreen().x + Simulator.frame.getSize().width + 10, Simulator.frame.getLocationOnScreen().y);

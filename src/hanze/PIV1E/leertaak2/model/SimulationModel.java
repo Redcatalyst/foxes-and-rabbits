@@ -6,6 +6,8 @@ import hanze.PIV1E.leertaak2.location.*;
 import hanze.PIV1E.leertaak2.music.*;
 import hanze.PIV1E.leertaak2.view.*;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -41,9 +43,11 @@ public class SimulationModel extends AbstractModel {
     // A statistics object computing and storing simulation information
     private FieldStats stats;
     // Plays sound
-    private MusicHandler musicHandler = new MusicHandler();
+    private MusicHandler musicHandler = new MusicHandler(this);
     // all the sounds
     public static MusicFile backgroundSound, rabbit, fox, hunter, bear, tourist, fire;
+    // Booleans if the settings menus are on or off
+    public static boolean sound, settings = false;
     
     public SimulationModel(int depth, int width){
     	actors = new ArrayList<Actor>();
@@ -242,6 +246,38 @@ public class SimulationModel extends AbstractModel {
 	}
 	
 	public void setSettings() {
-		new SimulationSettings();
+		if(settings != true){
+			new SimulationSettings(this);
+		}
+	}
+	
+	public class SettingsListener implements WindowListener {
+
+		public void windowClosed(WindowEvent e) {
+			SimulationModel.settings = false;			
+		}
+		
+		public void windowOpened(WindowEvent e) {}
+		public void windowClosing(WindowEvent e) {}
+		public void windowIconified(WindowEvent e) {}
+		public void windowDeiconified(WindowEvent e) {}
+		public void windowActivated(WindowEvent e) {}
+		public void windowDeactivated(WindowEvent e) {}
+		
+	}
+	
+	public class SoundListener implements WindowListener {
+
+		public void windowClosed(WindowEvent e) {
+			SimulationModel.sound = false;			
+		}
+		
+		public void windowOpened(WindowEvent e) {}
+		public void windowClosing(WindowEvent e) {}
+		public void windowIconified(WindowEvent e) {}
+		public void windowDeiconified(WindowEvent e) {}
+		public void windowActivated(WindowEvent e) {}
+		public void windowDeactivated(WindowEvent e) {}
+		
 	}
 }

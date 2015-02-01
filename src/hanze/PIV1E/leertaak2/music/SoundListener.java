@@ -1,5 +1,7 @@
 package hanze.PIV1E.leertaak2.music;
 
+import hanze.PIV1E.leertaak2.model.SimulationModel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -30,7 +32,7 @@ public class SoundListener {
 	private void restoreDefaults(JFrame frame) {
 		handler.resetDefaults();
 		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-		new SoundFrame(handler);
+		new SoundFrame(handler, SoundFrame.model);
 	}
 	
 	/**

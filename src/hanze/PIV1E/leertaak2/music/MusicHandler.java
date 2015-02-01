@@ -1,5 +1,7 @@
 package hanze.PIV1E.leertaak2.music;
 
+import hanze.PIV1E.leertaak2.model.SimulationModel;
+
 import java.util.HashMap;
 
 import javax.sound.sampled.Clip;
@@ -9,11 +11,13 @@ import javax.sound.sampled.Clip;
  */
 public class MusicHandler {
 	private HashMap<String, MusicFile> files;
+	private SimulationModel model;
 	
 	/**
 	 * Creates a MusicHandler.
 	 */
-	public MusicHandler() {
+	public MusicHandler(SimulationModel model) {
+		this.model = model;
 		files = new HashMap<String, MusicFile>();
 	}
 	
@@ -47,7 +51,7 @@ public class MusicHandler {
 	 * Gives a menu to adjust all sounds.
 	 */
 	public void adjustSound() {
-		new SoundFrame(this);
+		new SoundFrame(this, model);
 	}
 	
 	/**
