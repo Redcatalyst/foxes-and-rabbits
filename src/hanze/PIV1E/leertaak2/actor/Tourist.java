@@ -27,9 +27,9 @@ public class Tourist extends Human
     // The likelihood of a tourist bringing friends.
     public static final double INTRODUCING_PROBABILITY = 0.01;
     // The likelihood of a tourist making a campfire.
-    public static final double CAMPFIRE_PROBABILITY = 0.03;
+    public static final double CAMPFIRE_PROBABILITY = 0.9;
     // The likelihood of a campfire setting off a forestfire.
-    public static final double FORESTFIRE_PROBABILITY = 0.005;
+    public static final double FORESTFIRE_PROBABILITY = 0.9;
     // The maximum number of new tourists.
     public static final int MAX_NEW_TOURISTS = 1;   
     // A shared random number generator to control the friends a tourist brings.
@@ -170,6 +170,22 @@ public class Tourist extends Human
     		return false;
     	}
     }
+    
+    /**
+     * Check if forestfire is true.
+     * If so, start a fire that will spread to adjacent locations, killing everything in it's way.
+     */
+    private void startFire()
+    {
+    	Field field = getField();
+    	List<Location> adjacent = field.adjacentLocations(getLocation());
+    	for(int i = 0; i < adjacent.size(); i++) {
+    		Location loc = adjacent.remove(0);
+    		Fire young = new Fire(field, loc, getModel());
+            SimulationModel.newActors.add(young);
+    	}
+    }
+            
     
     /**
      * Check whether or not the tourist brings friends.  
