@@ -56,11 +56,11 @@ public class Fire implements Actor
      */
     public void act()
     {
-        incrementAge();
-        if(isAlive() && this.getCount() < MAX_FIRES) {
-            spreadFire();
-            }
-        }
+	    incrementAge();
+	    if(isAlive() && this.getCount() < MAX_FIRES) {
+	    	spreadFire();
+	    }
+    }
 
 	/**
 	 * Increase the age. This could result in the bear's death.
