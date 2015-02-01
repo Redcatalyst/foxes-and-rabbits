@@ -157,7 +157,7 @@ public class Rabbit extends Animal
      */
     private boolean canBreed()
     {
-        return age >= BREEDING_AGE;
+        return age >= BREEDING_AGE && age < 35;
     }
     
     /**
