@@ -18,7 +18,7 @@ public class Fire extends Animal
 	// The sound a fire makes
 	private static final MusicFile sound = SimulationModel.rabbit;
     // The age to which a fire can live.
-    private static int MAX_AGE = 5;
+    private static int MAX_AGE = 1;
     // The likelihood of a fire spreading.
     private static double SPREADING_PROBABILITY = 0.12; 
     // A shared random number generator to control breeding.
@@ -49,71 +49,9 @@ public class Fire extends Animal
     {
         incrementAge();
         if(isAlive()) {
-            spreadFire();            
-            // Try to move into a free location.
-            Location newLocation = spreadAndKill();
-            if(newLocation == null) { 
-                // No food inhabitants - try to move to a free location.
-                newLocation = getField().randomAdjacentLocation(getLocation());
-            }
-            // See if it was possible to move.
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
+            spreadFire();
             }
         }
-
-	private Location spreadAndKill() 
-	{
-		 Field field = getField();
-	        List<Location> adjacent = field.adjacentLocations(getLocation());
-	        Iterator<Location> it = adjacent.iterator();
-	        while(it.hasNext()) {
-	            Location where = it.next();
-	            Object actor = field.getObjectAt(where);
-	            if(actor instanceof Rabbit) {
-	                Rabbit rabbit = (Rabbit) actor;
-	                if(rabbit.isAlive()) { 
-	                    rabbit.setDead();
-	                    // Remove the dead rabbit from the field.
-	                    return where;
-	                }
-	            }
-	             if(actor instanceof Fox) {
-	                Fox fox = (Fox) actor;
-	                if(fox.isAlive()) { 
-	                    fox.setDead();
-	                    // Remove the dead fox from the field.
-	                    return where;
-	                }
-	            } 
-	             if(actor instanceof Bear) {
-	            	 Bear bear = (Bear) actor;
-		                if(bear.isAlive()) { 
-		                	bear.setDead();
-		                    // Remove the dead fox from the field.
-		                    return where;
-		           }
-		        }
-	             if(actor instanceof Hunter) {
-	            	 Hunter hunter = (Hunter) actor;
-		                if(hunter.isAlive()) { 
-		                	hunter.setDead();
-		                    // Remove the dead fox from the field.
-		                    return where;
-		            }
-		       } 
-	             if(actor instanceof Tourist) {
-	            	 Tourist tourist = (Tourist) actor;
-		                if(tourist.isAlive()) { 
-		                	tourist.setDead();
-		                    // Remove the dead fox from the field.
-		                    return where;
-		                }
-		            }  
-	        }
-	        return null;
-	}
 
 	/**
 	 * Increase the age. This could result in the bear's death.
@@ -134,6 +72,7 @@ public class Fire extends Animal
     {
         // New fires are spread to adjacent locations.
         // Get a list of adjacent locations.
+    	KillAdjecent();
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
     	for(int i = 0; i < adjacent.size(); i++) {
@@ -142,6 +81,53 @@ public class Fire extends Animal
             SimulationModel.newActors.add(young);
         }
     }
+    
+	private void KillAdjecent() 
+	{
+		 Field field = getField();
+	        List<Location> adjacent = field.adjacentLocations(getLocation());
+	        Iterator<Location> it = adjacent.iterator();
+	        while(it.hasNext()) {
+	            Location where = it.next();
+	            Object actor = field.getObjectAt(where);
+	            if(actor instanceof Rabbit) {
+	                Rabbit rabbit = (Rabbit) actor;
+	                if(rabbit.isAlive()) { 
+	                    rabbit.setDead();
+	                }
+	            }
+	             if(actor instanceof Fox) {
+	                Fox fox = (Fox) actor;
+	                	if(fox.isAlive()) { 
+	                		fox.setDead();
+	                	}
+	             } 
+	             if(actor instanceof Bear) {
+	            	 Bear bear = (Bear) actor;
+		                if(bear.isAlive()) { 
+		                	bear.setDead();
+		                }
+	             }
+	             if(actor instanceof Hunter) {
+	            	 Hunter hunter = (Hunter) actor;
+		                if(hunter.isAlive()) { 
+		                	hunter.setDead();
+		                }
+	             } 
+	             if(actor instanceof Tourist) {
+	            	 Tourist tourist = (Tourist) actor;
+		                if(tourist.isAlive()) { 
+		                	tourist.setDead();
+		                }
+		         }  
+	             if(actor instanceof Fire) {
+	            	 Fire fire = (Fire) actor;
+		                if(fire.isAlive()) { 
+		                	fire.setDead();
+		                }
+		         }
+	        }
+	}
 
     /**
      * @return age of the fire

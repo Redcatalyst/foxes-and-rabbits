@@ -21,7 +21,7 @@ public class SimulationModel extends AbstractModel {
     // The number of hunters that are hunting in the woods
     private static final int NUMBER_OF_HUNTERS = 20; 
     // The number of Tourist that are in the woods
-    private static final int NUMBER_OF_TOURISTS = 20; 
+    private static final int NUMBER_OF_TOURISTS = 1; 
     // The probability that a rabbit is infected when created
     private static final double RABBIT_INFECTED_PROBABILITY = 0.01;
     
@@ -161,7 +161,7 @@ public class SimulationModel extends AbstractModel {
         }
         // Add the tourists to the field
         for(int i = 0; i < NUMBER_OF_TOURISTS; i++){
-        	Tourist tourist = new Tourist(true, field, field.getFreeLocation(), this);
+        	Tourist tourist = new Tourist(field, field.getFreeLocation(), this);
         	actors.add(tourist);
         }
     }
