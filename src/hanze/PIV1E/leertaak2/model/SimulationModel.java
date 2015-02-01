@@ -96,9 +96,10 @@ public class SimulationModel extends AbstractModel {
      * Iterate over the whole field updating the state of each
      * fox and rabbit.
      */
-    private void simulateOneStep()
+    public void simulateOneStep()
     {
     	step++;
+    	actors.addAll(newActors);
     	// Decide if a tourist will visit the (dangerous) woods.
     	if(rand.nextDouble() <= tourist_visit_probability) {
     		Tourist tourist = new Tourist(field, field.getFreeLocation(), this);
@@ -193,6 +194,26 @@ public class SimulationModel extends AbstractModel {
 	    if(biggest != null) {
 	    	musicHandler.start(biggest.getSound());
 	    }
+    }
+    
+    public void addRabbit() {
+    	newActors.add(new Rabbit(false, field, field.getFreeLocation(), this));
+    }
+    
+    public void addFox() {
+    	newActors.add(new Fox(false, field, field.getFreeLocation(), this));
+    }
+    
+    public void addBear() {
+    	newActors.add(new Bear(false, field, field.getFreeLocation(), this));
+    }
+    
+    public void addHunter() {
+    	newActors.add(new Hunter(field, field.getFreeLocation(), this));
+    }
+    
+    public void addTourist() {
+    	newActors.add(new Tourist(field, field.getFreeLocation(), this));
     }
     
     /**

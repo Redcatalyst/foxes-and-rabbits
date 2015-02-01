@@ -106,7 +106,7 @@ public class SimulationSettings {
 		combine.add(text);
 		slider = new JSlider();
 		slider.setMaximum(10);
-		slider.setMinimum(0);
+		slider.setMinimum(1);
 		slider.setValue((int)(Bear.max_litter_size));
 		slider.addChangeListener(listener.new BearMaxLitterSize(text));
 		combine.add(slider);
@@ -159,7 +159,7 @@ public class SimulationSettings {
 		combine.add(text);
 		slider = new JSlider();
 		slider.setMaximum(10);
-		slider.setMinimum(0);
+		slider.setMinimum(1);
 		slider.setValue((int)(Fox.max_litter_size));
 		slider.addChangeListener(listener.new FoxMaxLitterSize(text));
 		combine.add(slider);
@@ -265,7 +265,7 @@ public class SimulationSettings {
 		combine.add(text);
 		slider = new JSlider();
 		slider.setMaximum(10);
-		slider.setMinimum(0);
+		slider.setMinimum(2);
 		slider.setValue((int)(Rabbit.max_litter_size));
 		slider.addChangeListener(listener.new RabbitMaxLitterSize(text));
 		combine.add(slider);

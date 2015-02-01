@@ -24,7 +24,7 @@ public class AddController extends AbstractController {
 	    
 	    JButton rabbit = new JButton("Add rabit");
 	    rabbit.addActionListener(new ActionListener() {
-	    							public void actionPerformed(ActionEvent e) {reset(); }
+	    							public void actionPerformed(ActionEvent e) {simulation.addRabbit();}
 	    						});
 	    flow.add(rabbit);
 
@@ -32,7 +32,7 @@ public class AddController extends AbstractController {
 	    
 	    JButton fox = new JButton("Add fox");
 	    fox.addActionListener(new ActionListener() {
-	    							public void actionPerformed(ActionEvent e) {reset(); }
+	    							public void actionPerformed(ActionEvent e) {simulation.addFox(); }
 	    						});
 	    flow.add(fox);
 
@@ -40,7 +40,7 @@ public class AddController extends AbstractController {
 	    
 	    JButton bear = new JButton("Add bear");
 	    bear.addActionListener(new ActionListener() {
-	    							public void actionPerformed(ActionEvent e) {reset(); }
+	    							public void actionPerformed(ActionEvent e) {simulation.addBear(); }
 	    						});
 	    flow.add(bear);
 
@@ -48,7 +48,7 @@ public class AddController extends AbstractController {
 	    
 	    JButton hunter = new JButton("Add hunter");
 	    hunter.addActionListener(new ActionListener() {
-	    							public void actionPerformed(ActionEvent e) {reset(); }
+	    							public void actionPerformed(ActionEvent e) {simulation.addHunter(); }
 	    						});
 	    flow.add(hunter);
 
@@ -56,17 +56,10 @@ public class AddController extends AbstractController {
 	    
 	    JButton tourist = new JButton("Add tourist");
 	    tourist.addActionListener(new ActionListener() {
-	    							public void actionPerformed(ActionEvent e) {reset(); }
+	    							public void actionPerformed(ActionEvent e) {simulation.addTourist(); }
 	    						});
 	    flow.add(tourist);
 
 	    add(flow);
 	}
-
-    /**
-     * resets the simulation
-     */
-    private void reset(){
-    	simulation.reset();
-    }
 }

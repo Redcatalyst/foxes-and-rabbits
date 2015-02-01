@@ -47,7 +47,7 @@ public class RunController extends AbstractController {
      * Simulates 1 step in the simulation
      */
     private void step1(){
-    	simulation.simulate(1);
+    	simulation.simulateOneStep();
     }
     
     /**
