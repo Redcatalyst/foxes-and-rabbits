@@ -7,6 +7,7 @@ import hanze.PIV1E.leertaak2.model.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class Simulator
     public static JFrame frame;
     private SimulationModel simulation;
     private MenuController menuController;
+    private AddController addController;
     private AbstractView view, graph, pie, chart;
     private ColorView color;
     
@@ -72,17 +74,19 @@ public class Simulator
         
         RunController controller = new RunController(simulation);
         menuController = new MenuController(simulation);
+        addController = new AddController(simulation);
         
         frame = new JFrame();
         makeMenuBar();
         JPanel extraViews = new JPanel();
         JPanel west = new JPanel();
-        west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
+        west.setLayout(new GridLayout(0, 1));
         extraViews.setLayout(new BoxLayout(extraViews, 1));
         extraViews.add(graph);
         extraViews.add(pie);
         extraViews.add(chart);
         west.add(controller);
+        west.add(addController);
         west.add(color);
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(view, BorderLayout.CENTER);
@@ -111,13 +115,13 @@ public class Simulator
      * give everything a color
      */
     public void setColor() {
-    	view.setColor(Fire.class, FIRECOLOR);
-    	view.setColor(Tourist.class, TOURISTCOLOR);
+        view.setColor(Fire.class, FIRECOLOR);
     	for (AbstractView view : views){
 	    	view.setColor(Rabbit.class, RABBITCOLOR);
 	        view.setColor(Fox.class, FOXCOLOR);
 	        view.setColor(Bear.class, BEARCOLOR);
 	        view.setColor(Hunter.class, HUNTERCOLOR);
+	    	view.setColor(Tourist.class, TOURISTCOLOR);
     	}
     }
     

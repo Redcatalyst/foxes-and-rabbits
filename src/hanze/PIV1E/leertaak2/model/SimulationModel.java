@@ -23,17 +23,13 @@ public class SimulationModel extends AbstractModel {
     // The number of Tourist that are in the woods
     private static final int NUMBER_OF_TOURISTS = 1; 
     // The probability that a rabbit is infected when created
-<<<<<<< HEAD
     public static final double RABBIT_INFECTED_PROBABILITY = 0.01;
     public static double rabbit_infected_probability = RABBIT_INFECTED_PROBABILITY;
-    
-=======
-    private static final double RABBIT_INFECTED_PROBABILITY = 0.01;
     // The probability a tourist will visit the woods.
-    private static final double TOURIST_VISIT_PROBABILITY = 0.001;
+    public static final double TOURIST_VISIT_PROBABILITY = 0.001;
+    public static double tourist_visit_probability = TOURIST_VISIT_PROBABILITY;
     // A random number generator to control the number of tourists.
     private static final Random rand = Randomizer.getRandom();
->>>>>>> 6d38d60c396da2a8ffde1d9393cd5d756644827a
     // List of actors in the field.
     public static List<Actor> actors;
     // List of new actors
@@ -47,7 +43,7 @@ public class SimulationModel extends AbstractModel {
     // Plays sound
     private MusicHandler musicHandler = new MusicHandler();
     // all the sounds
-    public static MusicFile backgroundSound, rabbit, fox, hunter, bear, tourist;
+    public static MusicFile backgroundSound, rabbit, fox, hunter, bear, tourist, fire;
     
     public SimulationModel(int depth, int width){
     	actors = new ArrayList<Actor>();
@@ -71,6 +67,7 @@ public class SimulationModel extends AbstractModel {
         hunter =	new MusicFile("resources/sound/hunter.wav",	musicHandler, 70, "Hunter");
         bear =		new MusicFile("resources/sound/bear.wav",	musicHandler, 70, "Bear");
         tourist =	new MusicFile("resources/sound/tourist.wav",musicHandler, 70, "Tourist");
+        fire =		new MusicFile("resources/sound/fire.wav",	musicHandler, 70, "Fire");
     }
     
     /**
@@ -102,8 +99,8 @@ public class SimulationModel extends AbstractModel {
     private void simulateOneStep()
     {
     	step++;
-    	// Decide if a tourist will visit the woods.
-    	if(rand.nextDouble() <= TOURIST_VISIT_PROBABILITY) {
+    	// Decide if a tourist will visit the (dangerous) woods.
+    	if(rand.nextDouble() <= tourist_visit_probability) {
     		Tourist tourist = new Tourist(field, field.getFreeLocation(), this);
         	actors.add(tourist);
     	}

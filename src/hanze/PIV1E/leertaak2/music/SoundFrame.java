@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.HashMap;
 
 import hanze.PIV1E.leertaak2.main.Simulator;
@@ -46,6 +48,8 @@ public class SoundFrame {
 		frame.setLocation(Simulator.frame.getLocationOnScreen().x + Simulator.frame.getSize().width + 10, Simulator.frame.getLocationOnScreen().y);
         frame.setResizable(false);
 		frame.setTitle("Sound volume");
+		Image icon = Toolkit.getDefaultToolkit().createImage("resources/icon.png");
+        frame.setIconImage(icon);
 	}
 	
 	/**

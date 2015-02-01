@@ -74,6 +74,8 @@ public class SettingsListener {
 			Rabbit.breeding_probability = Rabbit.BREEDING_PROBABILITY;
 			Rabbit.max_litter_size = Rabbit.MAX_LITTER_SIZE;
 			SimulationModel.rabbit_infected_probability = SimulationModel.RABBIT_INFECTED_PROBABILITY;
+			SimulationModel.tourist_visit_probability = SimulationModel.TOURIST_VISIT_PROBABILITY;
+			Tourist.campfire_probability = Tourist.CAMPFIRE_PROBABILITY;
 			
 			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			new SimulationSettings();
@@ -83,10 +85,10 @@ public class SettingsListener {
 	/**
 	 * Listens to actions of the bear sliders
 	 */
-	public class BearBreedingAge implements ChangeListener {
+	public class BearBreedingProbability implements ChangeListener {
 		JLabel text;
 		
-		public BearBreedingAge(JLabel text) {
+		public BearBreedingProbability(JLabel text) {
 			this.text = text;
 		}
 		
@@ -94,7 +96,7 @@ public class SettingsListener {
 		public void stateChanged(ChangeEvent e) {
 			double value = ((JSlider)e.getSource()).getValue();
 			Bear.breeding_probability = value / 100;
-			text.setText(String.valueOf((int)value));
+			text.setText(String.valueOf((int)value) + "%");
 		}
 	}
 	
@@ -131,10 +133,10 @@ public class SettingsListener {
 	/**
 	 * Listens to actions of the bear sliders
 	 */
-	public class FoxBreedingAge implements ChangeListener {
+	public class FoxBreedingProbability implements ChangeListener {
 		JLabel text;
 		
-		public FoxBreedingAge(JLabel text) {
+		public FoxBreedingProbability(JLabel text) {
 			this.text = text;
 		}
 		
@@ -142,7 +144,7 @@ public class SettingsListener {
 		public void stateChanged(ChangeEvent e) {
 			double value = ((JSlider)e.getSource()).getValue();
 			Fox.breeding_probability = value / 100;
-			text.setText(String.valueOf((int)value));
+			text.setText(String.valueOf((int)value) + "%");
 		}
 	}
 	
@@ -227,10 +229,10 @@ public class SettingsListener {
 	/**
 	 * Listens to actions of the rabbit sliders
 	 */
-	public class RabbitBreedingAge implements ChangeListener {
+	public class RabbitBreedingProbability implements ChangeListener {
 		JLabel text;
 		
-		public RabbitBreedingAge(JLabel text) {
+		public RabbitBreedingProbability(JLabel text) {
 			this.text = text;
 		}
 		
@@ -238,7 +240,7 @@ public class SettingsListener {
 		public void stateChanged(ChangeEvent e) {
 			double value = ((JSlider)e.getSource()).getValue();
 			Rabbit.breeding_probability = value / 100;
-			text.setText(String.valueOf((int)value));
+			text.setText(String.valueOf((int)value)  + "%");
 		}
 	}
 	
@@ -283,7 +285,40 @@ public class SettingsListener {
 		public void stateChanged(ChangeEvent e) {
 			double value = ((JSlider)e.getSource()).getValue();
 			SimulationModel.rabbit_infected_probability = value / 100;
-			text.setText(String.valueOf((int)value));
+			text.setText(String.valueOf((int)value) + "%");
+		}
+	}
+	
+	/**
+	 * Listens to actions of the tourist sliders
+	 */
+	public class TouristVisits implements ChangeListener {
+		JLabel text;
+		
+		public TouristVisits(JLabel text) {
+			this.text = text;
+		}
+		
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			double value = ((JSlider)e.getSource()).getValue();
+			SimulationModel.tourist_visit_probability = value / 1000;
+			text.setText(String.valueOf((int)value) + "%");
+		}
+	}
+	
+	public class TouristCampfire implements ChangeListener {
+		JLabel text;
+		
+		public TouristCampfire(JLabel text) {
+			this.text = text;
+		}
+		
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			double value = ((JSlider)e.getSource()).getValue();
+			Tourist.campfire_probability = value / 100;
+			text.setText(String.valueOf((int)value) + "%");
 		}
 	}
 }

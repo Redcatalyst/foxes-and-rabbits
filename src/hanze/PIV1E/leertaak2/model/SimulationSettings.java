@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -14,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 
 /**
  * Class that makes a JFrame which is able to adjust simulation settings.
@@ -41,6 +44,8 @@ public class SimulationSettings {
 		frame.setLocation(Simulator.frame.getLocationOnScreen().x + Simulator.frame.getSize().width + 10, Simulator.frame.getLocationOnScreen().y);
         frame.setResizable(false);
 		frame.setTitle("Simulation settings");
+		Image icon = Toolkit.getDefaultToolkit().createImage("resources/icon.png");
+        frame.setIconImage(icon);
 	}
 	
 	/**
@@ -81,13 +86,13 @@ public class SimulationSettings {
 		row.add(name);
 		combine = new JPanel();
 		text = new JLabel();
-		text.setText(String.valueOf((int)(Bear.breeding_probability * 100)));
+		text.setText(String.valueOf((int)(Bear.breeding_probability * 100))  + "%");
 		combine.add(text);
 		slider = new JSlider();
 		slider.setMaximum(100);
 		slider.setMinimum(0);
 		slider.setValue((int)(Bear.breeding_probability * 100));
-		slider.addChangeListener(listener.new BearBreedingAge(text));
+		slider.addChangeListener(listener.new BearBreedingProbability(text));
 		combine.add(slider);
 		row.add(combine);
 		sliders.add(row);
@@ -134,13 +139,13 @@ public class SimulationSettings {
 		row.add(name);
 		combine = new JPanel();
 		text = new JLabel();
-		text.setText(String.valueOf((int)(Fox.breeding_probability * 100)));
+		text.setText(String.valueOf((int)(Fox.breeding_probability * 100))  + "%");
 		combine.add(text);
 		slider = new JSlider();
 		slider.setMaximum(100);
 		slider.setMinimum(0);
 		slider.setValue((int)(Fox.breeding_probability * 100));
-		slider.addChangeListener(listener.new FoxBreedingAge(text));
+		slider.addChangeListener(listener.new FoxBreedingProbability(text));
 		combine.add(slider);
 		row.add(combine);
 		sliders.add(row);
@@ -240,13 +245,13 @@ public class SimulationSettings {
 		row.add(name);
 		combine = new JPanel();
 		text = new JLabel();
-		text.setText(String.valueOf((int)(Rabbit.breeding_probability * 100)));
+		text.setText(String.valueOf((int)(Rabbit.breeding_probability * 100))  + "%");
 		combine.add(text);
 		slider = new JSlider();
 		slider.setMaximum(100);
 		slider.setMinimum(0);
 		slider.setValue((int)(Rabbit.breeding_probability * 100));
-		slider.addChangeListener(listener.new RabbitBreedingAge(text));
+		slider.addChangeListener(listener.new RabbitBreedingProbability(text));
 		combine.add(slider);
 		row.add(combine);
 		sliders.add(row);
@@ -272,7 +277,7 @@ public class SimulationSettings {
 		row.add(name);
 		combine = new JPanel();
 		text = new JLabel();
-		text.setText(String.valueOf((int)(SimulationModel.rabbit_infected_probability * 100)));
+		text.setText(String.valueOf((int)(SimulationModel.rabbit_infected_probability * 100))  + "%");
 		combine.add(text);
 		JSlider infectionS = new JSlider();
 		infectionS.setMaximum(100);
@@ -284,8 +289,41 @@ public class SimulationSettings {
 		sliders.add(row);
 		
 		//Tourist
+		header = new JLabel("Tourist");
+		header.setFont(new Font(header.getName(), Font.BOLD, 15));
+		sliders.add(header);
 		
-		//Fire
+		row = new JPanel(new GridLayout(0,2));
+		name = new JLabel("Visit probability");
+		row.add(name);
+		combine = new JPanel();
+		text = new JLabel();
+		text.setText(String.valueOf((int)(SimulationModel.tourist_visit_probability * 1000))  + "%");
+		combine.add(text);
+		slider = new JSlider();
+		slider.setMaximum(10);
+		slider.setMinimum(0);
+		slider.setValue((int)(SimulationModel.tourist_visit_probability * 1000));
+		slider.addChangeListener(listener.new TouristVisits(text));
+		combine.add(slider);
+		row.add(combine);
+		sliders.add(row);
+		
+		row = new JPanel(new GridLayout(0,2));
+		name = new JLabel("Campfire probability");
+		row.add(name);
+		combine = new JPanel();
+		text = new JLabel();
+		text.setText(String.valueOf((int)(Tourist.campfire_probability * 1000)) + "%");
+		combine.add(text);
+		slider = new JSlider();
+		slider.setMaximum(10);
+		slider.setMinimum(0);
+		slider.setValue((int)(Tourist.campfire_probability * 1000));
+		slider.addChangeListener(listener.new TouristCampfire(text));
+		combine.add(slider);
+		row.add(combine);
+		sliders.add(row);
 		
 		JPanel buttons = new JPanel();
 		//Reset

@@ -21,8 +21,11 @@ public class Tourist extends Human
 {
     // Characteristics shared by all tourists (class variables).
     
+	// The sound a hunter makes
+	private static final MusicFile sound = SimulationModel.tourist;
     // The likelihood of a tourist making a campfire.
     public static final double CAMPFIRE_PROBABILITY = 0.001;
+    public static double campfire_probability = CAMPFIRE_PROBABILITY;
     // A shared random number generator to control the friends a tourist brings.
     public static final Random rand = Randomizer.getRandom();
     // A shared random number generator to control campfires a tourist can make.
@@ -122,7 +125,7 @@ public class Tourist extends Human
      */
     private boolean makeCampfire()
     {
-    	if(rand2.nextDouble() <= CAMPFIRE_PROBABILITY) {
+    	if(rand2.nextDouble() <= campfire_probability) {
     		return true;
     	} else {
     		return false;
@@ -144,13 +147,10 @@ public class Tourist extends Human
             SimulationModel.newActors.add(young);
     	}
     }
-            
     
-
 	@Override
 	public MusicFile getSound() {
-		// TODO Auto-generated method stub
-		return null;
+		return sound;
 	}
     
 }

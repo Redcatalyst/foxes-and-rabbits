@@ -13,15 +13,15 @@ public class RunController extends AbstractController {
 
 	public RunController(SimulationModel simulation) {
 		super(simulation);
-		setSize(90, 130);
 		makePanel();
 	}
 	
 	public void makePanel(){
 		JPanel flow = new JPanel();
-		GridLayout layout = new GridLayout(3, 1);
+		GridLayout layout = new GridLayout(0, 1);
 		layout.setVgap(3);
 	    flow.setLayout(layout);
+	    
 	    JButton step1 = new JButton("Step 1");
 	    step1.addActionListener(new ActionListener() {
 	    							public void actionPerformed(ActionEvent e) {step1(); }

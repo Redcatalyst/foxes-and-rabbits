@@ -100,8 +100,8 @@ public class ChartView extends AbstractView {
                 	double value = ((double)height / (double)total) * (double)count;
                 	Long l = Math.round(value);
                 	int newValue = Integer.valueOf(l.intValue());
-                	g.fillRect(x, height - newValue - 1, 20 , newValue);
-                	x += 30 ;
+                	g.fillRect(x, height - newValue - 1, 15 , newValue);
+                	x += 25 ;
                 }
                 
                 repaintNow();
