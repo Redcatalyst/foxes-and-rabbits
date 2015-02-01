@@ -37,7 +37,7 @@ public class PieView extends AbstractView {
 
 	@Override
 	public void showStatus(int step, Field field, FieldStats stats) {
-        pie.update(step, field, stats);	
+        pie.update(step, field, stats);
 	}
 
 	@Override

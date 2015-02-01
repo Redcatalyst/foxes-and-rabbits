@@ -119,7 +119,7 @@ public abstract class Animal implements Actor
     }
     
     /**
-     * Used to get the current count of rabbits on the field.
+     * Used to get the current count of animal on the field.
      * @return getPopulationCount the current count of the rabbits in the field
      */
     protected int getCount()

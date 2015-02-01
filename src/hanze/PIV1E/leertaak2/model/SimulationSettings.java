@@ -3,6 +3,7 @@ package hanze.PIV1E.leertaak2.model;
 import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.main.Simulator;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -266,13 +267,37 @@ public class SimulationSettings {
 		row.add(combine);
 		sliders.add(row);
 		
+		row = new JPanel(new GridLayout(0,2));
+		name = new JLabel("Infection chance");
+		row.add(name);
+		combine = new JPanel();
+		text = new JLabel();
+		text.setText(String.valueOf((int)(SimulationModel.rabbit_infected_probability * 100)));
+		combine.add(text);
+		JSlider infectionS = new JSlider();
+		infectionS.setMaximum(100);
+		infectionS.setMinimum(0);
+		infectionS.setValue((int)(SimulationModel.rabbit_infected_probability * 100));
+		infectionS.addChangeListener(listener.new RabbitInfectionChance(text));
+		combine.add(infectionS);
+		row.add(combine);
+		sliders.add(row);
+		
 		//Tourist
 		
 		//Fire
 		
+		JPanel buttons = new JPanel();
 		//Reset
 		JButton reset = new JButton("reset to defaults");
 		reset.addActionListener(listener.new Reset());
-		sliders.add(reset);
+		buttons.add(reset);
+		
+		//Rabbit infection on/off
+		JButton infection = new JButton("Turn infection off");
+		infection.addActionListener(listener.new RabbitInfection(infection, infectionS));
+		buttons.add(infection);
+		
+		content.add(buttons, BorderLayout.SOUTH);
 	}
 }

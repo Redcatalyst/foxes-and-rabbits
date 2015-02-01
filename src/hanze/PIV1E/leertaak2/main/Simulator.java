@@ -41,7 +41,7 @@ public class Simulator
     private static final Color BEARCOLOR = Color.RED;
     private static final Color HUNTERCOLOR = Color.GREEN;
     private static final Color TOURISTCOLOR = Color.MAGENTA;
-    private static final Color FIRECOLOR = Color.ORANGE;
+    private static final Color FIRECOLOR = Color.BLACK;
     
     private ArrayList<AbstractView> views;
     
@@ -49,6 +49,7 @@ public class Simulator
     private SimulationModel simulation;
     private MenuController menuController;
     private AbstractView view, graph, pie, chart;
+    private ColorView color;
     
     /**
      * Create a simulation field with the given size.
@@ -65,22 +66,28 @@ public class Simulator
         views.add(graph);
         pie = new PieView(140, 140, simulation);
         views.add(pie);
+        color = new ColorView();
         chart = new ChartView(140, 140, simulation);
         views.add(chart);
+        
         RunController controller = new RunController(simulation);
         menuController = new MenuController(simulation);
         
         frame = new JFrame();
         makeMenuBar();
         JPanel extraViews = new JPanel();
+        JPanel west = new JPanel();
+        west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
         extraViews.setLayout(new BoxLayout(extraViews, 1));
         extraViews.add(graph);
         extraViews.add(pie);
         extraViews.add(chart);
+        west.add(controller);
+        west.add(color);
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(view, BorderLayout.CENTER);
         frame.getContentPane().add(extraViews, BorderLayout.EAST);
-        frame.getContentPane().add(controller, BorderLayout.WEST);
+        frame.getContentPane().add(west, BorderLayout.WEST);
         frame.getContentPane().add(menuController, BorderLayout.NORTH);
         
         JLabel versionLabel = new JLabel(VERSION);
@@ -104,13 +111,13 @@ public class Simulator
      * give everything a color
      */
     public void setColor() {
-    	//view.setColor(Fire.class, FIRECOLOR);
+    	view.setColor(Fire.class, FIRECOLOR);
+    	view.setColor(Tourist.class, TOURISTCOLOR);
     	for (AbstractView view : views){
 	    	view.setColor(Rabbit.class, RABBITCOLOR);
 	        view.setColor(Fox.class, FOXCOLOR);
 	        view.setColor(Bear.class, BEARCOLOR);
 	        view.setColor(Hunter.class, HUNTERCOLOR);
-	        view.setColor(Tourist.class, TOURISTCOLOR);
     	}
     }
     

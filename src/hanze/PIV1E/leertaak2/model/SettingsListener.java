@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
@@ -22,7 +23,37 @@ public class SettingsListener {
 	public SettingsListener(JFrame frame) {
 		this.frame = frame;
 	}
-
+	
+	/**
+	 * Turns rabbit infection on or off
+	 */
+	public class RabbitInfection implements ActionListener {
+		private JButton button;
+		private boolean infection = true;
+		private JSlider infectionS;
+		
+		public RabbitInfection(JButton button, JSlider infection) {
+			this.button = button;
+			infectionS = infection;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(infection == false){
+				infection = true;
+				button.setText("Turn infection off");
+				SimulationModel.rabbit_infected_probability = SimulationModel.RABBIT_INFECTED_PROBABILITY;
+				infectionS.setEnabled(true);
+				infectionS.setValue((int)(SimulationModel.rabbit_infected_probability * 100));
+			} else {
+				infection = false;
+				button.setText("Turn infection on");
+				infectionS.setEnabled(false);
+				SimulationModel.rabbit_infected_probability = 0;
+			}
+		}
+	}
+	
 	/**
 	 * Resets all the standerd simulation values
 	 */
@@ -42,6 +73,7 @@ public class SettingsListener {
 			Rabbit.max_age = Rabbit.MAX_AGE;
 			Rabbit.breeding_probability = Rabbit.BREEDING_PROBABILITY;
 			Rabbit.max_litter_size = Rabbit.MAX_LITTER_SIZE;
+			SimulationModel.rabbit_infected_probability = SimulationModel.RABBIT_INFECTED_PROBABILITY;
 			
 			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			new SimulationSettings();
@@ -237,6 +269,21 @@ public class SettingsListener {
 			int value = ((JSlider)e.getSource()).getValue();
 			Rabbit.max_litter_size = value;
 			text.setText(String.valueOf(value));
+		}
+	}
+	
+	public class RabbitInfectionChance implements ChangeListener {
+		JLabel text;
+		
+		public RabbitInfectionChance(JLabel text) {
+			this.text = text;
+		}
+		
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			double value = ((JSlider)e.getSource()).getValue();
+			SimulationModel.rabbit_infected_probability = value / 100;
+			text.setText(String.valueOf((int)value));
 		}
 	}
 }

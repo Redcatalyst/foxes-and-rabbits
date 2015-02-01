@@ -38,7 +38,8 @@ public class Rabbit extends Animal
     // The number that determince when there are to much rabbits
     private static int TO_MUCH_RABBITS = 800; 
     // The chance a rabbit can get infected
-    private static final double INFECTION_CHANCE = 0.9;
+    public static final double INFECTION_CHANCE = 0.9;
+    public static double infection_chance = INFECTION_CHANCE;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -127,7 +128,11 @@ public class Rabbit extends Animal
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= breeding_probability) {
+        double breeding = breeding_probability;
+        if(checkForInfection()) {
+        	breeding = 0;
+        }
+        if(canBreed() && rand.nextDouble() <= breeding) {
             births = rand.nextInt(getLitterSize()) + 1;
         }
         return births;
@@ -180,7 +185,7 @@ public class Rabbit extends Animal
                 // Infect rabbit if other rabbit is infected
                 if(rabbit.checkForInfection()) {
                 	if(infected == false){
-                		setInfection(rand.nextDouble() <= INFECTION_CHANCE);
+                		setInfection(rand.nextDouble() <= infection_chance);
                 	}
                 }
             }
