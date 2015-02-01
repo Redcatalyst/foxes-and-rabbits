@@ -41,7 +41,7 @@ public class Simulator
     private static final Color BEARCOLOR = Color.RED;
     private static final Color HUNTERCOLOR = Color.GREEN;
     private static final Color TOURISTCOLOR = Color.MAGENTA;
-    private static final Color FIRECOLOR = Color.ORANGE;
+    private static final Color FIRECOLOR = Color.BLACK;
     
     private ArrayList<AbstractView> views;
     
