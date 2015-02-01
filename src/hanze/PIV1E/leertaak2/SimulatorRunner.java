@@ -3,14 +3,9 @@ package hanze.PIV1E.leertaak2;
 import hanze.PIV1E.leertaak2.main.Simulator;
 
 /**
- * Starts the whole simulation.
-<<<<<<< HEAD
+ * Starts the whole simulation. The simulation simulates how certain actors in a limited area interact with each other.
  * @author Frank Noorlander, Tsjeard de Winter en Rick van der Poel
- * @version 29/01/2015
-=======
- * @author Frank Noorlander, Rick van der Poel and Tsjeard de Winter.
- * @version 21/01/2015
->>>>>>> dingen
+ * @version 3.0 (01/02/2015)
  */
 public class SimulatorRunner {
 
