@@ -1,0 +1,27 @@
+Dingen die nog gedaan moeten worden voor dinsdag:
+
+Verslag
+- Bonus uitbreiding "Add" knoppen toevoegen.
+- Hoofdstuk 6.4 de toerist toevoegen
+- Goede slotzin voor de conclusie
+- Aanbevelingen over threading en Simulatie parameters
+- Literatuurlijst en Bronnen aanvullen
+
+Bijlagen verslag
+- Peerassesment van de groep
+- Reflectie over het project
+- Overzicht van individuele werkzaamheden (concept is er al) 
+
+V&K Applicatie
+- Kunnen runnen vanaf de commandline (demonsteren bij presentatie)
+- Documentatie afronden
+
+Losse onderdelen om uit te printen
+- Java-documentation dubbelzijdig zwart-wit met nietje
+- Verslag dubbelzijdig zwart-wit met nietje, maar zonder mapje (oid) in tweevoud
+
+Voor presentatie het volgende mailen naar Ronald van Dijk (DIRN), Bas Heijne (HEBL)
+- broncode van de applicatie, in de vorm van een ZIP-bestand.
+- de java executabe (de JAR-file)
+- Digitale versie verslag in de vorm van een DOCX-bestand (geen PDF)
+- Peerassement digitaal
