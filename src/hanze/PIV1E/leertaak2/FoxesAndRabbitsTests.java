@@ -54,33 +54,25 @@ public class FoxesAndRabbitsTests {
         
         //create 4 foxes and make 1 unable to move, this way he should die
         fox1 = new Fox(false, field, new Location(0,0), simulation);
-        Fox fox2 = new Fox(false, field, new Location(1,0), simulation);
-        Fox fox3 = new Fox(false, field, new Location(0,1), simulation);
-        Fox fox4 = new Fox(false, field, new Location(1,1), simulation);
+        new Fox(false, field, new Location(1,0), simulation);
+        new Fox(false, field, new Location(0,1), simulation);
+        new Fox(false, field, new Location(1,1), simulation);
         fox1.act();
         assertFalse(fox1.isAlive());
         
         //reset the field and the animals
         field.clear();
-        fox1 = null;
-        fox2 = null;
-        fox3 = null;
-        fox4 = null;
-        
+
         //create 4 bears and make 1 unable to move, this way he should die
         bear1 = new Bear(false, field, new Location(0,0), simulation);
-        Bear bear2 = new Bear(false, field, new Location(1,0), simulation);
-        Bear bear3 = new Bear(false, field, new Location(0,1), simulation);
-        Bear bear4 = new Bear(false, field, new Location(1,1), simulation);
+        new Bear(false, field, new Location(1,0), simulation);
+        new Bear(false, field, new Location(0,1), simulation);
+        new Bear(false, field, new Location(1,1), simulation);
         bear1.act();
         assertFalse(bear1.isAlive());        
         
         //reset the field and the animals
         field.clear();
-        bear1 = null;
-        bear2 = null;
-        bear3 = null;
-        bear4 = null;
     
         /* make a rabbit and let him live until he should die
         rabbit1 = new Rabbit(false, field, new Location(50, 50));
