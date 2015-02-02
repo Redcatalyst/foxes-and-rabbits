@@ -32,6 +32,7 @@ public class SoundFrame {
 	/**
 	 * Makes a SoundFrame
 	 * @param handler The handler associated with this SoundFrame
+	 * @param model The model that oppened this frame.
 	 */
 	public SoundFrame(MusicHandler handler, SimulationModel model) {
 		SimulationModel.sound = true;

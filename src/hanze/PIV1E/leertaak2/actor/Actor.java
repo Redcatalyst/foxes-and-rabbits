@@ -12,7 +12,6 @@ import hanze.PIV1E.leertaak2.music.*;
 public interface Actor {
 	/**
 	 * The method act, used by the actor to act.
-	 * @param newActors, a list containing actors.
 	 */
 	 public void act();
 	

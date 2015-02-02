@@ -56,6 +56,7 @@ public class Bear extends Animal
      * @param randomAge If true, the bear will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
+     * @param model The model this bear acts in.
      */
     public Bear(boolean randomAge, Field field, Location location, AbstractModel model)
     {
@@ -74,8 +75,6 @@ public class Bear extends Animal
      * This is what the bear does most of the time: it hunts for
      * rabbits and foxes. In the process, it might breed, die of hunger,
      * or die of old age.
-     * @param field The field currently occupied.
-     * @param newBears A list to return newly born foxes.
      */
     public void act()
     {
@@ -217,7 +216,7 @@ public class Bear extends Animal
     
     /**
      * Set the Bear to infected
-     * @param infect true to make this Bear sick
+     * @param infected true to make this Bear sick
      */
     public void setInfection(boolean infected) {
         if(infected){

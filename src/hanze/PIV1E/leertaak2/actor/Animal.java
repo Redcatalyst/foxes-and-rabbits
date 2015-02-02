@@ -29,6 +29,7 @@ public abstract class Animal implements Actor
      * 
      * @param field The field currently occupied.
      * @param location The location within the field.
+     * @param model The model this animals should act in.
      */
     public Animal(Field field, Location location, AbstractModel model)
     {
@@ -111,6 +112,7 @@ public abstract class Animal implements Actor
     
     /**
      * Check whether the animal is infected or not
+     * @return True if the animal is infected and false if not.
      */
     public boolean checkForInfection()
     {
