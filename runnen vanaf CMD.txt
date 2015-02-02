@@ -1,13 +1,6 @@
-JAR-file maken:
-  1. Navigaar naar de foxes and rabbits direcotry
-     1.1 D:
-     1.2 cd Eclipse Workspace/foxes and rabbits
-  2. Maak de jar file
-     2.1
-
 JAR-file runnen:
   1. Navigeer naar de foxes and rabbits directory
      1.1 D:
-     1.2 cd Eclipse Workspace/foxes and rabbits
+     1.2 cd Workspace/foxes_and_rabbits
   2. Run de jar file
      2.1 java -jar Foxes_and_Rabbits.jar
