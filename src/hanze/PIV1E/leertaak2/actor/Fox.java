@@ -15,7 +15,7 @@ import java.util.Random;
  * Foxes age, move, eat rabbits, and die.
  * 
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 2015.01.29
+ * @version 01/02/2015
  */
 public class Fox extends Animal
 {

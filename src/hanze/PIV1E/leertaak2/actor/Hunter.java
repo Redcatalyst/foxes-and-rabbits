@@ -13,7 +13,7 @@ import java.util.List;
  * A simple model of a hunter.
  * hunters age, move, eat foxes, rabbits and bears and die.
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 2015.01.29
+ * @version 01/02/2015
  */
 public class Hunter extends Human 
 {

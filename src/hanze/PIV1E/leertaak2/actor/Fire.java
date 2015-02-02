@@ -8,7 +8,12 @@ import hanze.PIV1E.leertaak2.location.Location;
 import hanze.PIV1E.leertaak2.model.AbstractModel;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 import hanze.PIV1E.leertaak2.music.MusicFile;
-
+/**
+ * A simple model of a Fire.
+ * Fire have a age, move and die.
+ * @author Tsjeard de Winter en Rick van der Poel
+ * @version 01/02/2015
+ */
 public class Fire implements Actor
 {
 	// Whether the human is alive or not.

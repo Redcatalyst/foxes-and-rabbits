@@ -8,7 +8,7 @@ import hanze.PIV1E.leertaak2.model.AbstractModel;
  * A class representing shared characteristics of humans.
  * 
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 2015.01.29
+ * @version 01/02/2015
  */
 public abstract class Human implements Actor 
 {

@@ -16,7 +16,7 @@ import java.util.Random;
  * Rabbits age, move, breed, and die.
  * 
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 2015.01.29
+ * @version 01/02/2015
  */
 public class Rabbit extends Animal
 {

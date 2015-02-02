@@ -2,8 +2,6 @@ package hanze.PIV1E.leertaak2.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -24,6 +22,9 @@ public class MenuController extends AbstractController {
 		super(simulation);
 	}
 	
+	/**
+	 * Add the show about page to the menu.
+	 */
     private void showAbout(){
     	final ImageIcon icon = new ImageIcon("resources/icon.png");
         JOptionPane.showMessageDialog(null, "Foxes and Rabits\n" + Simulator.VERSION, "About Foxes and Rabbits", JOptionPane.INFORMATION_MESSAGE, icon);

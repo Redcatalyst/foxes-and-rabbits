@@ -15,7 +15,7 @@ import java.util.Random;
  * A simple model of a tourist.
  * tourists age, move, make campfires and leave.
  * @author Tsjeard de Winter en Rick van der Poel
- * @Version 24.01.2015
+ * @Version 01/02/2015
  */
 public class Tourist extends Human 
 {
