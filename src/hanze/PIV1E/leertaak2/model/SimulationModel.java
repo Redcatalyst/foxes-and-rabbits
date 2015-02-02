@@ -13,6 +13,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The heart of the application. The SimulationModel contains all the data and
+ * uses it simulate a step. When the data inside the model changes all the views
+ * will get notified. Every action is given by a controller.
+ */
 public class SimulationModel extends AbstractModel {
 	// The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.04;
@@ -49,6 +54,11 @@ public class SimulationModel extends AbstractModel {
     // Booleans if the settings menus are on or off
     public static boolean sound, settings = false;
     
+    /**
+     * Creates a SimulatinModel
+     * @param depth The width of the field
+     * @param width The height of the field
+     */
     public SimulationModel(int depth, int width){
     	actors = new ArrayList<Actor>();
         newActors = new ArrayList<Actor>();
@@ -96,9 +106,9 @@ public class SimulationModel extends AbstractModel {
     }
     
     /**
-     * Run the simulation from its current state for a single step.
-     * Iterate over the whole field updating the state of each
-     * fox and rabbit.
+     * Run the simulation from its current state for a single step. 
+     * Iterate over the whole field updating the state of each actor.
+     * Every step the views get notified of the changes.
      */
     public void simulateOneStep()
     {
@@ -136,13 +146,11 @@ public class SimulationModel extends AbstractModel {
         actors.clear();
         populate();
         
-        // Show the starting state in the view.
-        //view.showStatus(step, field);
         notifyViews();
     }
     
     /**
-     * Randomly populate the field with foxes and rabbits.
+     * Randomly populate the field with actors.
      */
     private void populate()
     {
@@ -200,22 +208,37 @@ public class SimulationModel extends AbstractModel {
 	    }
     }
     
+    /**
+     * Manually adds a rabbit to the field at a random location.
+     */
     public void addRabbit() {
     	newActors.add(new Rabbit(false, field, field.getFreeLocation(), this));
     }
     
+    /**
+     * Manually adds a fox to the field at a random location.
+     */
     public void addFox() {
     	newActors.add(new Fox(false, field, field.getFreeLocation(), this));
     }
     
+    /**
+     * Manually adds a bear to the field at a random location.
+     */
     public void addBear() {
     	newActors.add(new Bear(false, field, field.getFreeLocation(), this));
     }
     
+    /**
+     * Manually adds a hunter to the field at a random location.
+     */
     public void addHunter() {
     	newActors.add(new Hunter(field, field.getFreeLocation(), this));
     }
     
+    /**
+     * Manually adds a tourist to the field at a random location.
+     */
     public void addTourist() {
     	newActors.add(new Tourist(field, field.getFreeLocation(), this));
     }
@@ -229,30 +252,55 @@ public class SimulationModel extends AbstractModel {
         return stats.isViable(field);
     }
     
+    /**
+	 * Gives the field the simulation works in
+	 * @return the field.
+	 */
     public Field getField(){
     	return field;
     }
     
+    /**
+	 * Gives the current step of the simulation.
+	 * @return the step.
+	 */
 	public int getStep(){
 		return step;
 	}
 	
+	/**
+	 * Gives the fieldstats the simulation works in
+	 * @return the fieldstats.
+	 */
 	public FieldStats getStats(){
 		return stats;
 	}
 	
+	/**
+	 * Gives the music handler the SimulationModel is working with.
+	 * @return the musichandler
+	 */
 	public MusicHandler getMusicHandler() {
 		return musicHandler;
 	}
 	
+	/**
+	 * Opens a settings window.
+	 */
 	public void setSettings() {
 		if(settings != true){
 			new SimulationSettings(this);
 		}
 	}
 	
+	/**
+	 * Listens to all the events created by the settings window.
+	 */
 	public class SettingsListener implements WindowListener {
 
+		/**
+		 * When a settings window closes a new one can be opened.
+		 */
 		public void windowClosed(WindowEvent e) {
 			SimulationModel.settings = false;			
 		}
@@ -266,8 +314,14 @@ public class SimulationModel extends AbstractModel {
 		
 	}
 	
+	/**
+	 * Listens to all the events created by the sound window.
+	 */
 	public class SoundListener implements WindowListener {
 
+		/**
+		 * When a sound window closes a new one can be opened.
+		 */
 		public void windowClosed(WindowEvent e) {
 			SimulationModel.sound = false;			
 		}

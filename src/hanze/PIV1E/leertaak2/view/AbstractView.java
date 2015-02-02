@@ -8,7 +8,8 @@ import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.model.*;
 
 /**
- * Defines the basics of a view as part of the MVC-model. Every view should extend this class.
+ * Defines the basics of a view as part of the MVC-model.
+ * Every view should extend this class.
  */
 public abstract class AbstractView extends JPanel {
 	protected AbstractModel simulation;

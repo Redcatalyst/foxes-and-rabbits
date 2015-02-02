@@ -2,8 +2,6 @@ package hanze.PIV1E.leertaak2.model;
 
 import hanze.PIV1E.leertaak2.actor.*;
 import hanze.PIV1E.leertaak2.main.Simulator;
-import hanze.PIV1E.leertaak2.controller.*;
-import hanze.PIV1E.leertaak2.controller.MenuController.ShowAbout;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
