@@ -10,6 +10,10 @@ import java.util.*;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.model.*;
 
+/**
+ * Defines a JPanel with a GraphView. The first panel gives lets the outside world interact with
+ * the panel within the class (GraphPanel).
+ */
 public class GraphView extends AbstractView {
 	
 	private static final Color LIGHT_GRAY = new Color(0, 0, 0, 40);
@@ -20,6 +24,12 @@ public class GraphView extends AbstractView {
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
 
+    /**
+     * Creates a GraphView.
+     * @param width The width the ChartPanel should have.
+     * @param height The height the ChartPanel should have.
+     * @param simulation The model this view belongs to.
+     */
 	public GraphView(int height, int width, int startMax, SimulationModel simulation) {
 		super(simulation);
 		classes = new HashSet<Class>();
@@ -41,14 +51,11 @@ public class GraphView extends AbstractView {
     }
     
     /**
-     * Show the current status of the field. The status is shown by displaying a line graph for
-     * two classes in the field. This view currently does not work for more (or fewer) than exactly
-     * two classes. If the field contains more than two different types of animal, only two of the classes
-     * will be plotted.
-     * 
-     * @param step Which iteration step it is.
-     * @param field The field whose status is to be displayed.
-     */
+	 * Get's called by the updateView() and gives the information needed from the model to change the view.
+	 * @param step The step the simulation is in
+	 * @param field The field the simulation is currently working in
+	 * @param stats The stats the simulation is currently working in (based on the field data)
+	 */
     public void showStatus(int step, Field field, FieldStats stats)
     {
         if(step == 0){
@@ -59,7 +66,7 @@ public class GraphView extends AbstractView {
     }
     
     /**
-     * Nested class: a JPanel to display the graph.
+     * A JPanel to display the graph.
      */
     class GraphPanel extends JPanel
     {
@@ -121,15 +128,8 @@ public class GraphView extends AbstractView {
         public void update(int step, Field field, FieldStats stats)
         {
             if (classes.size() >= 2) {
-                //Iterator<Class> it = classes.iterator();
-                //Class class1 = it.next();
-                //Class class2 = it.next();
-                //Class class3 = it.next();
 
                 stats.reset();
-                //int count1 = stats.getPopulationCount(field, class1);
-                //int count2 = stats.getPopulationCount(field, class2);
-                //int count3 = stats.getPopulationCount(field, class3);
 
                 Graphics g = graphImage.getGraphics();
 
@@ -155,42 +155,6 @@ public class GraphView extends AbstractView {
                     g.drawLine(width-3, lastVal.get(class1), width-2, y);
                     lastVal.put(class1, y);
                 }
-                
-                /*
-                // calculate y, check whether it's out of screen. scale down if necessary.
-                int y = height - ((height * count1) / yMax) - 1;
-                while (y<0) {
-                    scaleDown();
-                    y = height - ((height * count1) / yMax) - 1;
-                }
-                g.setColor(LIGHT_GRAY);
-                g.drawLine(width-2, y, width-2, height);
-                g.setColor(colors.get(class1));
-                g.drawLine(width-3, lastVal1, width-2, y);
-                lastVal1 = y;
-
-                y = height - ((height * count2) / yMax) - 1;
-                while (y<0) {
-                    scaleDown();
-                    y = height - ((height * count2) / yMax) - 1;
-                }
-                g.setColor(LIGHT_GRAY);
-                g.drawLine(width-2, y, width-2, height);
-                g.setColor(colors.get(class2));
-                g.drawLine(width-3, lastVal2, width-2, y);
-                lastVal2 = y;
-                
-                y = height - ((height * count3) / yMax) - 1;
-                while (y<0) {
-                    scaleDown();
-                    y = height - ((height * count3) / yMax) - 1;
-                }
-                g.setColor(LIGHT_GRAY);
-                g.drawLine(width-2, y, width-2, height);
-                g.setColor(colors.get(class3));
-                g.drawLine(width-3, lastVal3, width-2, y);
-                lastVal3 = y;
-                */
 
                 repaintNow();
             }
@@ -224,8 +188,6 @@ public class GraphView extends AbstractView {
             	Class class1 = it.next();
             	lastVal.put(class1, oldTop + (int) (lastVal.get(class1) * SCALE_FACTOR));
             }
-            //lastVal1 = oldTop + (int) (lastVal1 * SCALE_FACTOR);
-            //lastVal2 = oldTop + (int) (lastVal2 * SCALE_FACTOR);
 
             repaint();
         }

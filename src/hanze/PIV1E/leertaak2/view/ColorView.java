@@ -10,16 +10,24 @@ import javax.imageio.ImageIO;
 
 import javax.swing.JPanel;
 
+/**
+ * Puts a image on a JPanel.
+ */
 public class ColorView extends JPanel{
 	private BufferedImage image;
 	
+	/**
+	 * Creates a ColorView instance and loads the image.
+	 */
 	public ColorView() {
 		try {
 			image = ImageIO.read(new File("resources/colors.png"));
 	    } catch (IOException ex) {}
 	}
 	
-	@Override
+	/**
+	 * Displays the image on the component.
+	 */
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, null);

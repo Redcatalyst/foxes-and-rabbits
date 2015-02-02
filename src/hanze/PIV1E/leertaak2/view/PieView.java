@@ -3,7 +3,6 @@ package hanze.PIV1E.leertaak2.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +16,10 @@ import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 import hanze.PIV1E.leertaak2.view.GraphView.GraphPanel;
 
+/**
+ * Defines a JPanel with a PieView. The first panel gives lets the outside world interact with
+ * the panel within the class (PiePanel).
+ */
 public class PieView extends AbstractView {
 
 	private static PiePanel pie;
@@ -26,6 +29,12 @@ public class PieView extends AbstractView {
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
 	
+    /**
+     * Creates a PieView.
+     * @param width The width the ChartPanel should have.
+     * @param height The height the ChartPanel should have.
+     * @param simulation The model this view belongs to.
+     */
 	public PieView(int width, int height, SimulationModel simulation) {
 		super(simulation);
 		classes = new HashSet<Class>();
@@ -35,17 +44,29 @@ public class PieView extends AbstractView {
         add(pie);
 	}
 
-	@Override
+	/**
+	 * Get's called by the updateView() and gives the information needed from the model to change the view.
+	 * @param step The step the simulation is in
+	 * @param field The field the simulation is currently working in
+	 * @param stats The stats the simulation is currently working in (based on the field data)
+	 */
 	public void showStatus(int step, Field field, FieldStats stats) {
         pie.update(step, field, stats);
 	}
 
-	@Override
+	/**
+	 * Registers a class by the view.
+	 * @param actor The actor to be registered
+	 * @param color The color the actor should have
+	 */
 	public void setColor(Class animalClass, Color color) {
 		colors.put(animalClass, color);
         classes = colors.keySet();		
 	}
 	
+	/**
+	 * A JPanel to display the pie.
+	 */
 	class PiePanel extends JPanel
     {
         // An internal image buffer that is used for painting. For
@@ -71,7 +92,7 @@ public class PieView extends AbstractView {
         }
         
         /**
-         * Display a new point of data.
+         * Updates the pie.
          */
         public void update(int step, Field field, FieldStats stats)
         {

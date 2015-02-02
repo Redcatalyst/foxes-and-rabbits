@@ -1,5 +1,4 @@
 package hanze.PIV1E.leertaak2.view;
-import hanze.PIV1E.leertaak2.main.Simulator;
 import hanze.PIV1E.leertaak2.model.*;
 import hanze.PIV1E.leertaak2.location.*;
 
@@ -11,14 +10,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * A graphical view of the simulation grid.
- * The view displays a colored rectangle for each location 
- * representing its contents. It uses a default background color.
- * Colors for each type of species can be defined using the
+ * A graphical view of the simulation grid. The view displays a colored rectangle for each location 
+ * representing its contents. It uses a default background color. Colors for each type of species can be defined using the
  * setColor method.
- * 
- * @author Frank Noorlander
- * @version 16/01/2015
  */
 public class SimulatorView extends AbstractView 
 {
@@ -114,10 +108,6 @@ public class SimulatorView extends AbstractView
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
         
         fieldView.repaintNow();
-    }
-    
-    public void run(){
-    	
     }
     
     /**

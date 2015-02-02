@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 import hanze.PIV1E.leertaak2.location.Field;
 import hanze.PIV1E.leertaak2.model.SimulationModel;
 
+/**
+ * Defines a JPanel with a ChartView. The first panel gives lets the outside world interact with
+ * the panel within the class (ChartPanel).
+ */
 public class ChartView extends AbstractView {
 
 	private static ChartPanel chart;
@@ -24,6 +28,12 @@ public class ChartView extends AbstractView {
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
 	
+    /**
+     * Creates a ChartView.
+     * @param width The width the ChartPanel should have.
+     * @param height The height the ChartPanel should have.
+     * @param simulation The model this view belongs to.
+     */
 	public ChartView(int width, int height, SimulationModel simulation) {
 		super(simulation);
 		classes = new HashSet<Class>();
@@ -33,17 +43,29 @@ public class ChartView extends AbstractView {
         add(chart);
 	}
 
-	@Override
+	/**
+	 * Get's called by the updateView() and gives the information needed from the model to change the view.
+	 * @param step The step the simulation is in
+	 * @param field The field the simulation is currently working in
+	 * @param stats The stats the simulation is currently working in (based on the field data)
+	 */
 	public void showStatus(int step, Field field, FieldStats stats) {
         chart.update(step, field, stats);	
 	}
 
-	@Override
+	/**
+	 * Registers a class by the view.
+	 * @param actor The actor to be registered
+	 * @param color The color the actor should have
+	 */
 	public void setColor(Class animalClass, Color color) {
 		colors.put(animalClass, color);
         classes = colors.keySet();		
 	}
 	
+	/**
+	 * A JPanel to display the chart.
+	 */
 	class ChartPanel extends JPanel
     {
         // An internal image buffer that is used for painting. For
@@ -69,7 +91,7 @@ public class ChartView extends AbstractView {
         }
         
         /**
-         * Display a new point of data.
+         * Display the new data.
          */
         public void update(int step, Field field, FieldStats stats)
         {
@@ -128,7 +150,7 @@ public class ChartView extends AbstractView {
         }
 
         // The following methods are redefinitions of methods
-        // inherited from superclasses.
+        // inherited from superclasses JPanel.
 
         /**
          * Tell the layout manager how big we would like to be.

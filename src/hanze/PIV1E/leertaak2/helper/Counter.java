@@ -1,5 +1,4 @@
 package hanze.PIV1E.leertaak2.helper;
-import java.awt.Color;
 
 /**
  * Provide a counter for a participant in the simulation.
