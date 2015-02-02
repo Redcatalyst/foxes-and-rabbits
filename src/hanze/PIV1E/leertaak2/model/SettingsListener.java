@@ -15,7 +15,7 @@ import javax.swing.event.ChangeListener;
 /**
  * Implements the event listeners. This class will handel all the events created by the
  * SoundFrame.
- *
+ * @author Frank
  */
 public class SettingsListener {
 	private JFrame frame;

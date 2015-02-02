@@ -8,8 +8,6 @@ import hanze.PIV1E.leertaak2.music.*;
 /**
  * The interface Actor.
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 26/01/2015
- *
  */
 public interface Actor {
 	/**

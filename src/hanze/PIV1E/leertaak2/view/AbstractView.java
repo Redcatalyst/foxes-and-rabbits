@@ -10,6 +10,7 @@ import hanze.PIV1E.leertaak2.model.*;
 /**
  * Defines the basics of a view as part of the MVC-model.
  * Every view should extend this class.
+ * @author Frank
  */
 public abstract class AbstractView extends JPanel {
 	protected AbstractModel simulation;

@@ -18,6 +18,7 @@ import hanze.PIV1E.leertaak2.model.SimulationModel;
 /**
  * Defines a JPanel with a ChartView. The first panel gives lets the outside world interact with
  * the panel within the class (ChartPanel).
+ * @author Frank
  */
 public class ChartView extends AbstractView {
 
@@ -58,8 +59,8 @@ public class ChartView extends AbstractView {
 	 * @param actor The actor to be registered
 	 * @param color The color the actor should have
 	 */
-	public void setColor(Class animalClass, Color color) {
-		colors.put(animalClass, color);
+	public void setColor(Class actor, Color color) {
+		colors.put(actor, color);
         classes = colors.keySet();		
 	}
 	

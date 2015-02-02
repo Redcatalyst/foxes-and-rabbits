@@ -15,7 +15,6 @@ import java.util.Random;
  * A simple model of a tourist.
  * tourists age, move, make campfires and leave.
  * @author Tsjeard de Winter en Rick van der Poel
- * @Version 01/02/2015
  */
 public class Tourist extends Human 
 {
@@ -39,9 +38,9 @@ public class Tourist extends Human
      * Create a tourist. A tourist can be created as a new born (age zero)
      * or with a random age.
      * 
-     * @param randomAge If true, the tourist will have random age.
      * @param field The field currently occupied.
      * @param location The location within the field.
+     * @param model The model this tourist acts in.
      */
     public Tourist( Field field, Location location, AbstractModel model)
     {
@@ -51,7 +50,6 @@ public class Tourist extends Human
     /**
      * This is what the tourist does most of the time: it walks around
      * and makes campfires. Meanwhile it may leave or bring some friends.
-     * @param field The field currently occupied.
      */
     public void act()
     {

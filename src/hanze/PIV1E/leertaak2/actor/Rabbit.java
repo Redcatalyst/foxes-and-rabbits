@@ -16,7 +16,6 @@ import java.util.Random;
  * Rabbits age, move, breed, and die.
  * 
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 01/02/2015
  */
 public class Rabbit extends Animal
 {
@@ -56,6 +55,7 @@ public class Rabbit extends Animal
      * @param randomAge If true, the rabbit will have a random age.
      * @param field The field currently occupied.
      * @param location The location within the field.
+     * @param model The model this rabbit should act in.
      */
     public Rabbit(boolean randomAge, Field field, Location location, AbstractModel model)
     {
@@ -69,7 +69,6 @@ public class Rabbit extends Animal
     /**
      * This is what the rabbit does most of the time - it runs 
      * around. Sometimes it will breed or die of old age.
-     * @param newRabbits A list to return newly born rabbits.
      */
     public void act()
     {
@@ -194,7 +193,7 @@ public class Rabbit extends Animal
     
     /**
      * Set the rabbit to infected
-     * @param infect true to make this Rabbit sick
+     * @param infected true to make this Rabbit sick
      */
     public void setInfection(boolean infected) {
         if(infected){

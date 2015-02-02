@@ -10,6 +10,7 @@ import javax.sound.sampled.FloatControl;
 /**
  * Illustrates a musicfile, the class only contains a Clip object but just makes it easier to use.
  * The musicfile can only be of type '.wav'.
+ * @author Frank
  */
 public class MusicFile {
 	private Clip sound;

@@ -20,6 +20,7 @@ import javax.swing.JSlider;
 
 /**
  * Class that makes a JFrame which is able to adjust the sound.
+ * @author Frank
  */
 public class SoundFrame {
 	private MusicHandler handler;

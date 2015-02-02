@@ -13,6 +13,7 @@ import hanze.PIV1E.leertaak2.model.*;
 /**
  * Defines a JPanel with a GraphView. The first panel gives lets the outside world interact with
  * the panel within the class (GraphPanel).
+ * @author Frank
  */
 public class GraphView extends AbstractView {
 	
@@ -29,6 +30,7 @@ public class GraphView extends AbstractView {
      * @param width The width the ChartPanel should have.
      * @param height The height the ChartPanel should have.
      * @param simulation The model this view belongs to.
+     * @param startMax The height the graph should have at the beginning.
      */
 	public GraphView(int height, int width, int startMax, SimulationModel simulation) {
 		super(simulation);

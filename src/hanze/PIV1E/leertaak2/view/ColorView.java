@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 /**
  * Puts a image on a JPanel.
+ * @author Frank
  */
 public class ColorView extends JPanel{
 	private BufferedImage image;

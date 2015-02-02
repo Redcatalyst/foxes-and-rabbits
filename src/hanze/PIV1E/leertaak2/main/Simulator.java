@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 
 /**
  * Starts the simulation, will only be called once and will never be touched again.
+ * @author Rick and Frank
  */
 public class Simulator
 {

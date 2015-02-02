@@ -12,7 +12,6 @@ import hanze.PIV1E.leertaak2.music.MusicFile;
  * A simple model of a Fire.
  * Fire have a age, move and die.
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 01/02/2015
  */
 public class Fire implements Actor
 {
@@ -44,6 +43,7 @@ public class Fire implements Actor
      * Create a new fire.
      * @param field The field currently occupied.
      * @param location The location within the field.
+     * @param model The model this fire consists in.
      */
     public Fire(Field field, Location location, AbstractModel model)
     {
@@ -57,7 +57,6 @@ public class Fire implements Actor
     /**
      * This is what the fire does most of the time - it spreads
      * and kills everything in it's way.
-     * @param newFires A list to return newly spread fires.
      */
     public void act()
     {

@@ -8,6 +8,7 @@ import javax.sound.sampled.Clip;
 
 /**
  * Handles the playing of the music.
+ * @author Frank
  */
 public class MusicHandler {
 	private HashMap<String, MusicFile> files;
@@ -15,6 +16,7 @@ public class MusicHandler {
 	
 	/**
 	 * Creates a MusicHandler.
+	 * @param model The model this handler belongs to.
 	 */
 	public MusicHandler(SimulationModel model) {
 		this.model = model;
@@ -23,6 +25,7 @@ public class MusicHandler {
 	
 	/**
 	 * Adds a MusicFile to the MusicHandler.
+	 * @param name The name of the sound
 	 * @param file MusicFile to be added
 	 */
 	public void addMusicFile(String name, MusicFile file){

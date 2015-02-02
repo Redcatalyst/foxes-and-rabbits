@@ -15,7 +15,6 @@ import java.util.Random;
  * Foxes age, move, eat rabbits, and die.
  * 
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 01/02/2015
  */
 public class Fox extends Animal
 {
@@ -55,6 +54,7 @@ public class Fox extends Animal
      * @param randomAge If true, the fox will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
+     * @param model The model this fox should act in.
      */
     public Fox(boolean randomAge, Field field, Location location, AbstractModel model)
     {
@@ -73,8 +73,6 @@ public class Fox extends Animal
      * This is what the fox does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
-     * @param field The field currently occupied.
-     * @param newFoxes A list to return newly born foxes.
      */
     public void act()
     {
@@ -207,7 +205,7 @@ public class Fox extends Animal
     
     /**
      * Set the Fox to infected
-     * @param infect true to make this Fox sick
+     * @param infected true to make this Fox sick
      */
     public void setInfection(boolean infected) {
         this.infected = infected;

@@ -19,6 +19,7 @@ import javax.swing.JSlider;
 
 /**
  * Class that makes a JFrame which is able to adjust simulation settings.
+ * @author Frank
  */
 public class SimulationSettings {
 	private JFrame frame;

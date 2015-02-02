@@ -19,6 +19,7 @@ import hanze.PIV1E.leertaak2.view.GraphView.GraphPanel;
 /**
  * Defines a JPanel with a PieView. The first panel gives lets the outside world interact with
  * the panel within the class (PiePanel).
+ * @author Frank
  */
 public class PieView extends AbstractView {
 
@@ -59,8 +60,8 @@ public class PieView extends AbstractView {
 	 * @param actor The actor to be registered
 	 * @param color The color the actor should have
 	 */
-	public void setColor(Class animalClass, Color color) {
-		colors.put(animalClass, color);
+	public void setColor(Class actor, Color color) {
+		colors.put(actor, color);
         classes = colors.keySet();		
 	}
 	

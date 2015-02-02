@@ -8,7 +8,6 @@ import hanze.PIV1E.leertaak2.model.AbstractModel;
  * A class representing shared characteristics of humans.
  * 
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 01/02/2015
  */
 public abstract class Human implements Actor 
 {
@@ -28,6 +27,7 @@ public abstract class Human implements Actor
      * 
      * @param field The field currently occupied.
      * @param location The location within the field.
+     * @param model The model this human should act in.
      */
     public Human(Field field, Location location, AbstractModel model)
     {

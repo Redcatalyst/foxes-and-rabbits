@@ -8,6 +8,7 @@ import java.util.*;
 /**
  * Defines the basics of a model as part of the MVC-model.
  * Every model should extend this class.
+ * @author Frank
  */
 public abstract class AbstractModel {
 	private List<AbstractView> views;

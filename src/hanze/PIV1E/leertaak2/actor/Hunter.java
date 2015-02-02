@@ -13,7 +13,6 @@ import java.util.List;
  * A simple model of a hunter.
  * hunters age, move, eat foxes, rabbits and bears and die.
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 01/02/2015
  */
 public class Hunter extends Human 
 {
@@ -44,7 +43,6 @@ public class Hunter extends Human
     /**
      * This is what the hunter does most of the time: it hunts for bears,
      * rabbits and foxes. In the process it might die by a bear of old age.
-     * @param field The field currently occupied.
      */
     public void act()
     {

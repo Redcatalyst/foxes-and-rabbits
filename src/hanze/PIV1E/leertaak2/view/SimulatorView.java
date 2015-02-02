@@ -13,6 +13,7 @@ import java.util.Map;
  * A graphical view of the simulation grid. The view displays a colored rectangle for each location 
  * representing its contents. It uses a default background color. Colors for each type of species can be defined using the
  * setColor method.
+ * @author Frank
  */
 public class SimulatorView extends AbstractView 
 {
@@ -35,6 +36,7 @@ public class SimulatorView extends AbstractView
      * Create a view of the given width and height.
      * @param height The simulation's height.
      * @param width  The simulation's width.
+     * @param simulation The model this view is connected to.
      */
     public SimulatorView(int height, int width, SimulationModel simulation)
     {

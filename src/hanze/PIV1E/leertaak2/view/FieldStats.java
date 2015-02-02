@@ -9,8 +9,7 @@ import java.util.HashMap;
  * of a field. It is flexible: it will create and maintain a counter 
  * for any class of object that is found within the field.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author David J. Barnes and Michael Kölling with additions of Frank
  */
 public class FieldStats
 {
@@ -32,6 +31,7 @@ public class FieldStats
 
     /**
      * Get details of what is in the field.
+     * @param field The field that should be checked.
      * @return A string describing what is in the field.
      */
     public String getPopulationDetails(Field field)
@@ -52,6 +52,8 @@ public class FieldStats
     
     /**
      * Get the number of individuals in the population of a given class.
+     * @param field The field that should be checked.
+     * @param key The class that should be searched for.
      * @return  An int with the number for this class.
      */
     public int getPopulationCount(Field field, Class key)
@@ -104,6 +106,7 @@ public class FieldStats
     /**
      * Determine whether the simulation is still viable.
      * I.e., should it continue to run.
+     * @param field The field to generate stats for.
      * @return true If there is more than one species alive.
      */
     public boolean isViable(Field field)

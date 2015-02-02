@@ -17,6 +17,7 @@ import java.util.Random;
  * The heart of the application. The SimulationModel contains all the data and
  * uses it simulate a step. When the data inside the model changes all the views
  * will get notified. Every action is given by a controller.
+ * @author Frank
  */
 public class SimulationModel extends AbstractModel {
 	// The probability that a fox will be created in any given grid position.
@@ -245,6 +246,7 @@ public class SimulationModel extends AbstractModel {
     
     /**
      * Determine whether the simulation should continue to run.
+     * @param field The field that should be checked.
      * @return true If there is more than one species alive.
      */
     public boolean isViable(Field field)

@@ -8,7 +8,6 @@ import hanze.PIV1E.leertaak2.model.*;
  * A class representing shared characteristics of animals.
  * 
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 01/02/2015
  */
 public abstract class Animal implements Actor
 {

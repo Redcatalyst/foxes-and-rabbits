@@ -15,7 +15,6 @@ import java.util.Random;
  * A simple model of a bear.
  * Bears age, move, eat foxes and rabbits and die.
  * @author Tsjeard de Winter en Rick van der Poel
- * @version 01/02/2015
  */
 public class Bear extends Animal
 {
