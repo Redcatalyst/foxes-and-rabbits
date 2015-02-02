@@ -148,6 +148,10 @@ public class Tourist extends Human
     	}
     }
     
+    /**
+     * Get the MusicFile that belongs to the tourist
+     * @return sound
+     */
 	@Override
 	public MusicFile getSound() {
 		return sound;

@@ -75,7 +75,7 @@ public class Fire implements Actor
 	
     /**
      * The fire can spread anywhere.
-     * @param newFires A list to return newly spread fires.
+     * 
      */
     private void spreadFire()
     {
@@ -91,6 +91,9 @@ public class Fire implements Actor
 	        }
     }
     
+    /**
+     * The fire kills everything around itself because of the hear
+     */
 	private void KillAdjecent() 
 	{
 		 Field field = getField();
@@ -139,6 +142,7 @@ public class Fire implements Actor
 	}
 
     /**
+     * Get the age of the fire
      * @return age of the fire
      */
     public int getAge(){
@@ -146,6 +150,7 @@ public class Fire implements Actor
     }   
     
     /**
+     * Get the MusicFile that belongs to the fire
      * @return the sound of the fire.
      */
 	public MusicFile getSound() {
@@ -207,13 +212,17 @@ public class Fire implements Actor
     }
     
     /**
-     * Return the human's name.
+     * Return the name of the fire 
      * @return the human's name.
      */
     public String getName(){
     	return name;
     }
     
+    /**
+     * Get the model that belongs to the fire
+     * @return model that belongs to the fire
+     */
     public AbstractModel getModel(){
     	return model;
     }
