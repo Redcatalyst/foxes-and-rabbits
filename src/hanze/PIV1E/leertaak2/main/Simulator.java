@@ -21,11 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 /**
- * A simple predator-prey simulator, based on a rectangular field
- * containing rabbits and foxes.
- * 
- * @author Frank Noorlander
- * @version 16/01/2015
+ * Starts the simulation, will only be called once and will never be touched again.
  */
 public class Simulator
 {
@@ -54,9 +50,8 @@ public class Simulator
     private ColorView color;
     
     /**
-     * Create a simulation field with the given size.
-     * @param depth Depth of the field. Must be greater than zero.
-     * @param width Width of the field. Must be greater than zero.
+     * Create a simulation field with the default size.
+     * All the parts of the MVC structure are made and linked together and then put in a frame.
      */
     public Simulator()
     {
@@ -112,9 +107,9 @@ public class Simulator
     }
     
     /*
-     * give everything a color
+     * give every actor a color
      */
-    public void setColor() {
+    private void setColor() {
         view.setColor(Fire.class, FIRECOLOR);
     	for (AbstractView view : views){
 	    	view.setColor(Rabbit.class, RABBITCOLOR);
@@ -128,7 +123,7 @@ public class Simulator
     /*
      * make the menu in the simulation and give it the controller as actionlistener
      */
-    public void makeMenuBar(){
+    private void makeMenuBar(){
     	JMenuBar menubar = new JMenuBar();
         frame.setJMenuBar(menubar);
         

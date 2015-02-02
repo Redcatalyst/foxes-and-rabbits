@@ -19,6 +19,10 @@ import javax.swing.event.ChangeListener;
 public class SoundListener {
 	private MusicHandler handler;
 	
+	/**
+	 * Registers changes to the SoundFrame and gives it to the MusicHandler.
+	 * @param handler The handler to give the changes to.
+	 */
 	public SoundListener(MusicHandler handler) {
 		this.handler = handler;
 	}
@@ -36,7 +40,8 @@ public class SoundListener {
 	}
 	
 	/**
-	 * Listens to actions of the sliders
+	 * Listens to actions of the sliders. When a slider changes the sound will be 
+	 * adjusted and the label that is attached to the slider to.
 	 */
 	public class AdjustSound implements ChangeListener {
 		private MusicFile file;
