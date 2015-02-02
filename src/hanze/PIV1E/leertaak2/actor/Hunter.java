@@ -107,6 +107,10 @@ public class Hunter extends Human
         return null;
     }
     
+    /**
+     * Get the MusicFile that belongs to the Hunter
+     * @return sound
+     */
     public MusicFile getSound() {
 		return sound;
 	}

@@ -7,6 +7,7 @@ import hanze.PIV1E.leertaak2.main.Simulator;
  * @author Frank Noorlander, Tsjeard de Winter en Rick van der Poel
  * @version 3.0 (01/02/2015)
  */
+
 public class SimulatorRunner {
 
 	public static void main(String[] args) {

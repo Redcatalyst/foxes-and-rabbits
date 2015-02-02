@@ -41,8 +41,16 @@ public interface Actor {
 	  */
 	 void setLocation(Location newLocation);
 	 
+	 /**
+	  * Gets the name of the Actor.
+	  * @return Name of the Actor
+	  */
 	 String getName();
 	 
+	 /**
+	  * The method getSound gets the music file that belongs to the actor
+	  * @return MusicFile that belongs to the actor
+	  */
 	 public MusicFile getSound();
 	 
 }

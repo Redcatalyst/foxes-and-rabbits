@@ -203,6 +203,10 @@ public class Rabbit extends Animal
         this.infected = infected;
     }
     
+    /**
+     * Get the MusicFile that belongs to the hunter
+     * @return sound
+     */
     public MusicFile getSound() {
 		return sound;
 	}   
